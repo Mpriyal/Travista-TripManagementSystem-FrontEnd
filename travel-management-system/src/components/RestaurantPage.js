@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import axios from 'axios';
-import RestaurantList from "./RestaurantList";
+// import RestaurantList from "./RestaurantList";
 var restaurantUrl = 'http://opentable.herokuapp.com/api/restaurants';
 
 export default class RestaurantPage extends Component {
@@ -125,7 +125,7 @@ export default class RestaurantPage extends Component {
                                htmlFor="inlineRadio1">Country</label>
                     </div>
                 </div>
-                <RestaurantList data={this.state.restaurants}/>
+                {/*<RestaurantList data={this.state.restaurants}/>*/}
             </div>
         )
     }

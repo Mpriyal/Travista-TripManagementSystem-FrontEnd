@@ -12,4 +12,5 @@ export default class RestaurantList extends Component {
             RestOwner:null,
         }
     }
+    
 }
