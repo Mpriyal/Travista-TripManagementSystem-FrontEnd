@@ -12,33 +12,41 @@ export default class NavBar extends Component {
                 <div className="container-fluid">
                     <nav className="navbar navbar-expand-lg navbar-light bg-light">
                         <img src={logo} className="App-logo" alt="logo"/>
-                        <a className="navbar-brand" href="#">Travista</a>
+                        <div className="navbar-brand" href="#">Travista</div>
                         <button className="navbar-toggler" type="button" data-toggle="collapse"
                                 data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                                 aria-expanded="false" aria-label="Toggle navigation">
                             <span className="navbar-toggler-icon"></span>
                         </button>
                         <div className="container" id="navbarSupportedContent">
-                        {/*<div className="collapse navbar-collapse" id="navbarSupportedContent">*/}
+                            {/*<div className="collapse navbar-collapse" id="navbarSupportedContent">*/}
                             <ul className="navbar-nav mr-auto">
                                 <li className="nav-item active">
                                     <Link to='/hotels'>
-                                    <a className="nav-link" href="#">Hotels
-                                        <span className="sr-only">(current)</span>
-                                    </a>
+                                        <div className="nav-link" href="#">Hotels
+                                            <span className="sr-only">(current)</span>
+                                        </div>
                                     </Link>
                                 </li>
                                 <li className="nav-item">
-                                    <a className="nav-link" href="#">Restaurants</a>
+                                    <Link to='/restaurants'>
+                                        <div className="nav-link" href="#">Restaurants</div>
+                                    </Link>
                                 </li>
                                 <li className="nav-item">
-                                    <a className="nav-link" href="#">Flights</a>
+                                    <Link to='/flights'>
+                                        <div className="nav-link" href="#">Flights</div>
+                                    </Link>
                                 </li>
                                 <li className="nav-item">
-                                    <a className="nav-link" href="#">Attractions</a>
+                                    <Link to='/attractions'>
+                                        <div className="nav-link" href="#">Attractions</div>
+                                    </Link>
                                 </li>
                                 <li className="nav-item">
-                                    <a className="nav-link" href="#">Travel Blogs</a>
+                                    <Link to='/blogs'>
+                                        <div className="nav-link" href="#">Travel Blogs</div>
+                                    </Link>
                                 </li>
                                 {/*<li className="nav-item dropdown">*/}
                                 {/*<a className="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"*/}
@@ -63,7 +71,7 @@ export default class NavBar extends Component {
                                 <div className="divider"/>
                                 <button type="submit" className="btn btn-success btn-sm">
                                     Sign In
-                                        {/*// onClick={this.OnSignin}>Sign In*/}
+                                    {/*// onClick={this.OnSignin}>Sign In*/}
                                 </button>
                             </div>
                             {/*<form className="form-inline my-2 my-lg-0">*/}
