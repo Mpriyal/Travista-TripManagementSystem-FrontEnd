@@ -3,6 +3,8 @@ import DatePicker from 'react-datepicker';
 import moment from 'moment';
 import 'react-datepicker/dist/react-datepicker.css';
 import HotelService from '../services/HotelService.js'
+import HotelList from "./HotelList";
+import {Link, Route, BrowserRouter as Router} from "react-router-dom";
 
 
 export default class HotelPage extends Component {
@@ -50,6 +52,7 @@ export default class HotelPage extends Component {
                 this.setLatLong(results); })
             .then(() => this.findAllHotelsByLatLong());
 
+        {/*<Link to={'/hotelList'}>{this.state.hotels}</Link>*/}
     }
 
     setLatLong(results){
@@ -66,15 +69,15 @@ export default class HotelPage extends Component {
                 this.state.checkOut.format("YYYY-MM-DD"),
                 this.state.radius)
             .then((result) => {
-                console.log(result);
                 this.setState({
-                    hotels: result})
+                    hotels: result.results})
             });
     }
 
 
     render() {
         return (
+            <Router>
             <div className="row">
                 <div className="col-sm-2">
                 </div>
@@ -90,7 +93,11 @@ export default class HotelPage extends Component {
                         <div className="input-group-append"/>
                         <span className="input-group-text amber lighten-3" id="basic-text1">
                             <i className="fa fa-search text-grey" aria-hidden="true"
-                               onClick={this.findAllHotels}/>
+                               onClick={this.findAllHotels}
+                            />
+                            {/*<Link to={'/hotelList'}>{this.state.hotels}*/}
+                                {/**/}
+                            {/*</Link>*/}
                         </span>
                     </div>
                     <br/>
@@ -118,7 +125,13 @@ export default class HotelPage extends Component {
                 </div>
                 <div className="col-sm-2">
                 </div>
+                <div>
+                <HotelList data={this.state.hotels}/>
+                </div>
+                    {/*<Route path="/hotelList"*/}
+                       {/*component={HotelList} data={this.state.hotels}/>*/}
             </div>
+            </Router>
         )
     }
 }

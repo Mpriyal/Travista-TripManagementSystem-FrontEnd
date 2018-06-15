@@ -10,10 +10,14 @@ class App extends Component {
   render() {
     return (
         <Router>
-      <div className="nav">
-          <NavBar/>
-        <Main/>
-      </div>
+          <div>
+              <div className="nav">
+                  <NavBar/>
+              </div>
+              <div>
+                <Main/>
+              </div>
+          </div>
         </Router>
     );
   }

@@ -20,14 +20,14 @@ export default class RestaurantList extends Component {
                         <div className="container p-5 m-5">
                             <div className="row">
                                 {this.props.data.map((restaurant, index) =>
-                                    <div className="col-sm-4" key={restaurant.id}>
+                                    <div className="col-sm-4" key={restaurant.id} style={{marginBottom: 40}}>
                                         <div className="card">
                                             <img className="card-img-top" src={restaurant.image_url}
                                                  alt="Card image cap"/>
                                             <div className="card-body">
                                                 <h5 className="card-title">{restaurant.name}</h5>
-                                                <p className="card-text">{restaurant.address} {restaurant.city} {restaurant.state} </p>
-                                                <p className="card-text">Call : {restaurant.phone}</p>
+                                                <p className="card-text"><b>Address:</b> {restaurant.address} {restaurant.city} {restaurant.state} </p>
+                                                <p className="card-text"><b>Call:</b> {restaurant.phone}</p>
                                                 <p className="card-text"><a href={restaurant.reserve_url}>Reserve </a>
                                                 </p>
                                             </div>
