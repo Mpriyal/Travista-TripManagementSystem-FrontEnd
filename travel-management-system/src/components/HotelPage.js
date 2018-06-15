@@ -75,12 +75,15 @@ export default class HotelPage extends Component {
 
     render() {
         return (
-            <div>
+            <div className="row">
+                <div className="col-sm-2">
+                </div>
+                <div className="col-sm-8">
                 <div className="search">
                     <div className="input-group md-form form-sm form-2 pl-0">
                         <input className="form-control my-0 py-1 amber-border"
                                type="text"
-                               placeholder="Search Hotels"
+                               placeholder="Search Hotels by Location"
                                onChange={this.inputTextChanged}
                                aria-label="Search"
                                ref="searchValue"/>
@@ -90,17 +93,31 @@ export default class HotelPage extends Component {
                                onClick={this.findAllHotels}/>
                         </span>
                     </div>
+                    <br/>
+                    {/*<div className="row">*/}
+                            <DatePicker
+                                placeholderText="Date From:"
+                                className="form-control"
+                                value = {this.state.checkIn}
+                                selected={this.state.checkIn}
+                                onChange={this.checkInDateChange}
+                            />
+                    {/*</div>*/}
+                    <br/>
+                    {/*<div className="row">*/}
+                        <DatePicker
+                            placeholderText="Date to:"
+                            className="form-control"
+                            value={this.state.checkOut}
+                            selected={this.state.checkOut}
+                            onChange={this.checkOutDateChange}
+                        />
+                    {/*</div>*/}
                 </div>
-                <DatePicker
-                    value = {this.state.checkIn}
-                    selected={this.state.checkIn}
-                    onChange={this.checkInDateChange}
-                />
-                <DatePicker
-                    value = {this.state.checkOut}
-                    selected={this.state.checkOut}
-                    onChange={this.checkOutDateChange}
-                />
+
+                </div>
+                <div className="col-sm-2">
+                </div>
             </div>
         )
     }
