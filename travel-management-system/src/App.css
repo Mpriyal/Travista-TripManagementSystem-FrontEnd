@@ -27,12 +27,38 @@
   to { transform: rotate(360deg); }
 }
 
-.body {
-  width: 100%;
-}
-
 .divider{
   width:5px;
   height:auto;
   display:inline-block;
+}
+
+.body-width {
+  width:100%;
+}
+
+.search {
+  width:50%;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  margin-top: -40px;
+  margin-left: -380px;
+}
+
+.radioSelector{
+  width:50%;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  margin-top: -0.00005px;
+  margin-left: -170px;
+}
+
+body {
+  background: url(https://picsum.photos/1920/1080?image=871&?blur) no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
 }

@@ -1,23 +1,14 @@
 import React, {Component} from 'react'
 import logo from '../logo.svg';
-import background from '../greeceWall.jpg';
-import {BrowserRouter as Router, Link} from 'react-router-dom'
-
-var backgroundImage = {
-    width: "100%",
-    height: "1000px",
-    backgroundImage: "url(" + background + ")"
-};
+import {Link} from 'react-router-dom'
 
 export default class NavBar extends Component {
     constructor(props) {
         super(props)
     }
-
     render() {
         return (
-            <Router>
-            <div className="body">
+            <div className="body-width">
                 <div className="container-fluid">
                     <nav className="navbar navbar-expand-lg navbar-light bg-light">
                         <img src={logo} className="App-logo" alt="logo"/>
@@ -84,11 +75,10 @@ export default class NavBar extends Component {
                             {/*</form>*/}
                         </div>
                     </nav>
-                    <section style={ backgroundImage }>
-                    </section>
+                    {/*<section style={ backgroundImage }>*/}
+                    {/*</section>*/}
                 </div>
             </div>
-            </Router>
         )
     }
 }
