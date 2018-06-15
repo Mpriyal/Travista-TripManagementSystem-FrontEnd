@@ -36,6 +36,7 @@ export default class RestaurantPage extends Component {
                 console.log(res)
                 const restaurants = res.data.restaurants;
                 this.setState({restaurants});
+                console.log(this.state.restaurants)
             })
         }
         else if (currentState === 'city') {
@@ -125,7 +126,7 @@ export default class RestaurantPage extends Component {
                                htmlFor="inlineRadio1">Country</label>
                     </div>
                 </div>
-                {/*<RestaurantList data={this.state.restaurants}/>*/}
+                <RestaurantList data={this.state.restaurants}/>
             </div>
         )
     }
