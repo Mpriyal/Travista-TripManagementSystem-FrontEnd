@@ -1,5 +1,6 @@
 import React, {Component} from 'react'
 import axios from 'axios';
+import RestaurantList from "./RestaurantList";
 var restaurantUrl = 'http://opentable.herokuapp.com/api/restaurants';
 
 export default class RestaurantPage extends Component {
