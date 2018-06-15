@@ -76,7 +76,7 @@ export default class RestaurantPage extends Component {
 
     render() {
         return (
-            <div>
+            <div className="container-fluid">
                 <div className="search">
                     <div className="input-group md-form form-sm form-2 pl-0">
                         <input className="form-control my-0 py-1 amber-border" type="text" placeholder="Search Restaurants"

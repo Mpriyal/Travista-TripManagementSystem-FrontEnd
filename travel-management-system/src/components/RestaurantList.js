@@ -18,7 +18,7 @@ export default class RestaurantList extends Component {
         // if(!this.state.info){
         //     if(this.props.data){
         return (
-            <div>
+            <div className="container-fluid">
                 <div className="container p-5 m-5">
                     <div className="row">
                         {this.props.data.map((restaurant, index) =>
