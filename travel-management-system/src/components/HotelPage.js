@@ -3,6 +3,8 @@ import DatePicker from 'react-datepicker';
 import moment from 'moment';
 import 'react-datepicker/dist/react-datepicker.css';
 import HotelService from '../services/HotelService.js'
+import HotelList from "./HotelList";
+import {Link, Route, BrowserRouter as Router} from "react-router-dom";
 
 
 export default class HotelPage extends Component {
@@ -11,8 +13,8 @@ export default class HotelPage extends Component {
         this.state = {
             latitude: '42.3398198',
             longitude: '-71.0875516',
-            checkIn: moment(),
-            checkOut: moment(),
+            checkIn: moment('2018-06-01'),
+            checkOut: moment('2018-06-11'),
             radius: '10',
             inputText: '',
             hotels: []
@@ -27,7 +29,7 @@ export default class HotelPage extends Component {
 
     checkInDateChange(date) {
         this.setState({
-            checkIn : moment(date)
+            checkIn : date
         });
     }
 
@@ -39,7 +41,7 @@ export default class HotelPage extends Component {
 
     checkOutDateChange(date) {
         this.setState({
-            checkOut : moment(date)
+            checkOut : date
         });
     }
 
@@ -50,6 +52,7 @@ export default class HotelPage extends Component {
                 this.setLatLong(results); })
             .then(() => this.findAllHotelsByLatLong());
 
+        {/*<Link to={'/hotelList'}>{this.state.hotels}</Link>*/}
     }
 
     setLatLong(results){
@@ -66,50 +69,69 @@ export default class HotelPage extends Component {
                 this.state.checkOut.format("YYYY-MM-DD"),
                 this.state.radius)
             .then((result) => {
-                console.log(result);
                 this.setState({
-                    hotels: result})
+                    hotels: result.results})
             });
     }
 
 
     render() {
-        return (<div className="search">
-                <form>
-                    <div className="form-row search">
-                        <div className="col">
-                        <input className="form-control amber-border"
-                               type="text"
-                               placeholder="Location"
-                               onChange={this.inputTextChanged}
-                               aria-label="Search"
-                               ref="searchValue"/>
-                        </div>
-                        <div className="col">
-                        <input
-                            type= "date"
-                            className="form-control amber-border"
-                            onChange={this.checkInDateChange}
-                        />
-                        </div>
-                         <div className="col">
-
-                        <input
-                            type="date"
-                            className="form-control amber-border"
-                            onChange={this.checkOutDateChange}
-                        />
-                         </div>
-                        <div className="col">
-                        <button className ="fa fa-search btn " aria-hidden="true"
-                                type="button"
-                               onClick={this.findAllHotels}>
-                            Search
-                        </button>
-                        </div>
+        return (
+            <Router>
+                <div className="row">
+                    <div className="col-sm-2">
                     </div>
-                </form>
-            </div>
+                    <div className="col-sm-8">
+                        <div className="search">
+                            <div className="input-group md-form form-sm form-2 pl-0">
+                                <input className="form-control my-0 py-1 amber-border"
+                                       type="text"
+                                       placeholder="Search Hotels by Location"
+                                       onChange={this.inputTextChanged}
+                                       aria-label="Search"
+                                       ref="searchValue"/>
+                                <div className="input-group-append"/>
+                                <span className="input-group-text amber lighten-3" id="basic-text1">
+                            <i className="fa fa-search text-grey" aria-hidden="true"
+                               onClick={this.findAllHotels}
+                            />
+                                    {/*<Link to={'/hotelList'}>{this.state.hotels}*/}
+                                    {/**/}
+                                    {/*</Link>*/}
+                        </span>
+                            </div>
+                            <br/>
+                            {/*<div className="row">*/}
+                            <DatePicker
+                                placeholderText="Date From:"
+                                className="form-control"
+                                value = {this.state.checkIn}
+                                selected={this.state.checkIn}
+                                onChange={this.checkInDateChange}
+                            />
+                            {/*</div>*/}
+                            <br/>
+                            {/*<div className="row">*/}
+                            <DatePicker
+                                placeholderText="Date to:"
+                                className="form-control"
+                                value={this.state.checkOut}
+                                selected={this.state.checkOut}
+                                onChange={this.checkOutDateChange}
+                            />
+                            {/*</div>*/}
+                        </div>
+
+                    </div>
+                    <div className="col-sm-2">
+                    </div>
+                    <div>
+                        <HotelList data={this.state.hotels}/>
+                    </div>
+                    {/*<Route path="/hotelList"*/}
+                    {/*component={HotelList} data={this.state.hotels}/>*/}
+                </div>
+            </Router>
         )
     }
 }

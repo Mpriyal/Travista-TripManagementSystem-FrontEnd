@@ -6,24 +6,21 @@ import NavBar from "./components/NavBar";
 import Main from "./containers/Main";
 import {BrowserRouter as Router} from 'react-router-dom'
 
-
 class App extends Component {
-  render() {
-    return (
-        <div>
-        <Router>
-            <div className="container-fluid">
-                <div className="nav">
-                    <NavBar/>
-                </div>
+    render() {
+        return (
+            <Router>
                 <div>
-                    <Main/>
+                    <div className="nav">
+                        <NavBar/>
+                    </div>
+                    <div>
+                        <Main/>
+                    </div>
                 </div>
-            </div>
-        </Router>
-        </div>
-    );
-  }
+            </Router>
+        );
+    }
 }
 
 export default App;
