@@ -30,31 +30,29 @@ export default class AttractionPage extends Component {
             console.log(res)
             const attractions = res.data.points_of_interest;
             this.setState({attractions});
-            console.log(this.state.attractions)
-            // for (var x in this.state.attractions) {
-            //     newIndex.push(x);
-            // }
-            // this.state.index = newIndex
-            // console.log("I am index:" + this.state.index)
         })
     }
 
     render() {
         return (
-            <div className="container-fluid">
+            <div>
                 <div className="search">
-                    <div className="input-group md-form form-sm form-2 pl-0">
-                        <input className="form-control my-0 py-1 amber-border" type="text"
+                    <form>
+                        <div className="form-row align-content-center search">
+                        <input className="form-control col amber-border" type="text"
                                placeholder="Search Attractions by city"
                                aria-label="Search" ref="searchValue"/>
-                        <div className="input-group-append"/>
-                        <span className="input-group-text amber lighten-3" id="basic-text1">
-                            <i className="fa fa-search text-grey" aria-hidden="true"
-                               onClick={this.searchAttraction}/>
-                        </span>
+                            <button className ="fa fa-search btn " aria-hidden="true"
+                                    type="button"
+                                    onClick={this.searchAttraction}>
+                                Search
+                            </button>
                     </div>
+                    </form>
+                 </div>
+                <div>
+                    <AttractionList data={this.state.attractions}/>
                 </div>
-                <AttractionList data={this.state.attractions}/>
             </div>
         )
     }

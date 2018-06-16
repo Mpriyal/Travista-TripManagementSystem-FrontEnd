@@ -50,14 +50,6 @@
   color:white
 }
 
-.radioSelector{
-  width:50%;
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  margin-top: -0.00005px;
-  margin-left: -170px;
-}
 
 .dropdown{
   width:50%;
