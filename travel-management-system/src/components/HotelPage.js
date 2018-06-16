@@ -11,8 +11,8 @@ export default class HotelPage extends Component {
         this.state = {
             latitude: '42.3398198',
             longitude: '-71.0875516',
-            checkIn: moment('2018-06-01'),
-            checkOut: moment('2018-06-11'),
+            checkIn: moment(),
+            checkOut: moment(),
             radius: '10',
             inputText: '',
             hotels: []
@@ -27,7 +27,7 @@ export default class HotelPage extends Component {
 
     checkInDateChange(date) {
         this.setState({
-            checkIn : date
+            checkIn : moment(date)
         });
     }
 
@@ -39,7 +39,7 @@ export default class HotelPage extends Component {
 
     checkOutDateChange(date) {
         this.setState({
-            checkOut : date
+            checkOut : moment(date)
         });
     }
 
@@ -74,50 +74,41 @@ export default class HotelPage extends Component {
 
 
     render() {
-        return (
-            <div className="row">
-                <div className="col-sm-2">
-                </div>
-                <div className="col-sm-8">
-                <div className="search">
-                    <div className="input-group md-form form-sm form-2 pl-0">
-                        <input className="form-control my-0 py-1 amber-border"
+        return (<div className="search">
+                <form>
+                    <div className="form-row search">
+                        <div className="col">
+                        <input className="form-control amber-border"
                                type="text"
-                               placeholder="Search Hotels by Location"
+                               placeholder="Location"
                                onChange={this.inputTextChanged}
                                aria-label="Search"
                                ref="searchValue"/>
-                        <div className="input-group-append"/>
-                        <span className="input-group-text amber lighten-3" id="basic-text1">
-                            <i className="fa fa-search text-grey" aria-hidden="true"
-                               onClick={this.findAllHotels}/>
-                        </span>
-                    </div>
-                    <br/>
-                    {/*<div className="row">*/}
-                            <DatePicker
-                                placeholderText="Date From:"
-                                className="form-control"
-                                value = {this.state.checkIn}
-                                selected={this.state.checkIn}
-                                onChange={this.checkInDateChange}
-                            />
-                    {/*</div>*/}
-                    <br/>
-                    {/*<div className="row">*/}
-                        <DatePicker
-                            placeholderText="Date to:"
-                            className="form-control"
-                            value={this.state.checkOut}
-                            selected={this.state.checkOut}
+                        </div>
+                        <div className="col">
+                        <input
+                            type= "date"
+                            className="form-control amber-border"
+                            onChange={this.checkInDateChange}
+                        />
+                        </div>
+                         <div className="col">
+
+                        <input
+                            type="date"
+                            className="form-control amber-border"
                             onChange={this.checkOutDateChange}
                         />
-                    {/*</div>*/}
-                </div>
-
-                </div>
-                <div className="col-sm-2">
-                </div>
+                         </div>
+                        <div className="col">
+                        <button className ="fa fa-search btn " aria-hidden="true"
+                                type="button"
+                               onClick={this.findAllHotels}>
+                            Search
+                        </button>
+                        </div>
+                    </div>
+                </form>
             </div>
         )
     }
