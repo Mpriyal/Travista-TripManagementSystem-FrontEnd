@@ -1,10 +1,9 @@
 import React, {Component} from 'react'
-import DatePicker from 'react-datepicker';
 import moment from 'moment';
 import 'react-datepicker/dist/react-datepicker.css';
 import HotelService from '../services/HotelService.js'
 import HotelList from "./HotelList";
-import {Link, Route, BrowserRouter as Router} from "react-router-dom";
+import {BrowserRouter as Router} from "react-router-dom";
 
 
 export default class HotelPage extends Component {
@@ -29,7 +28,7 @@ export default class HotelPage extends Component {
 
     checkInDateChange(date) {
         this.setState({
-            checkIn : date
+            checkIn : moment(date)
         });
     }
 
@@ -41,7 +40,7 @@ export default class HotelPage extends Component {
 
     checkOutDateChange(date) {
         this.setState({
-            checkOut : date
+            checkOut : moment(date)
         });
     }
 
@@ -52,7 +51,6 @@ export default class HotelPage extends Component {
                 this.setLatLong(results); })
             .then(() => this.findAllHotelsByLatLong());
 
-        {/*<Link to={'/hotelList'}>{this.state.hotels}</Link>*/}
     }
 
     setLatLong(results){
@@ -78,58 +76,43 @@ export default class HotelPage extends Component {
     render() {
         return (
             <Router>
-                <div className="row">
-                    <div className="col-sm-2">
-                    </div>
-                    <div className="col-sm-8">
-                        <div className="search">
-                            <div className="input-group md-form form-sm form-2 pl-0">
-                                <input className="form-control my-0 py-1 amber-border"
+                <div className="search">
+                    <form>
+                        <div className="form-row search">
+                            <div className="col">
+                                <input className="form-control amber-border"
                                        type="text"
                                        placeholder="Search Hotels by Location"
                                        onChange={this.inputTextChanged}
                                        aria-label="Search"
                                        ref="searchValue"/>
-                                <div className="input-group-append"/>
-                                <span className="input-group-text amber lighten-3" id="basic-text1">
-                            <i className="fa fa-search text-grey" aria-hidden="true"
-                               onClick={this.findAllHotels}
-                            />
-                                    {/*<Link to={'/hotelList'}>{this.state.hotels}*/}
-                                    {/**/}
-                                    {/*</Link>*/}
-                        </span>
                             </div>
-                            <br/>
-                            {/*<div className="row">*/}
-                            <DatePicker
-                                placeholderText="Date From:"
-                                className="form-control"
-                                value = {this.state.checkIn}
-                                selected={this.state.checkIn}
-                                onChange={this.checkInDateChange}
-                            />
-                            {/*</div>*/}
-                            <br/>
-                            {/*<div className="row">*/}
-                            <DatePicker
-                                placeholderText="Date to:"
-                                className="form-control"
-                                value={this.state.checkOut}
-                                selected={this.state.checkOut}
-                                onChange={this.checkOutDateChange}
-                            />
-                            {/*</div>*/}
+                            <div className="col">
+                                <input
+                                    type= "date"
+                                    className="form-control amber-border"
+                                    onChange={this.checkInDateChange}
+                                    />
+                            </div>
+                            <div className="col">
+                                <input
+                                    type="date"
+                                    className="form-control amber-border"
+                                    onChange={this.checkOutDateChange}
+                                />
+                            </div>
+                            <div className="col">
+                                <button className ="fa fa-search btn " aria-hidden="true"
+                                        type="button"
+                                        onClick={this.findAllHotels}>
+                                    Search
+                                </button>
+                            </div>
                         </div>
-
-                    </div>
-                    <div className="col-sm-2">
-                    </div>
+                    </form>
                     <div>
                         <HotelList data={this.state.hotels}/>
                     </div>
-                    {/*<Route path="/hotelList"*/}
-                    {/*component={HotelList} data={this.state.hotels}/>*/}
                 </div>
             </Router>
         )
