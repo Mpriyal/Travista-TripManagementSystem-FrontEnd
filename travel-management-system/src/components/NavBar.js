@@ -10,13 +10,20 @@ export default class NavBar extends Component {
             collapsed: true,
         };
     }
+
+    toggleNavbar() {
+        this.setState({
+            collapsed: !this.state.collapsed,
+        });
+    }
+
     render() {
         return (
             <div className="body-width">
                 <div className="container-fluid">
                     <nav className="navbar navbar-expand-lg navbar-light bg-light">
                         <img src={logo} className="App-logo" alt="logo"/>
-                        <div className="navbar-brand" href="#">Travista</div>
+                        <div className="navbar-brand">Travista</div>
                         <button className="navbar-toggler" type="button" data-toggle="collapse"
                                 data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                                 aria-expanded="false" aria-label="Toggle navigation">
@@ -27,19 +34,19 @@ export default class NavBar extends Component {
                             <ul className="navbar-nav mr-auto">
                                 <li className="nav-item active">
                                     <Link to='/hotels'>
-                                        <div className="nav-link" href="#">Hotels
+                                        <div className="nav-link">Hotels
                                             <span className="sr-only">(current)</span>
                                         </div>
                                     </Link>
                                 </li>
                                 <li className="nav-item">
                                     <Link to='/restaurants'>
-                                        <div className="nav-link" href="#">Restaurants</div>
+                                        <div className="nav-link">Restaurants</div>
                                     </Link>
                                 </li>
                                 <li className="nav-item">
                                     <Link to='/attractions'>
-                                        <div className="nav-link" href="#">Attractions</div>
+                                        <div className="nav-link">Attractions</div>
                                     </Link>
                                 </li>
                                 {/*<li className="nav-item">*/}
@@ -48,18 +55,12 @@ export default class NavBar extends Component {
                                 {/*</Link>*/}
                                 {/*</li>*/}
                             </ul>
-                            <div className="float-right">
-                                <button className="btn btn-primary btn-sm">
-                                    Sign Up
-                                </button>
-                                <div className="divider"/>
-                                <button type="submit" className="btn btn-success btn-sm">
-                                    Sign In
-                                    {/*// onClick={this.OnSignin}>Sign In*/}
-                                </button>
-                            </div>
-                        </div>
-                    </nav>
+                        <ul className="navbar-nav">
+                            <li className="nav-item"><a href="#"><i className="fa fa-user btn"/> Sign Up</a></li>
+                            <li className="nav-item"><a href="#"><i className="fa fa-sign-in btn"/> Login</a></li>
+                        </ul>
+                </div>
+            </nav>
                 </div>
             </div>
         )
