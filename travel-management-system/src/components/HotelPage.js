@@ -26,9 +26,9 @@ export default class HotelPage extends Component {
         this.hotelService = HotelService.instance;
     }
 
-    checkInDateChange(date) {
+    checkInDateChange(event) {
         this.setState({
-            checkIn : moment(date)
+            checkIn : moment(event.target.value)
         });
     }
 
@@ -38,9 +38,9 @@ export default class HotelPage extends Component {
         });
     }
 
-    checkOutDateChange(date) {
+    checkOutDateChange(event) {
         this.setState({
-            checkOut : moment(date)
+            checkOut : moment(event.target.value)
         });
     }
 
@@ -67,6 +67,7 @@ export default class HotelPage extends Component {
                 this.state.checkOut.format("YYYY-MM-DD"),
                 this.state.radius)
             .then((result) => {
+                console.log(result);
                 this.setState({
                     hotels: result.results})
             });
@@ -76,32 +77,42 @@ export default class HotelPage extends Component {
     render() {
         return (
             <Router>
-                <div className="search">
+                <div>
+                <div className="search align-content-center">
                     <form>
-                        <div className="form-row search">
-                            <div className="col">
+                        <div className="form-row align-content-center search">
+                            <div className=" form-inline col">
+                                <div className="input-group-prepend">
+                                    <span className="input-group-text">Location</span>
+                                </div>
                                 <input className="form-control amber-border"
                                        type="text"
-                                       placeholder="Search Hotels by Location"
+                                       placeholder="Location"
                                        onChange={this.inputTextChanged}
                                        aria-label="Search"
                                        ref="searchValue"/>
                             </div>
-                            <div className="col">
+                            <div className="col form-inline">
+                                <div className="input-group-prepend">
+                                    <span className="input-group-text">CheckIn</span>
+                                </div>
                                 <input
                                     type= "date"
                                     className="form-control amber-border"
                                     onChange={this.checkInDateChange}
                                     />
                             </div>
-                            <div className="col">
+                            <div className="col form-inline">
+                                <div className="input-group-prepend">
+                                    <span className="input-group-text">CheckOut</span>
+                                </div>
                                 <input
                                     type="date"
                                     className="form-control amber-border"
                                     onChange={this.checkOutDateChange}
                                 />
                             </div>
-                            <div className="col">
+                            <div className="col form-control-lg">
                                 <button className ="fa fa-search btn " aria-hidden="true"
                                         type="button"
                                         onClick={this.findAllHotels}>
@@ -110,6 +121,7 @@ export default class HotelPage extends Component {
                             </div>
                         </div>
                     </form>
+                    </div>
                     <div>
                         <HotelList data={this.state.hotels}/>
                     </div>
