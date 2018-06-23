@@ -17,7 +17,6 @@ export default class Signup extends Component {
             email: "",
             password: "",
             confirmPassword: "",
-            confirmationCode: "",
             newUser: null
         };
     }
@@ -30,9 +29,6 @@ export default class Signup extends Component {
         );
     }
 
-    validateConfirmationForm() {
-        return this.state.confirmationCode.length > 0;
-    }
 
     handleChange = event => {
         this.setState({
@@ -56,31 +52,6 @@ export default class Signup extends Component {
         this.setState({ isLoading: true });
     }
 
-    renderConfirmationForm() {
-        return (
-            <form onSubmit={this.handleConfirmationSubmit}>
-                <FormGroup controlId="confirmationCode" bsSize="large">
-                    <ControlLabel>Confirmation Code</ControlLabel>
-                    <FormControl
-                        autoFocus
-                        type="tel"
-                        value={this.state.confirmationCode}
-                        onChange={this.handleChange}
-                    />
-                    <HelpBlock>Please check your email for the code.</HelpBlock>
-                </FormGroup>
-                <LoaderButton
-                    block
-                    bsSize="large"
-                    disabled={!this.validateConfirmationForm()}
-                    type="submit"
-                    isLoading={this.state.isLoading}
-                    text="Verify"
-                    loadingText="Verifying…"
-                />
-            </form>
-        );
-    }
 
     renderForm() {
         return (
@@ -126,9 +97,7 @@ export default class Signup extends Component {
     render() {
         return (
             <div className="Signup">
-                {this.state.newUser === null
-                    ? this.renderForm()
-                    : this.renderConfirmationForm()}
+                {this.renderForm()}
             </div>
         );
     }
