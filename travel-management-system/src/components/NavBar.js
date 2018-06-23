@@ -25,7 +25,6 @@ export default class NavBar extends Component {
         return (<div className="container">
                 <nav className="navbar navbar-expand-lg navbar-light bg-light navbar-static-top">
                     <div className="navbar-brand" href="#">
-                        <img src={logo} className="App-logo" alt="logo"/>
                         Travista
                     </div>
                     <button onClick={this.toggleNavbar}
@@ -57,6 +56,16 @@ export default class NavBar extends Component {
                             <li className="nav-item">
                                 <Link to='/attractions'>
                                     <div className="nav-link">Attractions</div>
+                                </Link>
+                            </li>
+                            <li className="nav-item">
+                                <Link to='/addYourBusiness'>
+                                    <div className="nav-link">Add Your Business</div>
+                                </Link>
+                            </li>
+                            <li className="nav-item">
+                                <Link to='/profile'>
+                                    <div className="nav-link">Profile</div>
                                 </Link>
                             </li>
                             </ul>
