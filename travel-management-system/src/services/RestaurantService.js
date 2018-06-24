@@ -28,6 +28,7 @@ export default class RestaurantService{
             owner: owner,
             name: restaurantName,
             address: restaurantAddress,
+            city: restaurantCity,
             phone: restaurantPhone,
             price: restaurantPrice};
         return fetch(LOCAL_RESTAURANT_URL, {
@@ -45,6 +46,7 @@ export default class RestaurantService{
             _id: restaurantId,
             name: restaurantName,
             address: restaurantAddress,
+            city: restaurantCity,
             phone: restaurantPhone,
             price: restaurantPrice};
         return fetch(LOCAL_RESTAURANT_URL+'/'+restaurantId,
@@ -52,10 +54,6 @@ export default class RestaurantService{
                 body: JSON.stringify(restaurant),
                 headers: { 'Content-Type': 'application/json' },
                 method: 'PUT'
-            })
-            .then(function (response)
-            {
-                return response.json();
             })
     }
 

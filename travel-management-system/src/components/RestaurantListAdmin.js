@@ -25,6 +25,7 @@ export default class RestaurantListAdmin extends Component {
         };
 
         this.createRestaurant = this.createRestaurant.bind(this)
+        this.userNameChanged = this.userNameChanged.bind(this)
         this.deleteRestaurant = this.deleteRestaurant.bind(this)
         this.populateRestaurant = this.populateRestaurant.bind(this)
         this.updateRestaurant = this.updateRestaurant.bind(this)
@@ -52,11 +53,11 @@ export default class RestaurantListAdmin extends Component {
     renderListOfRestaurants(){
         let restaurants = null;
         if(this.state) {
-             restaurants = this.state.restaurants.map((hotel) => {
-                    return <RestaurantListItem key={hotel.id}
-                                          hotel={hotel}
+             restaurants = this.state.restaurants.map((restaurant) => {
+                    return <RestaurantListItem key={restaurant.id}
+                                          restaurant={restaurant}
                                           deleteRestaurant={this.deleteRestaurant}
-                                          updateRestaurant={this.populateRestaurant}/>
+                                          populateRestaurant={this.populateRestaurant}/>
                 }
             );
         }
@@ -89,14 +90,16 @@ export default class RestaurantListAdmin extends Component {
         })
     }
 
-    setOwner(event){
+    userNameChanged(event){
         this.setState({
             ownerName: event.target.value
         })
+    }
+
+    setOwner(){
         this.ownerService
             .findOwnerByUsername(this.state.ownerName)
-            .then((owner) => {this.state.owner = owner})
-
+            .then((owner1) => {this.setState({owner: owner1[0]})});
     }
 
     setCity(event){
@@ -137,7 +140,7 @@ export default class RestaurantListAdmin extends Component {
 
     updateRestaurant() {
         this.restaurantService
-            .updateHotel( this.state.id, this.state.name, this.state.address,this.state.city, this.state.phone, this.state.price)
+            .updateRestaurant( this.state.id, this.state.name, this.state.address,this.state.city, this.state.phone, this.state.price)
             .then(() => {
                     this.findAllRestaurants()
                 }
@@ -161,7 +164,7 @@ export default class RestaurantListAdmin extends Component {
             <Switch>
                 <div className="container-fluid">
                     <div className="row">
-                        <div className="col-4">
+                        <div className="col-sm-4">
                             <h2 style={{textAlign: "center"}}>Restaurants</h2>
                             <br/>
                             <ul className="list-group">
@@ -169,9 +172,16 @@ export default class RestaurantListAdmin extends Component {
                             </ul>
                             <br/>
                             <label>Please fill the username of restaurant owner first first</label>
-                            <input onChange={this.setOwner}
+                            <input onChange={this.userNameChanged}
                                    value={this.state.ownerName}
-                                   placeholder="Enter Owner's username Name"
+                                   placeholder="Enter Owner's username"
+                                   className="form-control text-center font-weight-bold"/>
+                            <button onClick={this.setOwner}
+                                    className="btn btn-block btn-primary">
+                                Click to verify username
+                            </button>
+                            <input value={this.state.owner._id}
+                                   placeholder="Enter Owner's username to fill this ID"
                                    className="form-control text-center font-weight-bold"/>
                             <input onChange={this.setName}
                                    value={this.state.name}
