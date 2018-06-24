@@ -8,38 +8,22 @@ export default class AddRestaurant extends Component {
         super(props);
 
         this.state = {
-            car_info: {
-                address: "",
-                vehicle_info: {
-                    transmission: "",
-                    fuel: "",
-                    air_conditioning: "",
-                    category: "",
-                    type: ""
-                },
-                price: {
-                    type: "",
-                    amount: "",
-                    currency: ""
-                },
-                available: {
-                    startDate: "",
-                    endDate: ""
-                }
-            }
+            restaurantId: "",
+            name: "",
+            address: "",
+            city: "",
+            phone: "",
+            price: ""
         }
     }
 
     validateForm() {
-        return this.state.car_info.address.length > 0 &&
-            this.state.car_info.vehicle_info.transmission > 0 &&
-            this.state.car_info.vehicle_info.fuel > 0 &&
-            this.state.car_info.vehicle_info.type > 0 &&
-            this.state.car_info.vehicle_info.air_conditioning > 0 &&
-            this.state.car_info.vehicle_info.category > 0 &&
-            this.state.car_info.price.amount > 0 &&
-            this.state.car_info.price.type> 0 &&
-            this.state.car_info.price.currency > 0
+        return this.state.address.length > 0 &&
+            this.state.name.length > 0 &&
+            this.state.city.length> 0 &&
+            this.state.phone.length > 0 &&
+            this.state.price.length > 0
+
     }
 
     handleChange = event => {
@@ -56,121 +40,52 @@ export default class AddRestaurant extends Component {
         return (
             <div className="SubForm">
                 <Form horizontal onSubmit={this.handleSubmit}>
-                    <h2 className = "align-content-center">Enter Car Details</h2>
-                    <FormGroup controlId="carAddress" bsSize="large">
-                        <ControlLabel>Car Address</ControlLabel>
+                    <FormGroup className="form-inline" controlId="name" bsSize="large">
+                        <ControlLabel className="col-4">Restaurant Name</ControlLabel>
                         <FormControl
                             autoFocus
+                            className="col-8"
                             type="text"
-                            value={this.state.car_info.address}
+                            value={this.state.name}
                             onChange={this.handleChange}
                         />
                     </FormGroup>
-                    <FormGroup controlId="vehicle_info" bsSize="large">
-                        <ControlLabel>Vehicle Info</ControlLabel>
-                        <FormGroup controlId="transmission" bsSize="large">
-                            <ControlLabel>Transmission</ControlLabel>
+                        <FormGroup className="form-inline" controlId="address" bsSize="large">
+                            <ControlLabel className="col-4">Address</ControlLabel>
                             <FormControl
                                 autoFocus
+                                className="col-8"
                                 type="text"
-                                value={this.state.car_info.vehicle_info.transmission}
+                                value={this.state.address}
                                 onChange={this.handleChange}
                             />
                         </FormGroup>
-                        <FormGroup controlId="fuel" bsSize="large">
-                            <ControlLabel>Fuel</ControlLabel>
+                        <FormGroup className="form-inline" controlId="city" bsSize="large">
+                            <ControlLabel className="col-4">City</ControlLabel>
                             <FormControl
                                 autoFocus
+                                className="col-8"
                                 type="text"
-                                value={this.state.car_info.vehicle_info.fuel}
+                                value={this.state.city}
                                 onChange={this.handleChange}
                             />
                         </FormGroup>
-                        <FormGroup controlId="airConditioning" bsSize="large">
-                            <ControlLabel>Air Conditioning</ControlLabel>
+                        <FormGroup className="form-inline" controlId="price" bsSize="large">
+                            <ControlLabel className="col-4">Price</ControlLabel>
                             <FormControl
                                 autoFocus
+                                className="col-8"
                                 type="text"
-                                value={this.state.car_info.vehicle_info.air_conditioning}
+                                value={this.state.price}
                                 onChange={this.handleChange}
                             />
                         </FormGroup>
-                        <FormGroup controlId="category" bsSize="large">
-                            <ControlLabel>Category</ControlLabel>
-                            <FormControl
-                                autoFocus
-                                type="text"
-                                value={this.state.car_info.vehicle_info.category}
-                                onChange={this.handleChange}
-                            />
-                        </FormGroup>
-                        <FormGroup controlId="type" bsSize="large">
-                            <ControlLabel>Type</ControlLabel>
-                            <FormControl
-                                autoFocus
-                                type="text"
-                                value={this.state.car_info.vehicle_info.type}
-                                onChange={this.handleChange}
-                            />
-                        </FormGroup>
-                    </FormGroup>
-                    <FormGroup controlId="price" bsSize="large">
-                        <ControlLabel>Price</ControlLabel>
-                        <FormGroup controlId="type" bsSize="large">
-                            <ControlLabel>Type</ControlLabel>
-                            <FormControl
-                                autoFocus
-                                type="text"
-                                value={this.state.car_info.price.type}
-                                onChange={this.handleChange}
-                            />
-                        </FormGroup>
-                        <FormGroup controlId="amount" bsSize="large">
-                            <ControlLabel>Amount</ControlLabel>
-                            <FormControl
-                                autoFocus
-                                type="text"
-                                value={this.state.car_info.price.amount}
-                                onChange={this.handleChange}
-                            />
-                        </FormGroup>
-                        <FormGroup controlId="airConditioning" bsSize="large">
-                            <ControlLabel>Currency</ControlLabel>
-                            <FormControl
-                                autoFocus
-                                type="text"
-                                value={this.state.car_info.price.currency}
-                                onChange={this.handleChange}
-                            />
-                        </FormGroup>
-                    </FormGroup>
-                    <FormGroup controlId="availability" bsSize="large">
-                        <ControlLabel>Availability</ControlLabel>
-                        <FormGroup controlId="startDate" bsSize="large">
-                            <ControlLabel>Start Date</ControlLabel>
-                            <FormControl
-                                autoFocus
-                                type="date"
-                                value={this.state.car_info.available.startDate}
-                                onChange={this.handleChange}
-                            />
-                        </FormGroup>
-                        <FormGroup controlId="endDate" bsSize="large">
-                            <ControlLabel>End Date</ControlLabel>
-                            <FormControl
-                                autoFocus
-                                type="date"
-                                value={this.state.car_info.available.endDate}
-                                onChange={this.handleChange}
-                            />
-                        </FormGroup>
-                    </FormGroup>
                     <LoaderButton
                         block
                         bsSize="large"
                         disabled={!this.validateForm()}
                         type="submit"
-                        text="Add Your Car"
+                        text="Add Your Restaurant"
                     />
                 </Form>
             </div>

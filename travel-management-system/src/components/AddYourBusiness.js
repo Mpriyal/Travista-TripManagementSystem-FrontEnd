@@ -21,7 +21,7 @@ export default class AddYourBusiness extends Component {
             phone: "",
             email:"",
             address:"",
-            typeOfBusiness:"",
+            typeOfBusiness:"HOTEL",
             confirmPassword: ""
         };
     }
@@ -53,7 +53,7 @@ export default class AddYourBusiness extends Component {
         switch (param) {
             case 'HOTEL':
                 return <div>
-                    <Link to={`/register/${this.state.userId}/hotel`}>
+                    <Link to={`/register/hotel`}>
                         <LoaderButton
                             block
                             bsSize="large"
@@ -64,7 +64,7 @@ export default class AddYourBusiness extends Component {
                 </div>;
             case 'RESTAURANT':
                 return <div>
-                    <Link to={`/register/${this.state.userId}/restaurant`}>
+                    <Link to={`/register/restaurant`}>
                         <LoaderButton
                             block
                             bsSize="large"
@@ -76,7 +76,7 @@ export default class AddYourBusiness extends Component {
                 </div>;
             case 'CAR':
                 return <div>
-                    <Link to={`/register/${this.state.userId}/car`}>
+                    <Link to={`/register/car`}>
                         <LoaderButton
                             block
                             bsSize="large"
@@ -213,9 +213,9 @@ export default class AddYourBusiness extends Component {
             </div>
             <div className="col-8 SubForm">
                     {this.addBusiness(this.state.typeOfBusiness)}
-                <Route path="/register/:userId/hotel" exact component={AddHotel} />
-                <Route path="/register/:userId/restaurant" exact component={AddRestaurant} />
-                <Route path="/register/:userId/car" exact component={AddCar} />
+                <Route path="/register/hotel" exact component={AddHotel} />
+                <Route path="/register/restaurant" exact component={AddRestaurant} />
+                <Route path="/register/car" exact component={AddCar} />
             </div>
          </div>
         </Router>

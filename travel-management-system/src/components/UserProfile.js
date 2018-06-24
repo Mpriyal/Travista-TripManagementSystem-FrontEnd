@@ -1,12 +1,9 @@
 import React, { Component } from "react";
 import {BrowserRouter as Router ,Route, Link } from 'react-router-dom';
-import {Form, FormGroup, FormControl, ControlLabel} from "react-bootstrap";
+import {Form, FormGroup, FormControl, ControlLabel, ListGroupItem} from "react-bootstrap";
 import UserServiceClient from '../services/UserService';
+import BookingServiceClient from '../services/BookingService'
 import LoaderButton from "../components/LoaderButton";
-import "./Profile.css";
-import HotelManager from "./HotelManager";
-import CarManager from "./CarManager";
-import AddRestaurant from "./AddRestaurant";
 
 export default class AddYourBusiness extends Component {
     constructor(props) {
@@ -19,21 +16,39 @@ export default class AddYourBusiness extends Component {
             firstName: "",
             lastName: "",
             dateOfBirth: "",
-            businessName: "",
-            typeOfBusiness:"HOTEL",
             phone: "",
             email:"",
             address:"",
-            buttonDisplay: true
+            bookings:[]
         };
         this.userService = UserServiceClient.instance;
-        this.setButtonDisplay = this.setButtonDisplay.bind(this);
+        this.bookingService = BookingServiceClient.instance;
+    }
+    findAllBookingsByUserId(){
+        this
+            .bookingService
+            .findAllBookingsByUserId(this.state.userId)
+            .then(bookings => {this.setState({bookings: bookings})});
     }
 
     renderProfile(userId){
             this.userService
                 .findUserById(userId)
                 .then(user => this.setProfile(user));
+    }
+    renderAllBookingsOfUser(){
+        let bookings = null;
+        if(this.state) {
+            bookings = this.state.bookings.map((booking) =>{
+                    return <ListGroupItem>
+                        <b>Booking Id:</b> booking._id
+                    </ListGroupItem>
+                }
+            );
+        }
+        return (
+            bookings
+        )
     }
 
     setProfile(user){
@@ -47,7 +62,6 @@ export default class AddYourBusiness extends Component {
             this.state.username.length > 0 &&
             this.state.firstName.length > 0 &&
             this.state.lastName.length > 0 &&
-            this.state.businessName.length > 0 &&
             this.state.dateOfBirth.length > 0 &&
             this.state.phone.length > 0 &&
             this.state.address.length > 0;
@@ -61,50 +75,6 @@ export default class AddYourBusiness extends Component {
 
     handleSubmit = event => {
         event.preventDefault();
-    };
-    setButtonDisplay(){
-        this.setState({buttonDisplay : !this.state.buttonDisplay})
-    }
-    addBusiness(param){
-        if(this.state.buttonDisplay) {
-            switch (param) {
-                case 'HOTEL':
-                    return <div>
-                        <Link to={`/profile/${this.state.userId}/hotel`}>
-                            <LoaderButton
-                                block
-                                bsSize="large"
-                                type="submit"
-                                text="View Hotel Details"
-                                onClick={this.setButtonDisplay}/>
-                        </Link>
-                    </div>;
-                case 'RESTAURANT':
-                    return <div>
-                        <Link to={`/profile/${this.state.userId}/restaurant`}>
-                            <LoaderButton
-                                block
-                                bsSize="large"
-                                type="submit"
-                                text="View Restaurant Details"
-                                onClick={this.setButtonDisplay}
-                            />
-                        </Link>
-                    </div>;
-                case 'CAR':
-                    return <div>
-                        <Link to={`/profile/${this.state.userId}/car`}>
-                            <LoaderButton
-                                block
-                                bsSize="large"
-                                type="submit"
-                                text="View Car Details"
-                                onClick={this.setButtonDisplay}
-                            />
-                        </Link>
-                    </div>;
-            }
-        }
     };
 
     render() {
@@ -152,27 +122,6 @@ export default class AddYourBusiness extends Component {
                             type="email"
                             value={this.state.email}
                             onChange={this.handleChange}
-                        />
-                    </FormGroup>
-                    <FormGroup className="form-inline" controlId="businessName" bsSize="large">
-                        <ControlLabel className="col-4 ">Business Name </ControlLabel>
-                        <FormControl
-                            className="col-8"
-                            autoFocus
-                            type="text"
-                            value={this.state.businessName}
-                            onChange={this.handleChange}
-                        />
-                    </FormGroup>
-                    <FormGroup className="form-inline"
-                               controlId="typeOfBusiness"
-                               bsSize="large">
-                        <ControlLabel className="col-4">Business Type</ControlLabel>
-                        <FormControl
-                            className="col-8"
-                            autoFocus
-                            type="text"
-                            value={this.state.typeOfBusiness}
                         />
                     </FormGroup>
                     <FormGroup className="form-inline" controlId="phone" bsSize="large">
@@ -230,10 +179,7 @@ export default class AddYourBusiness extends Component {
                 </Form>
                 </div>
                 <div className="col-8 SubForm">
-                        {this.addBusiness(this.state.typeOfBusiness)}
-                    <Route path="/profile/:userId/hotel" exact component={HotelManager} />
-                    <Route path="/profile/:userId/restaurant" exact component={AddRestaurant} />
-                    <Route path="/profile/:userId/car" exact component={CarManager} />
+                        {this.renderAllBookingsOfUser()}
                 </div>
             </div>
           </Router>

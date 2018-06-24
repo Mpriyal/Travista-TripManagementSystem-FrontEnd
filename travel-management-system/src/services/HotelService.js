@@ -3,6 +3,7 @@ const HOTEL_API_URL = 'http://api.sandbox.amadeus.com/v1.2/hotels/search-circle?
 const LAT_LONG_URL = 'https://maps.googleapis.com/maps/api/geocode/json?';
 const API_KEY = '';
 const LAT_LONG_API_KEY = '';
+const HOTEL_URL ='';
 
 
 class HotelService {

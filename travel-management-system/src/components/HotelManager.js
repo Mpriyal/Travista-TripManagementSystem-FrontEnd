@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import {BrowserRouter as Router ,Route, Link } from 'react-router-dom';
-import {Form, FormGroup, FormControl, ControlLabel} from "react-bootstrap";
+import {Form, FormGroup, FormControl, ControlLabel, ListGroup, ListGroupItem} from "react-bootstrap";
 import LoaderButton from "../components/LoaderButton";
 import HotelServiceClient from "../services/HotelService";
 import AddRoom from "./AddRoom";
@@ -10,18 +10,34 @@ export default class HotelManager extends Component {
         super(props);
 
         this.state = {
+            userId:"",
+            hotelId:"",
             name:"",
             address: "",
             phone: "",
             rate: "",
             latitude:"",
-            longitude:""
+            longitude:"",
+            rooms:[]
         };
         this.hotelService = HotelServiceClient.instance;
         this.updateHotel = this.updateHotel.bind(this);
     }
-
-
+    setHotelId(hotelId){
+        this.setState({hotelId : hotelId})
+    }
+    setUserId(userId){
+        this.setState({userId : userId})
+    }
+    componentDidMount() {
+        this.setHotelId(this.props.hotelId);
+        this.setUserId(this.props.userId);
+    }
+    componentWillReceiveProps(newProps){
+        this.setHotelId(newProps.hotelId);
+        this.setUserId(newProps.userId);
+        this.findAllRoomsByHotelId(newProps.hotelId);
+    }
     validateForm() {
         return  this.state.name.length > 0 &&
             this.state.address.length > 0 &&
@@ -59,45 +75,69 @@ export default class HotelManager extends Component {
             latitude:  results.results[0].geometry.location.lat,
             longitude: results.results[0].geometry.location.lng })
     }
+    findAllRoomsByHotelId(){
+        this
+            .hotelService
+            .findAllRoomsByHotelId(this.state.hotelId)
+            .then(rooms => {this.setState({rooms: rooms})});
+    }
+    renderHotelRooms(){
+        let rooms = null;
+        if(this.state) {
+            rooms = this.state.rooms.map((room) =>{
+                    return <ListGroupItem>
+                        <b>Room Type:</b> room.type
+                        <b>Number of Beds:</b> room.numberOfBeds
+                    </ListGroupItem>
+                }
+            );
+        }
+        return (
+            rooms
+        )
+    }
 
     render() {
         return (
             <Router>
             <div>
-            <div className="Form">
+            <div className="SubForm">
                 <Form horizontal onSubmit={this.handleSubmit}>
-                    <h2 className = "align-content-center">Enter Hotel Details</h2>
-                    <FormGroup controlId="name" bsSize="large">
-                        <ControlLabel>Hotel Name</ControlLabel>
+                    <FormGroup className="form-inline" controlId="name" bsSize="large">
+                        <ControlLabel className="col-4">Hotel Name</ControlLabel>
                         <FormControl
                             autoFocus
+                            className="col-8"
                             type="text"
                             value={this.state.name}
                             onChange={this.handleChange}
                         />
                     </FormGroup>
-                    <FormGroup controlId="address" bsSize="large">
-                        <ControlLabel>Hotel Address</ControlLabel>
+                    <FormGroup className="form-inline" controlId="address" bsSize="large">
+                        <ControlLabel className="col-4">Hotel Address</ControlLabel>
                         <FormControl
                             autoFocus
+                            className="col-8"
                             type="text"
                             value={this.state.address}
                             onChange={this.handleChange}
                         />
                     </FormGroup>
-                    <FormGroup controlId="phone" bsSize="large">
-                        <ControlLabel>Phone</ControlLabel>
+                    <FormGroup className="form-inline" controlId="phone" bsSize="large">
+                        <ControlLabel className="col-4">Phone</ControlLabel>
                         <FormControl
                             autoFocus
+                            className="col-8"
                             type="text"
                             value={this.state.phone}
                             onChange={this.handleChange}
                         />
                     </FormGroup>
-                    <FormGroup controlId="rate" bsSize="large">
-                        <ControlLabel>Rate</ControlLabel>
+                    <FormGroup className="form-inline" controlId="rate" bsSize="large">
+                        <ControlLabel className="col-4">Rate</ControlLabel>
                         <FormControl
                             autoFocus
+                            className="col-8"
                             type="text"
                             value={this.state.rate}
                             onChange={this.handleChange}
@@ -113,6 +153,9 @@ export default class HotelManager extends Component {
                     />
                 </Form>
             </div>
+                <ListGroup>
+                    {this.renderHotelRooms()}
+                </ListGroup>
                 <div>
                     <Link to={`/profile/${this.state.userId}/hotel/${this.state.hotelId}`}>
                         <LoaderButton

@@ -64,16 +64,6 @@ export default class NavBar extends Component {
                                 </Link>
                             </li>
                             <li className="nav-item">
-                                <Link to='/addYourBusiness'>
-                                    <div className="nav-link">Add Your Business</div>
-                                </Link>
-                            </li>
-                            <li className="nav-item">
-                                <Link to='/profile'>
-                                    <div className="nav-link">Profile</div>
-                                </Link>
-                            </li>
-                            <li className="nav-item">
                                 <Link to='/admin'>
                                     <div className="nav-link">Admin</div>
                                 </Link>
@@ -82,6 +72,7 @@ export default class NavBar extends Component {
                         <ul className="navbar-nav">
                             <li className="nav-item"><Link to ="/signup"><i className="fa fa-user btn"/> Sign Up</Link></li>
                             <li className="nav-item"><Link to ="/login"><i className="fa fa-sign-in btn"/> Login</Link></li>
+                            <li className="nav-item"><Link to ="/businessSignIn"><i className="fa fa-briefcase btn"/> Business</Link></li>
                         </ul>
                 </div>
             </nav>

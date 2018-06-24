@@ -2,10 +2,10 @@ import React, { Component } from "react";
 import {Link } from 'react-router-dom';
 import {FormGroup, FormControl, ControlLabel } from "react-bootstrap";
 import LoaderButton from "../components/LoaderButton";
-import UserServiceClient from "../services/UserService";
+import OwnerServiceClient from "../services/OwnerService";
 
 
-export default class Login extends Component {
+export default class BusinessSignIn extends Component {
     constructor(props) {
         super(props);
 
@@ -13,7 +13,7 @@ export default class Login extends Component {
             username: "",
             password: ""
         };
-        this.userService = UserServiceClient.instance;
+        this.ownerService = OwnerServiceClient.instance;
     }
 
     validateForm() {
@@ -27,18 +27,22 @@ export default class Login extends Component {
     };
 
     handleSubmit = event => {
-        this
-            .userService
-            .loginUser(this.state.username,this.state.password)
-            .then((user) => {
-                return <Link to={`/profile/${user._id}`}/>;
-            });
+        event.preventDefault();
     };
+    loginOwner(){
+        this
+            .ownerService
+            .loginOwner(this.state.username,this.state.password)
+            .then(() => {
+               return <Link to="/owner/:userId"/>;
+            })
+    }
 
     render() {
         return (
+            <div>
             <div className="Form">
-                <form>
+                <form onSubmit={this.handleSubmit}>
                     <FormGroup controlId="username" bsSize="large">
                         <ControlLabel>Username</ControlLabel>
                         <FormControl
@@ -62,10 +66,21 @@ export default class Login extends Component {
                         disabled={!this.validateForm()}
                         type="submit"
                         text="Login"
-                        onClick = {this.handleSubmit}
+                        onClick={this.loginOwner}
                     />
                 </form>
             </div>
+            <div>
+                <Link to="/addYourBusiness">
+                    <LoaderButton
+                        block
+                        bsSize="large"
+                        type="submit"
+                        text="Want to Add your Business ??"
+                    />
+                </Link>
+            </div>
+    </div>
         );
     }
 }

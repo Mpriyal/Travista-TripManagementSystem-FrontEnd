@@ -61,7 +61,7 @@ export default class AddHotel extends Component {
     render() {
         return (
             <div className="SubForm">
-                <Form horizontal onSubmit={this.handleSubmit}>
+                <Form horizontal>
                     <FormGroup className="form-inline" controlId="name" bsSize="large">
                         <ControlLabel className="col-4">Hotel Name</ControlLabel>
                         <FormControl

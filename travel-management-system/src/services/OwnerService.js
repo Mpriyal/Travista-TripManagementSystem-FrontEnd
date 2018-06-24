@@ -1,22 +1,21 @@
 let _singleton = Symbol();
-const LOG_IN_URL = 'http://localhost:4000/api/login';
-const PROFILE_URL = 'http://localhost:4000/api/profile';
-const USER_URL = 'http://localhost:4000/api/user';
+const LOG_IN_URL = 'http://localhost:4000/api/businessLogin';
+const PROFILE_URL = 'http://localhost:4000/api/businessProfile';
+const LOG_OUT_URL = 'http://localhost:4000/api/logout';
+const OWNER_URL = 'http://localhost:4000/api/owner';
 
-
-
-class UserService {
+class OwnerService {
     constructor(singletonToken) {
         if (_singleton !== singletonToken)
             throw new Error('Cannot instantiate directly.');
     }
     static get instance() {
         if(!this[_singleton])
-            this[_singleton] = new UserService(_singleton);
+            this[_singleton] = new OwnerService(_singleton);
         return this[_singleton]
     }
 
-    loginUser(username,password){
+    loginOwner(username,password){
         return fetch(LOG_IN_URL, {
             method: 'post',
             body: JSON.stringify({username:username, password: password}),
@@ -29,34 +28,34 @@ class UserService {
         })
     }
 
-    findUserById(userId) {
-        return fetch(USER_URL + '/' + userId,{
+    findOwnerById(userId) {
+        return fetch(OWNER_URL + '/' + userId,{
             credentials: "same-origin"
         }).then(response => response.json());
     }
 
-    findUserIdByUsername(username) {
+    findOwnerByUsername(username) {
         return fetch(PROFILE_URL + '/' + username,{
             credentials: "same-origin"
         })
             .then(response => response.json());
     }
-    deleteUser(userId) {
-        return fetch(USER_URL + '/' + userId, {
+    deleteOwner(ownerId) {
+        return fetch(OWNER_URL + '/' + ownerId, {
             method: 'delete',
             credentials: "same-origin"
         })
     }
 
-    findAllUsers() {
-        return fetch(USER_URL,{
+    findAllOwners() {
+        return fetch(OWNER_URL,{
             credentials: "same-origin"
         })
             .then(response => response.json());
     }
 
-    createUser(user) {
-        return fetch(USER_URL, {
+    createOwner(user) {
+        return fetch(OWNER_URL, {
             method: 'post',
             body: JSON.stringify(user),
             credentials: "same-origin",
@@ -66,5 +65,12 @@ class UserService {
         });
     }
 
+    logout() {
+        return fetch(LOG_OUT_URL, {
+            method: 'post',
+            credentials: 'include'
+        });
+    }
+
 }
-export default UserService;
+export default OwnerService;

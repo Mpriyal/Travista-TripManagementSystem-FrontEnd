@@ -1,5 +1,4 @@
-import React, {Component} from 'react'
-import moment from 'moment';
+import React, {Component} from 'react';
 import 'react-datepicker/dist/react-datepicker.css';
 import HotelService from '../services/HotelService.js'
 import HotelList from "./HotelList";
