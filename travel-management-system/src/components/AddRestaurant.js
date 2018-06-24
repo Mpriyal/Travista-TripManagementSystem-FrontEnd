@@ -54,7 +54,7 @@ export default class AddRestaurant extends Component {
 
     render() {
         return (
-            <div className="Form">
+            <div className="SubForm">
                 <Form horizontal onSubmit={this.handleSubmit}>
                     <h2 className = "align-content-center">Enter Car Details</h2>
                     <FormGroup controlId="carAddress" bsSize="large">

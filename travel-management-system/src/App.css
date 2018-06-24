@@ -16,6 +16,14 @@
   padding: 60px 0;
 }
 
+.SubForm {
+    padding: 60px 60px;
+}
+
+.Pad{
+    margin: 0 auto;
+}
+
 .Form form {
   margin: 0 auto;
   max-width: 320px;

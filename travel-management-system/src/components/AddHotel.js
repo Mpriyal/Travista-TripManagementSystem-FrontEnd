@@ -60,41 +60,44 @@ export default class AddHotel extends Component {
 
     render() {
         return (
-            <div className="Form">
+            <div className="SubForm">
                 <Form horizontal onSubmit={this.handleSubmit}>
-                    <h2 className = "align-content-center">Enter Hotel Details</h2>
-                    <FormGroup controlId="name" bsSize="large">
-                        <ControlLabel>Hotel Name</ControlLabel>
+                    <FormGroup className="form-inline" controlId="name" bsSize="large">
+                        <ControlLabel className="col-4">Hotel Name</ControlLabel>
                         <FormControl
                             autoFocus
                             type="text"
+                            className="col-8"
                             value={this.state.name}
                             onChange={this.handleChange}
                         />
                     </FormGroup>
-                    <FormGroup controlId="address" bsSize="large">
-                        <ControlLabel>Hotel Address</ControlLabel>
+                    <FormGroup className="form-inline" controlId="address" bsSize="large">
+                        <ControlLabel className="col-4">Hotel Address</ControlLabel>
                         <FormControl
                             autoFocus
                             type="text"
+                            className="col-8"
                             value={this.state.address}
                             onChange={this.handleChange}
                         />
                     </FormGroup>
-                    <FormGroup controlId="phone" bsSize="large">
-                        <ControlLabel>Phone</ControlLabel>
+                    <FormGroup className="form-inline" controlId="phone" bsSize="large">
+                        <ControlLabel className="col-4">Phone</ControlLabel>
                         <FormControl
                             autoFocus
                             type="text"
+                            className="col-8"
                             value={this.state.phone}
                             onChange={this.handleChange}
                         />
                     </FormGroup>
-                    <FormGroup controlId="rate" bsSize="large">
-                        <ControlLabel>Rate</ControlLabel>
+                    <FormGroup className="form-inline" controlId="rate" bsSize="large">
+                        <ControlLabel className="col-4">Rate</ControlLabel>
                          <FormControl
                                 autoFocus
                                 type="text"
+                                className="col-8"
                                 value={this.state.rate}
                                 onChange={this.handleChange}
                           />

@@ -222,8 +222,10 @@ export default class AddYourBusiness extends Component {
                     />
                 </Form>
                 </div>
-                <div className="col-8 Form">
-                    {this.addBusiness(this.state.typeOfBusiness)}
+                <div className="col-8">
+                    <div className="Form">
+                        {this.addBusiness(this.state.typeOfBusiness)}
+                    </div>
                     <Route path="/profile/:userId/hotel" exact component={HotelManager} />
                     <Route path="/profile/:userId/restaurant" exact component={AddRestaurant} />
                     <Route path="/profile/:userId/car" exact component={AddCar} />
