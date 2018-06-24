@@ -4,7 +4,7 @@ const LAT_LONG_URL = 'https://maps.googleapis.com/maps/api/geocode/json?';
 const API_KEY = '';
 const LAT_LONG_API_KEY = 'AIzaSyCGFcq0Kr1hQAULOY9_O3azu2N4Srn-tmY'
 
-// Qx2BLHZV4pB0wTFL3qFx9JGNAXsMa4my
+
 
 class HotelService {
     constructor(singletonToken) {
