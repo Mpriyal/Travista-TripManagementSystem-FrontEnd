@@ -1,8 +1,10 @@
 let _singleton = Symbol();
 const HOTEL_API_URL = 'http://api.sandbox.amadeus.com/v1.2/hotels/search-circle?';
+const LOCAL_HOTEL_URL = 'http://localhost:4000/api/hotel';
 const LAT_LONG_URL = 'https://maps.googleapis.com/maps/api/geocode/json?';
 const API_KEY = '';
-const LAT_LONG_API_KEY = '';
+const LAT_LONG_API_KEY = 'AIzaSyCGFcq0Kr1hQAULOY9_O3azu2N4Srn-tmY';
+
 
 
 class HotelService {
@@ -28,12 +30,7 @@ class HotelService {
                 return response.json();
             });
     }
-    findAllHotels(){
-        return fetch('http://localhost:4000/api/hotel')
-            .then(function(response){
-                return response.json();
-            })
-    }
+
     findLatLongOfHotel(address){
         return fetch(LAT_LONG_URL +
             'address=' + address +
@@ -42,50 +39,62 @@ class HotelService {
                 return response.json();
             });
     }
-    createHotel(hotel, userId){
-        return fetch(HOTEL_URL
-                .replace('UID', userId),
-            {
-                body: JSON.stringify(hotel),
-                headers: { 'Content-Type': 'application/json' },
-                method: 'POST'
-            })
-            .then(function (response)
-            {
+
+    findAllLocalHotel() {
+        return fetch(LOCAL_HOTEL_URL)
+            .then(function(response){
                 return response.json();
-            })
+            });
     }
-    updateHotel(hotel, userId){
-        return fetch(HOTEL_URL
-                .replace('UID', userId),
+
+    findRoomsForHotel(hotelId) {
+        return fetch(LOCAL_HOTEL_URL+'/'+hotelId+ '/room')
+            .then(function(response){
+                return response.json();
+            });
+    }
+
+    findHotelById(hotelId) {
+        return fetch(LOCAL_HOTEL_URL+'/'+hotelId)
+            .then(function(response){
+                return response.json();
+            });
+    }
+
+    createHotel(hotel) {
+        return fetch(LOCAL_HOTEL_URL, {
+            body: JSON.stringify(hotel),
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            method: 'POST'
+        }).then(function (response) {
+                return response.json();
+            }
+        )
+    }
+
+    updateHotel(hotelId,hotel){
+        return fetch(LOCAL_HOTEL_URL+'/'+hotelId),
             {
                 body: JSON.stringify(hotel),
                 headers: { 'Content-Type': 'application/json' },
                 method: 'PUT'
-            })
-            .then(function (response)
-            {
-                return response.json();
-            })
-    }
-    createRoom(room, userId){
-        return fetch(HOTEL_URL
-                .replace('UID', userId),
-            {
-                body: JSON.stringify(room),
-                headers: { 'Content-Type': 'application/json' },
-                method: 'POST'
-            })
-            .then(function (response)
-            {
-                return response.json();
-            })
-    }
-    deleteHotels(hotelId){
-        return fetch('http://localhost:4000/api/hotel/'
-            + hotelId, {method: 'delete'})
+            }
+                .then(function (response)
+                {
+                    return response.json();
+                })
     }
 
+    deleteHotel(hotelId) {
+        return fetch(LOCAL_HOTEL_URL + '/' + hotelId,
+            {
+                method: 'DELETE'
+            }).then(function (response) {
+            return response;
+        })
+    }
 
 }
 export default HotelService;
