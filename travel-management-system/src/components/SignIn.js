@@ -14,6 +14,7 @@ export default class Login extends Component {
             password: ""
         };
         this.userService = UserServiceClient.instance;
+        this.loginCustomer = this.loginCustomer.bind(this);
     }
 
     validateForm() {
@@ -26,14 +27,24 @@ export default class Login extends Component {
         });
     };
 
-    handleSubmit = event => {
-        this
-            .userService
+    // handleSubmit = event => {
+    //     this
+    //         .userService
+    //         .loginUser(this.state.username,this.state.password)
+    //         .then((user) => {
+    //             return <Link to={`/profile/${user._id}`}/>;
+    //         });
+    //         // .then((user) => {
+    //         //     return <Link to={`/profile/${user._id}`}/>;
+    //         // });
+    // };
+
+    loginCustomer() {
+        console.log(this.state.username)
+        this.userService
             .loginUser(this.state.username,this.state.password)
-            .then((user) => {
-                return <Link to={`/profile/${user._id}`}/>;
-            });
-    };
+            .then((customer) => {customer == null ? alert ("Wrong Credentials") : window.location.assign(`/profile/${customer._id}`);});
+    }
 
     render() {
         return (
@@ -56,14 +67,15 @@ export default class Login extends Component {
                             type="password"
                         />
                     </FormGroup>
-                    <LoaderButton
-                        block
-                        bsSize="large"
-                        disabled={!this.validateForm()}
-                        type="submit"
-                        text="Login"
-                        onClick = {this.handleSubmit}
-                    />
+                    {/*<LoaderButton*/}
+                        {/*block*/}
+                        {/*bsSize="large"*/}
+                        {/*disabled={!this.validateForm()}*/}
+                        {/*type="submit"*/}
+                        {/*text="Login"*/}
+                        {/*onClick = {this.handleSubmit}*/}
+                    {/*/>*/}
+                    <button onClick={this.loginCustomer}>Login</button>
                 </form>
             </div>
         );

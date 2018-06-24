@@ -10,7 +10,7 @@ export default class AddYourBusiness extends Component {
         super(props);
 
         this.state = {
-            userId:"123",
+            userId:"",
             username: "",
             password: "",
             firstName: "",
@@ -22,18 +22,30 @@ export default class AddYourBusiness extends Component {
             bookings:[]
         };
         this.userService = UserServiceClient.instance;
-        this.bookingService = BookingServiceClient.instance;
+        // this.bookingService = BookingServiceClient.instance;
+        this.updateUser = this.updateUser.bind(this);
+        this.deleteUser = this.deleteUser.bind(this);
     }
-    findAllBookingsByUserId(){
-        this
-            .bookingService
-            .findAllBookingsByUserId(this.state.userId)
-            .then(bookings => {this.setState({bookings: bookings})});
+
+    // findAllBookingsByUserId(){
+    //     this
+    //         .bookingService
+    //         .findAllBookingsByUserId(this.state.userId)
+    //         .then(bookings => {this.setState({bookings: bookings})});
+    // }
+
+    componentDidMount() {
+        console.log(this.props.match.params.userId);
+        this.setState({userId: this.props.match.params.userId});
+    }
+
+    componentWillReceiveProps(newProps){
+        this.setState({userId : newProps.userId});
     }
 
     renderProfile(userId){
             this.userService
-                .findUserById(userId)
+                .findCustomerById(userId)
                 .then(user => this.setProfile(user));
     }
     renderAllBookingsOfUser(){
@@ -72,6 +84,26 @@ export default class AddYourBusiness extends Component {
             [event.target.id]: event.target.value
         });
     };
+
+    updateUser() {
+        let customer = {
+            username : this.state.username,
+        password : this.state.password,
+        lastName : this.state.lastName,
+        firstName : this.state.firstName,
+        dateOfBirth : this.state.dateOfBirth,
+        email : this.state.email,
+        address : this.state.address,
+        phoneNumber : this.state.phone
+        }
+            this.userService
+                .updateCustomer(this.state.userId, customer);
+    }
+
+    deleteUser() {
+        this.userService
+            .deleteCustomer(this.state.userId);
+    }
 
     handleSubmit = event => {
         event.preventDefault();
@@ -162,20 +194,22 @@ export default class AddYourBusiness extends Component {
                             type="password"
                         />
                     </FormGroup>
-                    <LoaderButton
-                        block
-                        bsSize="large"
-                        disabled={!this.validateForm()}
-                        type="submit"
-                        text="Update"
-                    />
-                    <LoaderButton
-                        className="btn-danger"
-                        block
-                        bsSize="large"
-                        type="submit"
-                        text="DELETE ACCOUNT"
-                    />
+                    {/*<LoaderButton*/}
+                        {/*block*/}
+                        {/*bsSize="large"*/}
+                        {/*disabled={!this.validateForm()}*/}
+                        {/*type="submit"*/}
+                        {/*text="Update"*/}
+                    {/*/>*/}
+                    {/*<LoaderButton*/}
+                        {/*className="btn-danger"*/}
+                        {/*block*/}
+                        {/*bsSize="large"*/}
+                        {/*type="submit"*/}
+                        {/*text="DELETE ACCOUNT"*/}
+                    {/*/>*/}
+                    <button onClick={this.updateUser}>Update</button>
+                    <button onClick={this.deleteUser}>Delete</button>
                 </Form>
                 </div>
                 <div className="col-8 SubForm">
