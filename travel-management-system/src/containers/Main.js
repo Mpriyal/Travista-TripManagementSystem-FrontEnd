@@ -7,6 +7,7 @@ import SignUp from "../components/SignUp";
 import SignIn from "../components/SignIn";
 import AddYourBusiness from "../components/AddYourBuisness";
 import Profile from "../components/Profile";
+import RentalCarsPage from "../components/RentalCarsPage";
 
 
 export default class Main extends Component {
@@ -15,6 +16,7 @@ export default class Main extends Component {
             <main>
                 <Switch>
                     <Route exact path='/hotels' component={HotelPage}/>
+                    <Route exact path='/cars' component={RentalCarsPage}/>
                     <Route exact path='/restaurants' component={RestaurantPage}/>
                     <Route exact path='/attractions' component={AttractionPage}/>
                     <Route exact path='/signup' component={SignUp}/>
