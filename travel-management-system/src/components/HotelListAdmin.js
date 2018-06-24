@@ -11,15 +11,25 @@ export default class HotelListAdmin extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            id: '',
             hotels: [],
             name: '',
-
+            address: '',
+            phone: '',
+            rate: ''
         };
 
         this.deleteHotels = this.deleteHotels.bind(this)
+        this.populateHotel = this.populateHotel.bind(this)
+        this.updateHotel = this.updateHotel.bind(this)
         this.findAllHotels = this.findAllHotels.bind(this)
         this.hotelService = HotelService.instance
         this.setHotels = this.setHotels.bind(this)
+        this.setName = this.setName.bind(this)
+        this.setAddress = this.setAddress.bind(this)
+        this.setPhone = this.setPhone.bind(this)
+        this.setRate = this.setRate.bind(this)
+        this.createHotel = this.createHotel.bind(this)
     }
 
 
@@ -37,7 +47,8 @@ export default class HotelListAdmin extends Component {
             hotels = this.state.hotels.map((hotel) => {
                     return <HotelListItem key={hotel.id}
                                           hotel={hotel}
-                                          deleteHotels={this.deleteHotels}/>
+                                          deleteHotels={this.deleteHotels}
+                                          populateHotel={this.populateHotel}/>
                 }
             );
         }
@@ -46,9 +57,33 @@ export default class HotelListAdmin extends Component {
         )
     }
 
+    setName(event){
+        this.setState({
+            name: event.target.value
+        })
+    }
+
+    setPhone(event){
+        this.setState({
+            phone: event.target.value
+        })
+    }
+
+    setAddress(event){
+        this.setState({
+            address: event.target.value
+        })
+    }
+
+    setRate(event){
+        this.setState({
+            rate: event.target.value
+        })
+    }
+
     createHotel() {
         this.hotelService
-            .createHotel(this.state.hotel)
+            .createHotel(this.state.name, this.state.address, this.state.phone, this.state.rate)
             .then(() => { this.findAllHotels(); });
     }
 
@@ -62,6 +97,25 @@ export default class HotelListAdmin extends Component {
                     }
                 );
         }
+    }
+
+    populateHotel(hotel) {
+        this.setState({
+            name: hotel.name,
+            address: hotel.address,
+            phone: hotel.phone,
+            rate: hotel.rate,
+            id: hotel._id
+        })
+    }
+
+    updateHotel() {
+        this.hotelService
+            .updateHotel(this.state.id, this.state.name, this.state.address, this.state.phone, this.state.rate)
+            .then(() => {
+                    this.findAllHotels()
+                }
+            );
     }
 
     setHotels(htls){
@@ -90,13 +144,28 @@ export default class HotelListAdmin extends Component {
                                     {this.renderListOfHotels()}
                                 </ul>
                             <br/>
-                            {/*<input onChange={this.titleChanged}*/}
-                                   {/*value={this.state.module.title}*/}
-                                   {/*placeholder="Add module"*/}
-                                   {/*className="form-control text-center font-weight-bold"/>*/}
-                            {/*<button onClick={this.createHotel} className="btn btn-dark btn-block">*/}
-                                {/*<i className="fa fa-plus"></i>*/}
-                            {/*</button>*/}
+                            <input onChange={this.setName}
+                                   value={this.state.name}
+                                   placeholder="Add Hotel Name"
+                                   className="form-control text-center font-weight-bold"/>
+                            <input onChange={this.setAddress}
+                                   value={this.state.address}
+                                   placeholder="Add Hotel Address"
+                                   className="form-control text-center font-weight-bold"/>
+                            <input onChange={this.setPhone}
+                                   value={this.state.phone}
+                                   placeholder="Add Hotel Phone"
+                                   className="form-control text-center font-weight-bold"/>
+                            <input onChange={this.setRate}
+                                   value={this.state.rate}
+                                   placeholder="Add Hotel Rate"
+                                   className="form-control text-center font-weight-bold"/>
+                            <button onClick={this.createHotel} className="btn btn-dark btn-block">
+                                <i className="fa fa-plus"></i>
+                            </button>
+                            <button onClick={this.updateHotel} className="btn btn-dark btn-block">
+                                <i className="fa fa-pencil"></i>
+                            </button>
                         </div>
                         {/*<div className="col-8">*/}
                             {/*<Route path="/course/:courseId/module/:moduleId"*/}
