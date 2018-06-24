@@ -1,13 +1,19 @@
 import React, { Component } from "react";
+import {BrowserRouter as Router ,Route, Link } from 'react-router-dom';
 import {Form, FormGroup, FormControl, ControlLabel} from "react-bootstrap";
+import UserServiceClient from '../services/UserService';
 import LoaderButton from "../components/LoaderButton";
 import "./Profile.css";
+import AddHotel from "./AddHotel";
+import AddCar from "./AddCar";
+import AddRestaurant from "./AddRestaurant";
 
 export default class AddYourBusiness extends Component {
     constructor(props) {
         super(props);
 
         this.state = {
+            userId:"123",
             username: "",
             password: "",
             firstName: "",
@@ -17,10 +23,22 @@ export default class AddYourBusiness extends Component {
             phone: "",
             email:"",
             address:"",
-            typeOfBusiness:""
+            businessDisplay:""
         };
+        this.userService = UserServiceClient.instance;
     }
 
+    renderProfile(userId){
+            this.userService
+                .findUserById(userId)
+                .then(user => this.setProfile(user));
+    }
+
+    setProfile(user){
+        for (var key in user) {
+            this.setState({key: user[key]});
+        }
+    }
     validateForm() {
         return this.state.email.length > 0 &&
             this.state.password.length > 0 &&
@@ -37,15 +55,53 @@ export default class AddYourBusiness extends Component {
         this.setState({
             [event.target.id]: event.target.value
         });
-    }
+    };
 
     handleSubmit = event => {
         event.preventDefault();
-    }
+    };
+    addBusiness(param){
+        switch(param) {
+            case 'HOTEL':
+                return<div>
+                    <Link to={`/profile/${this.state.userId}/hotel`}>
+                        <LoaderButton
+                        block
+                        bsSize="large"
+                        type="submit"
+                        text="ADD HOTEL"/>
+                    </Link>
+                </div>;
+            case 'RESTAURANT':
+                return<div>
+                        <Link to={`/profile/${this.state.userId}/restaurant`}>
+                            <LoaderButton
+                                block
+                                bsSize="large"
+                                type="submit"
+                                text="ADD RESTAURANT"
+                            />
+                        </Link>
+                    </div>;
+            case 'CAR':
+                return<div>
+                        <Link to={`/profile/${this.state.userId}/car`}>
+                             <LoaderButton
+                                block
+                                bsSize="large"
+                                type="submit"
+                                text="ADD CAR"
+                            />
+                        </Link>
+                    </div>;
+        }
+    };
 
     render() {
         return (
+            <Router>
             <div className="row">
+                {this.renderProfile()}
                 <div className="col-4">
                 <Form horizontal onSubmit={this.handleSubmit}>
                     <FormGroup className="form-inline" controlId="firstName" bsSize="large">
@@ -108,6 +164,20 @@ export default class AddYourBusiness extends Component {
                             onChange={this.handleChange}
                         />
                     </FormGroup>
+                    <FormGroup className="form-inline"
+                               controlId="typeOfBusiness"
+                               bsSize="large">
+                        <ControlLabel className="col-4">Business Type</ControlLabel>
+                        <FormControl
+                            className="col-8"
+                            componentClass="select"
+                            placeholder="Business Type"
+                            onChange={this.handleChange}>
+                            <option value="HOTEL">HOTEL</option>
+                            <option value="RESTAURANT">RESTAURANT</option>
+                            <option value="CAR">CAR</option>
+                        </FormControl>
+                    </FormGroup>
                     <FormGroup className="form-inline" controlId="phone" bsSize="large">
                         <ControlLabel className="col-4">Phone Number </ControlLabel>
                         <FormControl
@@ -146,30 +216,13 @@ export default class AddYourBusiness extends Component {
                 </Form>
                 </div>
                 <div className="col-8">
-                    <LoaderButton
-                        block
-                        bsSize="large"
-                        disabled={!this.validateForm()}
-                        type="submit"
-                        text="Add Hotel"
-                    />
-                    <LoaderButton
-                        block
-                        bsSize="large"
-                        disabled={!this.validateForm()}
-                        type="submit"
-                        text="Add Restaurant"
-                    />
-                    <LoaderButton
-                        block
-                        bsSize="large"
-                        disabled={!this.validateForm()}
-                        type="submit"
-                        text="Add Car"
-                    />
-                 </div>
-
+                    {this.addBusiness(this.state.typeOfBusiness)}
+                    <Route path="/profile/:userId/hotel" exact component={AddHotel} />
+                    <Route path="/profile/:userId/restaurant" exact component={AddRestaurant} />
+                    <Route path="/profile/:userId/car" exact component={AddCar} />
+                </div>
             </div>
+          </Router>
         );
     }
 }

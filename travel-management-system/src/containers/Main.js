@@ -9,7 +9,6 @@ import AddYourBusiness from "../components/AddYourBuisness";
 import Profile from "../components/Profile";
 import RentalCarsPage from "../components/RentalCarsPage";
 
-
 export default class Main extends Component {
     render() {
         return (
