@@ -1,41 +1,34 @@
 import React, { Component } from "react";
 import {Form, FormGroup, FormControl, ControlLabel} from "react-bootstrap";
 import LoaderButton from "../components/LoaderButton";
-import "./AddYourBuisness.css";
 
 export default class AddCar extends Component {
     constructor(props) {
         super(props);
 
         this.state = {
-            car_info: {
-                        address: "",
-                        vehicle_info: {
-                            transmission: "",
-                            fuel: "",
-                            air_conditioning: "",
-                            category: "",
-                            type: ""
-                        },
-                        price: {
-                                type: "",
-                                amount: "",
-                                currency: ""
-                            }
-        }
-        }
+                address: "",
+                transmission: "",
+                fuel: "",
+                air_conditioning: "",
+                category: "",
+                type: "",
+                rate: "",
+                startDate: "",
+                endDate: ""
+            }
     }
 
     validateForm() {
-        return this.state.car_info.address.length > 0 &&
-            this.state.car_info.vehicle_info.transmission > 0 &&
-            this.state.car_info.vehicle_info.fuel > 0 &&
-            this.state.car_info.vehicle_info.type > 0 &&
-            this.state.car_info.vehicle_info.air_conditioning > 0 &&
-            this.state.car_info.vehicle_info.category > 0 &&
-            this.state.car_info.price.amount > 0 &&
-            this.state.car_info.price.type> 0 &&
-            this.state.car_info.price.currency > 0
+        return this.state.address.length > 0 &&
+            this.state.transmission.length > 0 &&
+            this.state.fuel.length > 0 &&
+            this.state.type.length > 0 &&
+            this.state.air_conditioning.length > 0 &&
+            this.state.category.length > 0 &&
+            this.state.rate.length > 0 &&
+            this.state.startDate.length > 0 &&
+            this.state.endDate.length
     }
 
     handleChange = event => {
@@ -50,14 +43,15 @@ export default class AddCar extends Component {
 
     render() {
         return (
-            <div className="Login">
+            <div className="Form">
                 <Form horizontal onSubmit={this.handleSubmit}>
+                    <h2 className = "align-content-center">Enter Car Details</h2>
                     <FormGroup controlId="carAddress" bsSize="large">
                     <ControlLabel>Car Address</ControlLabel>
                     <FormControl
                         autoFocus
                         type="text"
-                        value={this.state.car_info.address}
+                        value={this.state.address}
                         onChange={this.handleChange}
                     />
                 </FormGroup>
@@ -135,6 +129,27 @@ export default class AddCar extends Component {
                                 autoFocus
                                 type="text"
                                 value={this.state.car_info.price.currency}
+                                onChange={this.handleChange}
+                            />
+                        </FormGroup>
+                    </FormGroup>
+                    <FormGroup controlId="availability" bsSize="large">
+                        <ControlLabel>Availability</ControlLabel>
+                        <FormGroup controlId="startDate" bsSize="large">
+                            <ControlLabel>Start Date</ControlLabel>
+                            <FormControl
+                                autoFocus
+                                type="date"
+                                value={this.state.car_info.available.startDate}
+                                onChange={this.handleChange}
+                            />
+                        </FormGroup>
+                        <FormGroup controlId="endDate" bsSize="large">
+                            <ControlLabel>End Date</ControlLabel>
+                            <FormControl
+                                autoFocus
+                                type="date"
+                                value={this.state.car_info.available.endDate}
                                 onChange={this.handleChange}
                             />
                         </FormGroup>

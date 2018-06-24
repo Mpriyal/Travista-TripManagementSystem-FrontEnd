@@ -1,157 +1,176 @@
 import React, { Component } from "react";
 import {Form, FormGroup, FormControl, ControlLabel} from "react-bootstrap";
 import LoaderButton from "../components/LoaderButton";
-import "./AddYourBuisness.css";
 
-export default class AddHotel extends Component {
+
+export default class AddRestaurant extends Component {
     constructor(props) {
         super(props);
 
         this.state = {
-            username: "",
-            password: "",
-            firstName: "",
-            lastName: "",
-            dateOfBirth: "",
-            businessName: "",
-            phone: "",
-            email:"",
-            address:"",
-            typeOfBusiness:"",
-            confirmPassword: ""
-        };
+            car_info: {
+                address: "",
+                vehicle_info: {
+                    transmission: "",
+                    fuel: "",
+                    air_conditioning: "",
+                    category: "",
+                    type: ""
+                },
+                price: {
+                    type: "",
+                    amount: "",
+                    currency: ""
+                },
+                available: {
+                    startDate: "",
+                    endDate: ""
+                }
+            }
+        }
     }
 
     validateForm() {
-        return this.state.email.length > 0 &&
-            this.state.password.length > 0 &&
-            this.state.username.length > 0 &&
-            this.state.firstName.length > 0 &&
-            this.state.lastName.length > 0 &&
-            this.state.businessName.length > 0 &&
-            this.state.dateOfBirth.length > 0 &&
-            this.state.phone.length > 0 &&
-            this.state.address.length > 0 &&
-            this.state.typeOfBusiness.length > 0 && this.state.password === this.state.confirmPassword;
+        return this.state.car_info.address.length > 0 &&
+            this.state.car_info.vehicle_info.transmission > 0 &&
+            this.state.car_info.vehicle_info.fuel > 0 &&
+            this.state.car_info.vehicle_info.type > 0 &&
+            this.state.car_info.vehicle_info.air_conditioning > 0 &&
+            this.state.car_info.vehicle_info.category > 0 &&
+            this.state.car_info.price.amount > 0 &&
+            this.state.car_info.price.type> 0 &&
+            this.state.car_info.price.currency > 0
     }
 
     handleChange = event => {
         this.setState({
             [event.target.id]: event.target.value
         });
-    }
+    };
 
     handleSubmit = event => {
         event.preventDefault();
-    }
+    };
 
     render() {
         return (
-            <div className="Login">
+            <div className="Form">
                 <Form horizontal onSubmit={this.handleSubmit}>
-                    <FormGroup controlId="firstName" bsSize="large">
-                        <ControlLabel>First Name</ControlLabel>
-                        <FormControl
-                            autoFocus
-                            type="test"
-                            value={this.state.firstName}
-                            onChange={this.handleChange}
-                        />
-                    </FormGroup>
-                    <FormGroup controlId="lastName" bsSize="large">
-                        <ControlLabel>Last Name</ControlLabel>
+                    <h2 className = "align-content-center">Enter Car Details</h2>
+                    <FormGroup controlId="carAddress" bsSize="large">
+                        <ControlLabel>Car Address</ControlLabel>
                         <FormControl
                             autoFocus
                             type="text"
-                            value={this.state.lastName}
+                            value={this.state.car_info.address}
                             onChange={this.handleChange}
                         />
                     </FormGroup>
-                    <FormGroup controlId="dateOfBirth" bsSize="large">
-                        <ControlLabel>Date of Birth</ControlLabel>
-                        <FormControl
-                            autoFocus
-                            type="date"
-                            value={this.state.dateOfBirth}
-                            onChange={this.handleChange}
-                        />
+                    <FormGroup controlId="vehicle_info" bsSize="large">
+                        <ControlLabel>Vehicle Info</ControlLabel>
+                        <FormGroup controlId="transmission" bsSize="large">
+                            <ControlLabel>Transmission</ControlLabel>
+                            <FormControl
+                                autoFocus
+                                type="text"
+                                value={this.state.car_info.vehicle_info.transmission}
+                                onChange={this.handleChange}
+                            />
+                        </FormGroup>
+                        <FormGroup controlId="fuel" bsSize="large">
+                            <ControlLabel>Fuel</ControlLabel>
+                            <FormControl
+                                autoFocus
+                                type="text"
+                                value={this.state.car_info.vehicle_info.fuel}
+                                onChange={this.handleChange}
+                            />
+                        </FormGroup>
+                        <FormGroup controlId="airConditioning" bsSize="large">
+                            <ControlLabel>Air Conditioning</ControlLabel>
+                            <FormControl
+                                autoFocus
+                                type="text"
+                                value={this.state.car_info.vehicle_info.air_conditioning}
+                                onChange={this.handleChange}
+                            />
+                        </FormGroup>
+                        <FormGroup controlId="category" bsSize="large">
+                            <ControlLabel>Category</ControlLabel>
+                            <FormControl
+                                autoFocus
+                                type="text"
+                                value={this.state.car_info.vehicle_info.category}
+                                onChange={this.handleChange}
+                            />
+                        </FormGroup>
+                        <FormGroup controlId="type" bsSize="large">
+                            <ControlLabel>Type</ControlLabel>
+                            <FormControl
+                                autoFocus
+                                type="text"
+                                value={this.state.car_info.vehicle_info.type}
+                                onChange={this.handleChange}
+                            />
+                        </FormGroup>
                     </FormGroup>
-                    <FormGroup controlId="email" bsSize="large">
-                        <ControlLabel>Email</ControlLabel>
-                        <FormControl
-                            autoFocus
-                            type="email"
-                            value={this.state.email}
-                            onChange={this.handleChange}
-                        />
+                    <FormGroup controlId="price" bsSize="large">
+                        <ControlLabel>Price</ControlLabel>
+                        <FormGroup controlId="type" bsSize="large">
+                            <ControlLabel>Type</ControlLabel>
+                            <FormControl
+                                autoFocus
+                                type="text"
+                                value={this.state.car_info.price.type}
+                                onChange={this.handleChange}
+                            />
+                        </FormGroup>
+                        <FormGroup controlId="amount" bsSize="large">
+                            <ControlLabel>Amount</ControlLabel>
+                            <FormControl
+                                autoFocus
+                                type="text"
+                                value={this.state.car_info.price.amount}
+                                onChange={this.handleChange}
+                            />
+                        </FormGroup>
+                        <FormGroup controlId="airConditioning" bsSize="large">
+                            <ControlLabel>Currency</ControlLabel>
+                            <FormControl
+                                autoFocus
+                                type="text"
+                                value={this.state.car_info.price.currency}
+                                onChange={this.handleChange}
+                            />
+                        </FormGroup>
                     </FormGroup>
-                    <FormGroup controlId="businessName" bsSize="large">
-                        <ControlLabel>Business Name</ControlLabel>
-                        <FormControl
-                            autoFocus
-                            type="text"
-                            value={this.state.businessName}
-                            onChange={this.handleChange}
-                        />
-                    </FormGroup>
-                    <FormGroup controlId="address" bsSize="large">
-                        <ControlLabel>Business Address</ControlLabel>
-                        <FormControl
-                            autoFocus
-                            type="text"
-                            value={this.state.address}
-                            onChange={this.handleChange}
-                        />
-                    </FormGroup>
-                    <FormGroup controlId="typeOfBusiness">
-                        <ControlLabel>Business Type</ControlLabel>
-                        <FormControl componentClass="select"
-                                     placeholder="Business Type"
-                                     onChange={this.handleChange}>
-                            <option value="HOTEL">HOTEL</option>
-                            <option value="RESTAURANT">RESTAURANT</option>
-                            <option value="CAR">CAR</option>
-                        </FormControl>
-                    </FormGroup>
-                    <FormGroup controlId="phone" bsSize="large">
-                        <ControlLabel>Phone Number</ControlLabel>
-                        <FormControl
-                            autoFocus
-                            type="text"
-                            value={this.state.phone}
-                            onChange={this.handleChange}
-                        />
-                    </FormGroup>
-                    <FormGroup controlId="username" bsSize="large">
-                        <ControlLabel>Username</ControlLabel>
-                        <FormControl
-                            value={this.state.username}
-                            onChange={this.handleChange}
-                            type="text"
-                        />
-                    </FormGroup>
-                    <FormGroup controlId="password" bsSize="large">
-                        <ControlLabel>Password</ControlLabel>
-                        <FormControl
-                            value={this.state.password}
-                            onChange={this.handleChange}
-                            type="password"
-                        />
-                    </FormGroup>
-                    <FormGroup controlId="confirmPassword" bsSize="large">
-                        <ControlLabel>Confirm Password</ControlLabel>
-                        <FormControl
-                            value={this.state.confirmPassword}
-                            onChange={this.handleChange}
-                            type="password"
-                        />
+                    <FormGroup controlId="availability" bsSize="large">
+                        <ControlLabel>Availability</ControlLabel>
+                        <FormGroup controlId="startDate" bsSize="large">
+                            <ControlLabel>Start Date</ControlLabel>
+                            <FormControl
+                                autoFocus
+                                type="date"
+                                value={this.state.car_info.available.startDate}
+                                onChange={this.handleChange}
+                            />
+                        </FormGroup>
+                        <FormGroup controlId="endDate" bsSize="large">
+                            <ControlLabel>End Date</ControlLabel>
+                            <FormControl
+                                autoFocus
+                                type="date"
+                                value={this.state.car_info.available.endDate}
+                                onChange={this.handleChange}
+                            />
+                        </FormGroup>
                     </FormGroup>
                     <LoaderButton
                         block
                         bsSize="large"
                         disabled={!this.validateForm()}
                         type="submit"
-                        text="Login"
+                        text="Add Your Car"
                     />
                 </Form>
             </div>

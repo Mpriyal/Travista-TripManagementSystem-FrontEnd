@@ -4,7 +4,7 @@ import {Form, FormGroup, FormControl, ControlLabel} from "react-bootstrap";
 import UserServiceClient from '../services/UserService';
 import LoaderButton from "../components/LoaderButton";
 import "./Profile.css";
-import AddHotel from "./AddHotel";
+import HotelManager from "./HotelManager";
 import AddCar from "./AddCar";
 import AddRestaurant from "./AddRestaurant";
 
@@ -20,12 +20,14 @@ export default class AddYourBusiness extends Component {
             lastName: "",
             dateOfBirth: "",
             businessName: "",
+            typeOfBusiness:"HOTEL",
             phone: "",
             email:"",
             address:"",
-            businessDisplay:""
+            buttonDisplay: true
         };
         this.userService = UserServiceClient.instance;
+        this.setButtonDisplay = this.setButtonDisplay.bind(this);
     }
 
     renderProfile(userId){
@@ -60,40 +62,48 @@ export default class AddYourBusiness extends Component {
     handleSubmit = event => {
         event.preventDefault();
     };
+    setButtonDisplay(){
+        this.setState({buttonDisplay : !this.state.buttonDisplay})
+    }
     addBusiness(param){
-        switch(param) {
-            case 'HOTEL':
-                return<div>
-                    <Link to={`/profile/${this.state.userId}/hotel`}>
-                        <LoaderButton
-                        block
-                        bsSize="large"
-                        type="submit"
-                        text="ADD HOTEL"/>
-                    </Link>
-                </div>;
-            case 'RESTAURANT':
-                return<div>
+        if(this.state.buttonDisplay) {
+            switch (param) {
+                case 'HOTEL':
+                    return <div>
+                        <Link to={`/profile/${this.state.userId}/hotel`}>
+                            <LoaderButton
+                                block
+                                bsSize="large"
+                                type="submit"
+                                text="UPDATE YOUR HOTEL DETAILS"
+                                onClick={this.setButtonDisplay}/>
+                        </Link>
+                    </div>;
+                case 'RESTAURANT':
+                    return <div>
                         <Link to={`/profile/${this.state.userId}/restaurant`}>
                             <LoaderButton
                                 block
                                 bsSize="large"
                                 type="submit"
                                 text="ADD RESTAURANT"
+                                onClick={this.setButtonDisplay}
                             />
                         </Link>
                     </div>;
-            case 'CAR':
-                return<div>
+                case 'CAR':
+                    return <div>
                         <Link to={`/profile/${this.state.userId}/car`}>
-                             <LoaderButton
+                            <LoaderButton
                                 block
                                 bsSize="large"
                                 type="submit"
                                 text="ADD CAR"
+                                onClick={this.setButtonDisplay}
                             />
                         </Link>
                     </div>;
+            }
         }
     };
 
@@ -102,7 +112,7 @@ export default class AddYourBusiness extends Component {
             <Router>
             <div className="row">
                 {this.renderProfile()}
-                <div className="col-4">
+                <div className="col-4 Form">
                 <Form horizontal onSubmit={this.handleSubmit}>
                     <FormGroup className="form-inline" controlId="firstName" bsSize="large">
                         <ControlLabel className="col-4">First Name </ControlLabel>
@@ -154,29 +164,16 @@ export default class AddYourBusiness extends Component {
                             onChange={this.handleChange}
                         />
                     </FormGroup>
-                    <FormGroup className="form-inline" controlId="address" bsSize="large">
-                        <ControlLabel className="col-4">Business Address </ControlLabel>
-                        <FormControl
-                            className="col-8"
-                            autoFocus
-                            type="text"
-                            value={this.state.address}
-                            onChange={this.handleChange}
-                        />
-                    </FormGroup>
                     <FormGroup className="form-inline"
                                controlId="typeOfBusiness"
                                bsSize="large">
                         <ControlLabel className="col-4">Business Type</ControlLabel>
                         <FormControl
                             className="col-8"
-                            componentClass="select"
-                            placeholder="Business Type"
-                            onChange={this.handleChange}>
-                            <option value="HOTEL">HOTEL</option>
-                            <option value="RESTAURANT">RESTAURANT</option>
-                            <option value="CAR">CAR</option>
-                        </FormControl>
+                            autoFocus
+                            type="text"
+                            value={this.state.typeOfBusiness}
+                        />
                     </FormGroup>
                     <FormGroup className="form-inline" controlId="phone" bsSize="large">
                         <ControlLabel className="col-4">Phone Number </ControlLabel>
@@ -185,6 +182,16 @@ export default class AddYourBusiness extends Component {
                             autoFocus
                             type="text"
                             value={this.state.phone}
+                            onChange={this.handleChange}
+                        />
+                    </FormGroup>
+                    <FormGroup className="form-inline" controlId="address" bsSize="large">
+                        <ControlLabel className="col-4">Address </ControlLabel>
+                        <FormControl
+                            className="col-8"
+                            autoFocus
+                            type="text"
+                            value={this.state.address}
                             onChange={this.handleChange}
                         />
                     </FormGroup>
@@ -215,9 +222,9 @@ export default class AddYourBusiness extends Component {
                     />
                 </Form>
                 </div>
-                <div className="col-8">
+                <div className="col-8 Form">
                     {this.addBusiness(this.state.typeOfBusiness)}
-                    <Route path="/profile/:userId/hotel" exact component={AddHotel} />
+                    <Route path="/profile/:userId/hotel" exact component={HotelManager} />
                     <Route path="/profile/:userId/restaurant" exact component={AddRestaurant} />
                     <Route path="/profile/:userId/car" exact component={AddCar} />
                 </div>

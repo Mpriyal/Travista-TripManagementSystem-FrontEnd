@@ -1,8 +1,9 @@
 let _singleton = Symbol();
-const HOTEL_URL = 'http://api.sandbox.amadeus.com/v1.2/hotels/search-circle?';
+const HOTEL_API_URL = 'http://api.sandbox.amadeus.com/v1.2/hotels/search-circle?';
 const LAT_LONG_URL = 'https://maps.googleapis.com/maps/api/geocode/json?';
 const API_KEY = '';
-const LAT_LONG_API_KEY = 'AIzaSyCGFcq0Kr1hQAULOY9_O3azu2N4Srn-tmY'
+const LAT_LONG_API_KEY = 'AIzaSyCGFcq0Kr1hQAULOY9_O3azu2N4Srn-tmY';
+const HOTEL_URL = 'http://';
 
 // Qx2BLHZV4pB0wTFL3qFx9JGNAXsMa4my
 
@@ -18,7 +19,7 @@ class HotelService {
     }
 
     findAllHotelsByLatLong(latitude,longitude,checkIn,checkOut,radius){
-        return fetch(HOTEL_URL +
+        return fetch(HOTEL_API_URL +
             'latitude=' + latitude +
             '&longitude=' + longitude +
             '&check_in=' + checkIn +
@@ -37,6 +38,45 @@ class HotelService {
             .then(function(response){
                 return response.json();
             });
+    }
+    createHotel(hotel, userId){
+        return fetch(HOTEL_URL
+                .replace('UID', userId),
+            {
+                body: JSON.stringify(hotel),
+                headers: { 'Content-Type': 'application/json' },
+                method: 'POST'
+            })
+            .then(function (response)
+            {
+                return response.json();
+            })
+    }
+    updateHotel(hotel, userId){
+        return fetch(HOTEL_URL
+                .replace('UID', userId),
+            {
+                body: JSON.stringify(hotel),
+                headers: { 'Content-Type': 'application/json' },
+                method: 'PUT'
+            })
+            .then(function (response)
+            {
+                return response.json();
+            })
+    }
+    createRoom(room, userId){
+        return fetch(HOTEL_URL
+                .replace('UID', userId),
+            {
+                body: JSON.stringify(room),
+                headers: { 'Content-Type': 'application/json' },
+                method: 'POST'
+            })
+            .then(function (response)
+            {
+                return response.json();
+            })
     }
 
 }

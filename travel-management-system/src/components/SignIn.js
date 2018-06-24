@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import {FormGroup, FormControl, ControlLabel } from "react-bootstrap";
 import LoaderButton from "../components/LoaderButton";
-import "./Login.css";
+
 
 export default class Login extends Component {
     constructor(props) {
@@ -21,15 +21,15 @@ export default class Login extends Component {
         this.setState({
             [event.target.id]: event.target.value
         });
-    }
+    };
 
     handleSubmit = event => {
         event.preventDefault();
-    }
+    };
 
     render() {
         return (
-            <div className="Login">
+            <div className="Form">
                 <form onSubmit={this.handleSubmit}>
                     <FormGroup controlId="username" bsSize="large">
                         <ControlLabel>Username</ControlLabel>
