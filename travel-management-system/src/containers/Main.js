@@ -8,7 +8,6 @@ import SignIn from "../components/SignIn";
 import AddYourBusiness from "../components/AddYourBuisness";
 import Profile from "../components/Profile";
 
-
 export default class Main extends Component {
     render() {
         return (

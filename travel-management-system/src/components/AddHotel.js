@@ -1,9 +1,9 @@
 import React, { Component } from "react";
-import {Form, FormGroup, FormControl, ControlLabel, DropdownButton, MenuItem, ButtonToolbar} from "react-bootstrap";
+import {Form, FormGroup, FormControl, ControlLabel} from "react-bootstrap";
 import LoaderButton from "../components/LoaderButton";
 import "./AddYourBuisness.css";
 
-export default class AddYourBusiness extends Component {
+export default class AddHotel extends Component {
     constructor(props) {
         super(props);
 
@@ -24,15 +24,15 @@ export default class AddYourBusiness extends Component {
 
     validateForm() {
         return this.state.email.length > 0 &&
-                this.state.password.length > 0 &&
-                this.state.username.length > 0 &&
-                this.state.firstName.length > 0 &&
-                this.state.lastName.length > 0 &&
-                this.state.businessName.length > 0 &&
-                this.state.dateOfBirth.length > 0 &&
-                this.state.phone.length > 0 &&
-                this.state.address.length > 0 &&
-                this.state.typeOfBusiness.length > 0 && this.state.password === this.state.confirmPassword;
+            this.state.password.length > 0 &&
+            this.state.username.length > 0 &&
+            this.state.firstName.length > 0 &&
+            this.state.lastName.length > 0 &&
+            this.state.businessName.length > 0 &&
+            this.state.dateOfBirth.length > 0 &&
+            this.state.phone.length > 0 &&
+            this.state.address.length > 0 &&
+            this.state.typeOfBusiness.length > 0 && this.state.password === this.state.confirmPassword;
     }
 
     handleChange = event => {
