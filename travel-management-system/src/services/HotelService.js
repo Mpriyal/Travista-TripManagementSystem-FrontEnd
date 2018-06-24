@@ -5,7 +5,7 @@ const API_KEY = '';
 const LAT_LONG_API_KEY = 'AIzaSyCGFcq0Kr1hQAULOY9_O3azu2N4Srn-tmY';
 const HOTEL_URL = 'http://';
 
-// Qx2BLHZV4pB0wTFL3qFx9JGNAXsMa4my
+
 
 class HotelService {
     constructor(singletonToken) {
