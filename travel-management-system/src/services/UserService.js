@@ -1,7 +1,8 @@
 let _singleton = Symbol();
 const LOG_IN_URL = 'http://localhost:4000/api/login';
 const PROFILE_URL = 'http://localhost:4000/api/profile';
-const USER_URL = 'http://localhost:4000/api/user';
+const CUSTOMER_URL = 'http://localhost:4000/api/customer';
+// const USER_URL = 'http://localhost:4000/api/user';
 
 
 
@@ -25,12 +26,12 @@ class UserService {
                 'content-type': 'application/json'
             }
         }).then(function(response){
-            return response;
+           return response == null ? null :  response.json() ;
         })
     }
 
-    findUserById(userId) {
-        return fetch(USER_URL + '/' + userId,{
+    findCustomerById(customerId) {
+        return fetch(CUSTOMER_URL + '/' + customerId,{
             credentials: "same-origin"
         }).then(response => response.json());
     }
@@ -41,30 +42,53 @@ class UserService {
         })
             .then(response => response.json());
     }
-    deleteUser(userId) {
-        return fetch(USER_URL + '/' + userId, {
+    deleteCustomer(customerId) {
+        return fetch(CUSTOMER_URL + '/' + customerId, {
             method: 'delete',
             credentials: "same-origin"
         })
     }
 
-    findAllUsers() {
-        return fetch(USER_URL,{
+    findAllCustomers() {
+        return fetch(CUSTOMER_URL,{
             credentials: "same-origin"
         })
             .then(response => response.json());
     }
 
-    createUser(user) {
-        return fetch(USER_URL, {
+    createCustomer(customer) {
+        return fetch(CUSTOMER_URL, {
             method: 'post',
-            body: JSON.stringify(user),
+            body: JSON.stringify(customer),
             credentials: "same-origin",
             headers: {
                 'content-type': 'application/json'
             }
-        });
+        })
+            .then(response => response.json());
     }
 
+
+    updateCustomer(customerId,customer){
+        return fetch(CUSTOMER_URL+'/'+customerId,
+            {
+                body: JSON.stringify(customer),
+                headers: { 'Content-Type': 'application/json' },
+                method: 'PUT'
+            })
+            .then(function (response)
+            {
+                return response.json();
+            })
+    }
+
+    deleteCustomer(customerId) {
+        return fetch(CUSTOMER_URL + '/' + customerId,
+            {
+                method: 'DELETE'
+            }).then(function (response) {
+            return response;
+        })
+    }
 }
 export default UserService;
