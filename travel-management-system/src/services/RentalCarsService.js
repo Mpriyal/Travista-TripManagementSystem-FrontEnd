@@ -2,7 +2,7 @@ let _singleton = Symbol();
 const RENTAL_CARS_URL = 'https://api.sandbox.amadeus.com/v1.2/cars/search-circle?';
 const LAT_LONG_URL = 'https://maps.googleapis.com/maps/api/geocode/json?';
 const API_KEY = '';
-const LAT_LONG_API_KEY = 'AIzaSyCGFcq0Kr1hQAULOY9_O3azu2N4Srn-tmY'
+const LAT_LONG_API_KEY = ''
 
 
 class RentalCarsService {
