@@ -19,6 +19,7 @@ import AddCar from "../components/AddCar";
 import RentalCarsListAdmin from "../components/RentalCarsListAdmin";
 import OwnersListAdmin from "../components/OwnersListAdmin";
 import CustomerListAdmin from "../components/CustomerListAdmin";
+import CouponListAdmin from "../components/CouponListAdmin";
 
 export default class Main extends Component {
     render() {
@@ -45,6 +46,7 @@ export default class Main extends Component {
                     <Route path="/carEditor" exact component={RentalCarsListAdmin} />
                     <Route path="/ownerEditor" exact component={OwnersListAdmin} />
                     <Route path="/customerEditor" exact component={CustomerListAdmin} />
+                    <Route path="/couponEditor" exact component={CouponListAdmin} />
                 </Switch>
             </main>
         )
