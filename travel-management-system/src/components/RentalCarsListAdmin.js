@@ -208,12 +208,18 @@ export default class RentalCarsListAdmin extends Component {
             <Switch>
                 <div className="container-fluid">
                     <div className="row">
-                        <div className="col-sm-4">
+                        <div className="col-sm-4" style={{overflow: 'scroll'}}>
                             <h2 style={{textAlign: "center"}}>Cars</h2>
                             <br/>
                             <ul className="list-group">
                                 {this.renderListOfCars()}
                             </ul>
+                            <br/>
+                        </div>
+                        <div className="col-sm-8" style={{overflow: 'scroll'}}>
+                            <br/>
+                            <br/>
+                            <h3 style={{textAlign: 'center'}}>Add Cars</h3>
                             <br/>
                             <label>Please fill the username of Car owner first first</label>
                             <input onChange={this.userNameChanged}
@@ -224,56 +230,60 @@ export default class RentalCarsListAdmin extends Component {
                                     className="btn btn-block btn-primary">
                                 Click to verify username
                             </button>
-                            {/*<input value={this.state.owner._id}*/}
-                                   {/*placeholder="Enter Owner's username to fill this ID"*/}
-                                   {/*className="form-control text-center font-weight-bold"/>*/}
+                            <br/>
                             <input onChange={this.setCategory}
                                    value={this.state.category}
                                    placeholder="Add Car Category"
                                    className="form-control text-center font-weight-bold"/>
+                            <br/>
                             <input onChange={this.setType}
                                    value={this.state.type}
                                    placeholder="Add Car Type"
                                    className="form-control text-center font-weight-bold"/>
+                            <br/>
                             <input onChange={this.setFuel}
                                    value={this.state.fuel}
                                    placeholder="Add Car Fuel"
                                    className="form-control text-center font-weight-bold"/>
+                            <br/>
                             <input onChange={this.setAC}
                                    value={this.state.air_conditioning}
                                    placeholder="Add Car Air-Conditioning"
                                    className="form-control text-center font-weight-bold"/>
+                            <br/>
                             <input onChange={this.setTransmission}
                                    value={this.state.transmission}
                                    placeholder="Add Car Transmission"
                                    className="form-control text-center font-weight-bold"/>
+                            <br/>
                             <input type="date"
                                    onChange={this.setStartDate}
                                    value={this.state.startDate}
                                    className="form-control text-center font-weight-bold"/>
+                            <br/>
                             <input type="date"
                                    onChange={this.setEndDate}
                                    value={this.state.endDate}
                                    className="form-control text-center font-weight-bold"/>
+                            <br/>
                             <input onChange={this.setAddress}
                                    value={this.state.address}
                                    placeholder="Add Car Provider's address"
                                    className="form-control text-center font-weight-bold"/>
+                            <br/>
                             <input onChange={this.setRate}
                                    value={this.state.rate}
                                    placeholder="Add Car Rate"
                                    className="form-control text-center font-weight-bold"/>
+                            <br/>
                             <button onClick={this.createCar} className="btn btn-dark btn-block">
                                 <i className="fa fa-plus"></i>
                             </button>
+                            <br/>
                             <button onClick={this.updateCar} className="btn btn-dark btn-block">
-                                <i className="fa fa-pencil"></i>
+                                <i className="fa fa-refresh"></i>
                             </button>
                         </div>
-                        {/*<div className="col-8">*/}
-                        {/*<Route path="/course/:courseId/module/:moduleId"*/}
-                        {/*component={RoomEditor}/>*/}
-                        {/*</div>*/}
                     </div>
                 </div>
             </Switch>

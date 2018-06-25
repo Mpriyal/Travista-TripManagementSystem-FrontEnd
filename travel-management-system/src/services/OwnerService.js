@@ -45,14 +45,12 @@ class OwnerService {
             credentials: "same-origin"
         })
     }
-
     findAllOwners() {
         return fetch(OWNER_URL,{
             credentials: "same-origin"
         })
             .then(response => response.json());
     }
-
     createOwner(user) {
         return fetch(OWNER_URL, {
             method: 'post',
@@ -64,7 +62,14 @@ class OwnerService {
         })
     .then(response => response.json());
     }
-
+    updateOwner(user) {
+        return fetch(OWNER_URL + '/' + user._id,
+            {
+                body: JSON.stringify(user),
+                headers: { 'Content-Type': 'application/json' },
+                method: 'PUT'
+            })
+    }
     logout() {
         return fetch(LOG_OUT_URL, {
             method: 'post',

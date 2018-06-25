@@ -156,12 +156,18 @@ export default class HotelListAdmin extends Component {
             <Switch>
                 <div className="container-fluid">
                     <div className="row">
-                        <div className="col-4">
+                        <div className="col-4" style={{overflow: 'scroll'}}>
                             <h2 style={{textAlign: "center"}}>Hotels</h2>
                             <br/>
                                 <ul className="list-group">
                                     {this.renderListOfHotels()}
                                 </ul>
+                            <br/>
+                        </div>
+                        <div className="col-8" style={{overflow: 'scroll'}}>
+                            <br/>
+                            <br/>
+                            <h3 style={{textAlign: 'center'}}>Add Hotels</h3>
                             <br/>
                             <label>Please fill the username of Hotel owner first</label>
                             <input onChange={this.userNameChanged}
@@ -172,33 +178,35 @@ export default class HotelListAdmin extends Component {
                                     className="btn btn-block btn-primary">
                                 Click to verify username
                             </button>
+                            <br/>
                             <input onChange={this.setName}
                                    value={this.state.name}
                                    placeholder="Add Hotel Name"
                                    className="form-control text-center font-weight-bold"/>
+                            <br/>
                             <input onChange={this.setAddress}
                                    value={this.state.address}
                                    placeholder="Add Hotel Address"
                                    className="form-control text-center font-weight-bold"/>
+                            <br/>
                             <input onChange={this.setPhone}
                                    value={this.state.phone}
                                    placeholder="Add Hotel Phone"
                                    className="form-control text-center font-weight-bold"/>
+                            <br/>
                             <input onChange={this.setRate}
                                    value={this.state.rate}
                                    placeholder="Add Hotel Rate"
                                    className="form-control text-center font-weight-bold"/>
+                            <br/>
                             <button onClick={this.createHotel} className="btn btn-dark btn-block">
                                 <i className="fa fa-plus"></i>
                             </button>
+                            <br/>
                             <button onClick={this.updateHotel} className="btn btn-dark btn-block">
-                                <i className="fa fa-pencil"></i>
+                                <i className="fa fa-refresh"></i>
                             </button>
                         </div>
-                        {/*<div className="col-8">*/}
-                            {/*<Route path="/course/:courseId/module/:moduleId"*/}
-                            {/*component={RoomEditor}/>*/}
-                        {/*</div>*/}
                     </div>
                 </div>
             </Switch>

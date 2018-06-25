@@ -164,12 +164,18 @@ export default class RestaurantListAdmin extends Component {
             <Switch>
                 <div className="container-fluid">
                     <div className="row">
-                        <div className="col-sm-4">
+                        <div className="col-sm-4" style={{overflow: 'scroll'}}>
                             <h2 style={{textAlign: "center"}}>Restaurants</h2>
                             <br/>
                             <ul className="list-group">
                                 {this.renderListOfRestaurants()}
                             </ul>
+                            <br/>
+                        </div>
+                        <div className="col-sm-8" style={{overflow: 'scroll'}}>
+                            <br/>
+                            <br/>
+                            <h3 style={{textAlign: 'center'}}>Add Restaurants</h3>
                             <br/>
                             <label>Please fill the username of restaurant owner first first</label>
                             <input onChange={this.userNameChanged}
@@ -180,40 +186,41 @@ export default class RestaurantListAdmin extends Component {
                                     className="btn btn-block btn-primary">
                                 Click to verify username
                             </button>
-                            <input value={this.state.owner._id}
-                                   placeholder="Enter Owner's username to fill this ID"
-                                   className="form-control text-center font-weight-bold"/>
+                            <br/>
                             <input onChange={this.setName}
                                    value={this.state.name}
                                    placeholder="Add Restaurant Name"
                                    className="form-control text-center font-weight-bold"/>
+                            <br/>
                             <input onChange={this.setAddress}
                                    value={this.state.address}
                                    placeholder="Add Restaurant Address"
                                    className="form-control text-center font-weight-bold"/>
+                            <br/>
                             <input onChange={this.setCity}
                                    value={this.state.city}
                                    placeholder="Add Restaurant City"
                                    className="form-control text-center font-weight-bold"/>
+                            <br/>
                             <input onChange={this.setPhone}
                                    value={this.state.phone}
                                    placeholder="Add Restaurant Contact"
                                    className="form-control text-center font-weight-bold"/>
+                            <br/>
                             <input onChange={this.setPrice}
                                    value={this.state.price}
                                    placeholder="Add Restaurant Rate"
                                    className="form-control text-center font-weight-bold"/>
+                            <br/>
                             <button onClick={this.createRestaurant} className="btn btn-dark btn-block">
                                 <i className="fa fa-plus"></i>
                             </button>
+                            <br/>
                             <button onClick={this.updateRestaurant} className="btn btn-dark btn-block">
-                                <i className="fa fa-pencil"></i>
+                                <i className="fa fa-refresh"></i>
                             </button>
+                            <br/>
                         </div>
-                        {/*<div className="col-8">*/}
-                        {/*<Route path="/course/:courseId/module/:moduleId"*/}
-                        {/*component={RoomEditor}/>*/}
-                        {/*</div>*/}
                     </div>
                 </div>
             </Switch>

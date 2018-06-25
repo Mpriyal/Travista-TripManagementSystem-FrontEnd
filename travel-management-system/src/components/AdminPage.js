@@ -19,7 +19,7 @@ export default class AdminPage extends Component {
                 <div className="container-fluid">
                     <div className="container p-5 m-5">
                         <div className="row">
-                                <div className="col-sm-3" style={{marginBottom: 40}}>
+                                <div className="col-sm-2" style={{marginBottom: 40}}>
                                     <div className="card align-content-center">
                                         <img className="card-img-top" src="https://logoobject.com/wp-content/uploads/edd/2017/09/Real-Estate-Logos-Inspiration.png" alt="Card image cap"/>
                                         <div className="card-body">
@@ -33,7 +33,7 @@ export default class AdminPage extends Component {
                                         </div>
                                     </div>
                                 </div>
-                                <div className="col-sm-3" style={{marginBottom: 40}}>
+                                <div className="col-sm-2" style={{marginBottom: 40}}>
                                     <div className="card">
                                         <img className="card-img-top" src="https://cdn.onlinewebfonts.com/svg/img_56766.png" alt="Card image cap"/>
                                         <div className="card-body">
@@ -47,7 +47,7 @@ export default class AdminPage extends Component {
                                         </div>
                                     </div>
                                 </div>
-                                <div className="col-sm-3" style={{marginBottom: 40}}>
+                                <div className="col-sm-2" style={{marginBottom: 40}}>
                                     <div className="card">
                                         <img className="card-img-top" src="https://image.flaticon.com/icons/svg/48/48670.svg" alt="Card image cap"/>
                                         <div className="card-body">
@@ -61,14 +61,28 @@ export default class AdminPage extends Component {
                                         </div>
                                     </div>
                                 </div>
-                                <div className="col-sm-3" style={{marginBottom: 40}}>
+                                <div className="col-sm-2" style={{marginBottom: 40}}>
+                                    <div className="card">
+                                        <img className="card-img-top" src="http://locker.com.au/wp-content/uploads/2017/01/user-icon-png-person-user-profile-icon-20.png" alt="Card image cap"/>
+                                        <div className="card-body">
+                                            <h5 className="card-title">Owners</h5>
+                                            <p>Add delete or update Owners</p>
+                                            <button className="btn btn-primary">
+                                                <Link to='/ownerEditor' style={{color: "white"}}>
+                                                    <div className="nav-link">Press</div>
+                                                </Link>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="col-sm-2" style={{marginBottom: 40}}>
                                     <div className="card">
                                         <img className="card-img-top" src="http://locker.com.au/wp-content/uploads/2017/01/user-icon-png-person-user-profile-icon-20.png" alt="Card image cap"/>
                                         <div className="card-body">
                                             <h5 className="card-title">Users</h5>
-                                            <p>Add delete or update or Users</p>
+                                            <p>Add delete or update Users</p>
                                             <button className="btn btn-primary">
-                                                <Link to='/userEditor' style={{color: "white"}}>
+                                                <Link to='/customerEditor' style={{color: "white"}}>
                                                     <div className="nav-link">Press</div>
                                                 </Link>
                                             </button>
