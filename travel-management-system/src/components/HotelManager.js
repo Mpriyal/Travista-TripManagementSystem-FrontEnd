@@ -54,7 +54,7 @@ export default class HotelManager extends Component {
 
     updateHotel() {
         this.hotelService
-            .updateHotel(this.state.userId,this.state.hotelId, this.state.name, this.state.address, this.state.phone, this.state.rate)
+            .updateHotel(this.state.hotelId, this.state.name, this.state.address, this.state.phone, this.state.rate)
 
     }
     findAllRoomsByHotelId(){

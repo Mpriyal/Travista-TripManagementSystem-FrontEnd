@@ -1,12 +1,14 @@
 import React, { Component } from "react";
 import {Form, FormGroup, FormControl, ControlLabel,ListGroup, ListGroupItem} from "react-bootstrap";
-import LoaderButton from "../components/LoaderButton";
+import CarServiceClient from "../services/RentalCarsService";
 
-export default class AddCar extends Component {
+
+export default class CarManager extends Component {
     constructor(props) {
         super(props);
 
         this.state = {
+                userId: "",
                 address: "",
                 transmission: "",
                 fuel: "",
@@ -17,6 +19,10 @@ export default class AddCar extends Component {
                 startDate: "",
                 endDate: ""
             }
+        this.carService = CarServiceClient.instance;
+        this.updateCar = this.updateCar.bind(this);
+        this.setState({userId : this.props.match.params.userId});
+        this.renderCar(this.props.match.params.userId);
     }
 
     validateForm() {
@@ -39,6 +45,32 @@ export default class AddCar extends Component {
 
     renderCarBooking(){
 
+    }
+    setCar(car) {
+        this.setState({
+            id: car._id,
+            type: car.type,
+            address: car.address,
+            category: car.category,
+            fuel: car.fuel,
+            air_conditioning:  car.air_conditioning,
+            rate: car.rate,
+            transmission: car.transmission,
+            startDate: car.startDate,
+            endDate: car.endDate,
+        })
+    }
+    renderCar(ownerId){
+        this.carService
+            .findCarByOwnerId(ownerId)
+            .then(car => this.setCar(car[0]));
+    }
+
+    updateCar() {
+        this.carService
+            .updateCar(this.state.id, this.state.category, this.state.type, this.state.fuel, this.state.air_conditioning,
+                this.state.transmission, this.state.address, this.state.startDate,
+                this.state.endDate,this.state.rate)
     }
 
     handleSubmit = event => {
@@ -139,13 +171,9 @@ export default class AddCar extends Component {
                                 onChange={this.handleChange}
                             />
                         </FormGroup>
-                    <LoaderButton
-                        block
-                        bsSize="large"
-                        disabled={!this.validateForm()}
-                        type="submit"
-                        text="Add Your Car"
-                    />
+                    <button
+                        onClick={this.updateCar}> Update your Car
+                    </button>
                 </Form>
                 <ListGroup>
                     {this.renderCarBooking()}

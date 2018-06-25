@@ -102,7 +102,7 @@ export default class HotelListAdmin extends Component {
 
     createHotel() {
         this.hotelService
-            .createHotel(this.state.name, this.state.address, this.state.phone, this.state.rate)
+            .createHotel(this.state.owner._id, this.state.name, this.state.address, this.state.phone, this.state.rate)
             .then(() => { this.findAllHotels(); });
     }
 
@@ -130,7 +130,7 @@ export default class HotelListAdmin extends Component {
 
     updateHotel() {
         this.hotelService
-            .updateHotel(this.state.owner._id,this.state.id, this.state.name, this.state.address, this.state.phone, this.state.rate)
+            .updateHotel(this.state.id, this.state.name, this.state.address, this.state.phone, this.state.rate)
             .then(() => {
                     this.findAllHotels()
                 }

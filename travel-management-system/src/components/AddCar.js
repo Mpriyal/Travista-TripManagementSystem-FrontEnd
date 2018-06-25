@@ -54,9 +54,9 @@ export default class AddCar extends Component {
 
     registerCar(){
             this.carService
-                .createCar( this.state.category, this.state.type, this.state.fuel, this.state.air_conditioning,
-                    this.state.transmission, this.state.address, this.state.startDate.format("YYYY-MM-DD"),
-                    this.state.endDate.format("YYYY-MM-DD"),this.state.rate)
+                .createCar(this.state.owners, this.state.category, this.state.type, this.state.fuel, this.state.air_conditioning,
+                    this.state.transmission, this.state.address, this.state.startDate,
+                    this.state.endDate,this.state.rate)
                 .then(() => { window.location.assign(`/businessProfile/${this.state.owners}`); });
 
     }

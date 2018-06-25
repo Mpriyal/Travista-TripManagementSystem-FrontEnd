@@ -157,6 +157,7 @@ export default class RentalCarsListAdmin extends Component {
         }
     }
 
+
     populateCar(car) {
         this.setState({
             id: car._id,
@@ -171,10 +172,9 @@ export default class RentalCarsListAdmin extends Component {
             endDate: car.endDate,
         })
     }
-
     createCar() {
         this.carService
-            .createCar( this.state.category, this.state.type, this.state.fuel, this.state.air_conditioning,
+            .createCar( this.state.owner._id, this.state.category, this.state.type, this.state.fuel, this.state.air_conditioning,
                 this.state.transmission, this.state.address, this.state.startDate.format("YYYY-MM-DD"),
                 this.state.endDate.format("YYYY-MM-DD"),this.state.rate)
             .then(() => { this.findAllCars(); });

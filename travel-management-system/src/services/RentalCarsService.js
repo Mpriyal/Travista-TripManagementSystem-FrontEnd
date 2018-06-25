@@ -46,10 +46,17 @@ class RentalCarsService {
                 return response.json();
             });
     }
+    findCarByOwnerId(ownerId) {
+        return fetch(LOCAL_CAR_URL+'/owner/'+ownerId)
+            .then(function(response){
+                return response.json();
+            });
+    }
 
-    createCar( ccategory, ctype, cfuel, cair, ctransmission, caddress, cstartDate, cendDate, crate) {
+    createCar( owners, category, ctype, cfuel, cair, ctransmission, caddress, cstartDate, cendDate, crate) {
         const car = {
-            category: ccategory,
+            owners: owners,
+            category: category,
             type: ctype,
             address: caddress,
             fuel: cfuel,
