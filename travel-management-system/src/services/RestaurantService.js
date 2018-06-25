@@ -21,6 +21,20 @@ export default class RestaurantService{
             });
     }
 
+    findDbRestaurantByCity(city) {
+        return fetch(LOCAL_RESTAURANT_URL+'/city/'+city)
+            .then(function(response){
+                return response.json();
+            });
+    }
+
+    findDbRestaurantByName(name) {
+        return fetch(LOCAL_RESTAURANT_URL+'/name/'+name)
+            .then(function(response){
+                return response.json();
+            });
+    }
+
     createRestaurant( owner, restaurantName, restaurantAddress, restaurantCity, restaurantPhone, restaurantPrice) {
         const restaurant = {
             owners: owner,

@@ -16,7 +16,8 @@ export default class RentalCarsPage extends Component {
             dropOff: moment('2018-07-11'),
             radius: '10',
             location: '',
-            cars: []
+            cars: [],
+            dbCars: []
         };
         this.locationChanged = this.locationChanged.bind(this);
         this.findAllCars = this.findAllCars.bind(this);
@@ -36,15 +37,24 @@ export default class RentalCarsPage extends Component {
         this.setState({
             pickUp : moment(event.target.value)
         });
+        // console.log(this.state.pickUp._i)
     }
 
     dropOffDateChange(event) {
         this.setState({
             dropOff : moment(event.target.value)
         });
+        // console.log(this.state.dropOff._i)
     }
 
     findAllCars(){
+        this.carService
+            .findDbCarsByLocation(this.state.location)
+            .then((result) => {
+                console.log("db result: "+result);
+                this.setState({
+                    dbCars: result})
+            });
         this.carService
             .findLatLongOfLocation(this.state.location)
             .then((results) => {
@@ -123,7 +133,7 @@ export default class RentalCarsPage extends Component {
                         </form>
                     </div>
                     <div>
-                        <CarsList data={this.state.cars}/>
+                        <CarsList data={this.state.cars} data2={this.state.dbCars}/>
                     </div>
                 </div>
             </Router>

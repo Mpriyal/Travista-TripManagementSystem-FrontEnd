@@ -1,7 +1,7 @@
 let _singleton = Symbol();
 const RENTAL_CARS_URL = 'https://api.sandbox.amadeus.com/v1.2/cars/search-circle?';
 const LAT_LONG_URL = 'https://maps.googleapis.com/maps/api/geocode/json?';
-const API_KEY = '';
+const API_KEY = 'Qx2BLHZV4pB0wTFL3qFx9JGNAXsMa4my';
 const LAT_LONG_API_KEY = '';
 const LOCAL_CAR_URL = 'http://localhost:4000/api/car';
 
@@ -46,6 +46,14 @@ class RentalCarsService {
                 return response.json();
             });
     }
+
+    findDbCarsByLocation(location) {
+        return fetch(LOCAL_CAR_URL+'/location/'+location)
+            .then(function(response){
+                return response.json();
+            });
+    }
+
     findCarByOwnerId(ownerId) {
         return fetch(LOCAL_CAR_URL+'/owner/'+ownerId)
             .then(function(response){
