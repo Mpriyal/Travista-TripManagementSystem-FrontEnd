@@ -2,8 +2,6 @@ import React, { Component } from "react";
 import {BrowserRouter as Router ,Route, Link } from 'react-router-dom';
 import {Form, FormGroup, FormControl, ControlLabel, ListGroupItem} from "react-bootstrap";
 import UserServiceClient from '../services/UserService';
-import BookingServiceClient from '../services/BookingService'
-import LoaderButton from "../components/LoaderButton";
 
 export default class AddYourBusiness extends Component {
     constructor(props) {
@@ -35,8 +33,8 @@ export default class AddYourBusiness extends Component {
     // }
 
     componentDidMount() {
-        console.log(this.props.match.params.userId);
         this.setState({userId: this.props.match.params.userId});
+        this.renderProfile(this.state.userId);
     }
 
     componentWillReceiveProps(newProps){
@@ -65,6 +63,7 @@ export default class AddYourBusiness extends Component {
 
     setProfile(user){
         for (var key in user) {
+            console.log(key);
             this.setState({key: user[key]});
         }
     }
@@ -87,15 +86,14 @@ export default class AddYourBusiness extends Component {
 
     updateUser() {
         let customer = {
-            username : this.state.username,
-        password : this.state.password,
-        lastName : this.state.lastName,
-        firstName : this.state.firstName,
-        dateOfBirth : this.state.dateOfBirth,
-        email : this.state.email,
-        address : this.state.address,
-        phoneNumber : this.state.phone
-        }
+                    password : this.state.password,
+                    lastName : this.state.lastName,
+                    firstName : this.state.firstName,
+                    dateOfBirth : this.state.dateOfBirth,
+                    email : this.state.email,
+                    address : this.state.address,
+                    phoneNumber : this.state.phone
+        };
             this.userService
                 .updateCustomer(this.state.userId, customer);
     }
@@ -181,7 +179,6 @@ export default class AddYourBusiness extends Component {
                         <FormControl
                             className="col-8"
                             value={this.state.username}
-                            onChange={this.handleChange}
                             type="text"
                         />
                     </FormGroup>

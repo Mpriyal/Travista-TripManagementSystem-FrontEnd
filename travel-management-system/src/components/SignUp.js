@@ -69,9 +69,9 @@ export default class Signup extends Component {
         }
         this.UserService
             .createCustomer(customer)
-            .then((customer) => {window.location.assign(`/profile/${customer._id}`);});
-        console.log(customer.username);
-        console.log(customer);
+            .then((customer) => {customer.Status === "Username Taken" ?
+                                alert(customer.Status) :
+                                window.location.assign(`/profile/${customer._id}`);});
     }
 
 

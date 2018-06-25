@@ -8,6 +8,7 @@ export default class AddHotel extends Component {
         super(props);
 
         this.state = {
+                owners: "",
                 name:"",
                 address: "",
                 phone: "",
@@ -19,7 +20,15 @@ export default class AddHotel extends Component {
         this.addHotel = this.addHotel.bind(this);
         }
 
-
+    componentDidMount(){
+        this.setOwners(this.props.match.params.userId);
+    }
+    setOwners(userId) {
+        this.setState({owners: userId});
+    }
+    componentWillReceiveProps(newProps){
+        this.setOwners(newProps.match.params.userId);
+    }
     validateForm() {
         return  this.state.name.length > 0 &&
                 this.state.address.length > 0 &&

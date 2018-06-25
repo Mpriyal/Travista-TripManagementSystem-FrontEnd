@@ -7,6 +7,7 @@ export default class AddCar extends Component {
         super(props);
 
         this.state = {
+                owners: "",
                 address: "",
                 transmission: "",
                 fuel: "",
@@ -18,7 +19,15 @@ export default class AddCar extends Component {
                 endDate: ""
             }
     }
-
+    componentDidMount(){
+        this.setOwners(this.props.match.params.userId);
+    }
+    setOwners(userId) {
+        this.setState({owners: userId});
+    }
+    componentWillReceiveProps(newProps){
+        this.setOwners(newProps.match.params.userId);
+    }
     validateForm() {
         return this.state.address.length > 0 &&
             this.state.transmission.length > 0 &&

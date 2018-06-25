@@ -12,6 +12,7 @@ export default class AddYourBusiness extends Component {
         super(props);
 
         this.state = {
+            userId:"",
             username: "",
             password: "",
             firstName: "",
@@ -47,47 +48,47 @@ export default class AddYourBusiness extends Component {
     };
 
     handleSubmit = event => {
-        event.preventDefault();
+
     };
-    addBusiness(param){
-        switch (param) {
-            case 'HOTEL':
-                return <div>
-                    <Link to={`/register/hotel`}>
-                        <LoaderButton
-                            block
-                            bsSize="large"
-                            type="submit"
-                            text="PLEASE CLICK HERE TO ADD YOUR HOTEL FIRST"
-                            onClick={this.setButtonDisplay}/>
-                    </Link>
-                </div>;
-            case 'RESTAURANT':
-                return <div>
-                    <Link to={`/register/restaurant`}>
-                        <LoaderButton
-                            block
-                            bsSize="large"
-                            type="submit"
-                            text="PLEASE CLICK HERE TO ADD YOUR RESTAURANT FIRST"
-                            onClick={this.setButtonDisplay}
-                        />
-                    </Link>
-                </div>;
-            case 'CAR':
-                return <div>
-                    <Link to={`/register/car`}>
-                        <LoaderButton
-                            block
-                            bsSize="large"
-                            type="submit"
-                            text="PLEASE CLICK HERE TO ADD YOUR CAR FIRST"
-                            onClick={this.setButtonDisplay}
-                        />
-                    </Link>
-                </div>;
-        }
-    };
+    // addBusiness(param){
+    //     switch (param) {
+    //         case 'HOTEL':
+    //             return <div>
+    //                 <Link to={`/register/hotel`}>
+    //                     <LoaderButton
+    //                         block
+    //                         bsSize="large"
+    //                         type="submit"
+    //                         text="PLEASE CLICK HERE TO ADD YOUR HOTEL NOW"
+    //                         onClick={this.setButtonDisplay}/>
+    //                 </Link>
+    //             </div>;
+    //         case 'RESTAURANT':
+    //             return <div>
+    //                 <Link to={`/register/restaurant`}>
+    //                     <LoaderButton
+    //                         block
+    //                         bsSize="large"
+    //                         type="submit"
+    //                         text="PLEASE CLICK HERE TO ADD YOUR RESTAURANT NOW"
+    //                         onClick={this.setButtonDisplay}
+    //                     />
+    //                 </Link>
+    //             </div>;
+    //         case 'CAR':
+    //             return <div>
+    //                 <Link to={`/register/car`}>
+    //                     <LoaderButton
+    //                         block
+    //                         bsSize="large"
+    //                         type="submit"
+    //                         text="PLEASE CLICK HERE TO ADD YOUR CAR NOW"
+    //                         onClick={this.setButtonDisplay}
+    //                     />
+    //                 </Link>
+    //             </div>;
+    //     }
+    // };
 
     render() {
         return (<Router>
@@ -202,20 +203,22 @@ export default class AddYourBusiness extends Component {
                             type="password"
                         />
                     </FormGroup>
-                    <LoaderButton
-                        block
-                        bsSize="large"
-                        disabled={!this.validateForm()}
-                        type="submit"
-                        text="Register"
-                    />
+                    <Link to={`/register/${this.state.userId}/${this.state.typeOfBusiness.toLowerCase()}`}>
+                        <LoaderButton
+                            block
+                            bsSize="large"
+                            disabled={!this.validateForm()}
+                            type="submit"
+                            text="Register"
+                        />
+                    </Link>
                 </Form>
             </div>
             <div className="col-8 SubForm">
-                    {this.addBusiness(this.state.typeOfBusiness)}
-                <Route path="/register/hotel" exact component={AddHotel} />
-                <Route path="/register/restaurant" exact component={AddRestaurant} />
-                <Route path="/register/car" exact component={AddCar} />
+                    {/*{this.addBusiness(this.state.typeOfBusiness)}*/}
+                <Route path="/register/:userId/hotel" exact component={AddHotel} />
+                <Route path="/register/:userId/restaurant" exact component={AddRestaurant} />
+                <Route path="/register/:userId/car" exact component={AddCar} />
             </div>
          </div>
         </Router>

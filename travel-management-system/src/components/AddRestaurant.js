@@ -8,6 +8,7 @@ export default class AddRestaurant extends Component {
         super(props);
 
         this.state = {
+            owners: "",
             restaurantId: "",
             name: "",
             address: "",
@@ -16,7 +17,15 @@ export default class AddRestaurant extends Component {
             price: ""
         }
     }
-
+    componentDidMount(){
+        this.setOwners(this.props.match.params.userId);
+    }
+    setOwners(userId) {
+        this.setState({owners: userId});
+    }
+    componentWillReceiveProps(newProps){
+        this.setOwners(newProps.match.params.userId);
+    }
     validateForm() {
         return this.state.address.length > 0 &&
             this.state.name.length > 0 &&
