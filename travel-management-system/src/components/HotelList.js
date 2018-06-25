@@ -1,4 +1,5 @@
 import React, {Component} from 'react'
+import CouponService from "../services/CouponService";
 
 const HOTEL_LOGO = 'https://logoobject.com/wp-content/uploads/edd/2017/09/Real-Estate-Logos-Inspiration.png';
 
@@ -13,15 +14,24 @@ export default class HotelList extends Component {
             restId: null,
             RestOwner: null,
             hotels: [],
-            dbHotels: []
+            dbHotels: [],
+            coupons: []
         }
+
+        this.couponService = CouponService.instance
+        this.findCouponByHotelId = this.findCouponByHotelId.bind(this)
+
+    }
+
+    findCouponByHotelId(hotelId){
+        this.couponService
+            .findCouponByHotelId(hotelId)
+            .then((coupons) => {this.setState({coupons: coupons})})
     }
 
     render() {
         if (this.props.data2) {
             if (this.props.data) {
-                // console.log("GGGGG");
-                // console.log("Local hotels: "+this.props.data2);
                 return (
                     <div className="container-fluid">
                         <div className="container p-5 m-5">
@@ -41,6 +51,27 @@ export default class HotelList extends Component {
                                                     <b>Rate:</b> {hotel.rate}
                                                 </p>
                                                 <p className="card-text"><b>Call:</b> {hotel.phone}</p>
+                                                {this.findCouponByHotelId(hotel._id)}
+                                                {this.state.coupons.length !== 0 &&  <span>
+                                                        <ul>
+                                                            {this.state.coupons.map((coupon, index) =>
+                                                                <div>
+                                                                    <li>Code: {coupon.code} Value: {coupon.value}</li>
+                                                                </div>
+                                                            )}
+                                                        </ul>
+                                                    </span>}
+                                                {/*{renderIf(this.state.coupons.length !== 0)(*/}
+                                                    {/*<span>*/}
+                                                        {/*<ul>*/}
+                                                            {/*{this.state.coupons.map((coupon, index) =>*/}
+                                                                {/*<div>*/}
+                                                                    {/*<li>Code: {coupon.code} Value: {coupon.value}</li>*/}
+                                                                {/*</div>*/}
+                                                            {/*)}*/}
+                                                        {/*</ul>*/}
+                                                    {/*</span>*/}
+                                                {/*)}*/}
                                             </div>
                                         </div>
                                     </div>
