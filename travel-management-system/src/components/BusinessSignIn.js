@@ -60,14 +60,13 @@ export default class BusinessSignIn extends Component {
                             type="password"
                         />
                     </FormGroup>
-                    <LoaderButton
-                        block
-                        bsSize="large"
-                        disabled={!this.validateForm()}
+                    <button
+
                         type="submit"
-                        text="Login"
-                        onClick={this.loginOwner}
-                    />
+
+                        onClick={this.loginOwner}>
+                        LogIn</button>
+
                 </form>
             </div>
             <div>

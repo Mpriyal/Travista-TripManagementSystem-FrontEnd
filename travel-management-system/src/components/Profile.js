@@ -8,7 +8,7 @@ import HotelManager from "./HotelManager";
 import CarManager from "./CarManager";
 import AddRestaurant from "./AddRestaurant";
 
-export default class AddYourBusiness extends Component {
+export default class Profile extends Component {
     constructor(props) {
         super(props);
 
@@ -28,17 +28,19 @@ export default class AddYourBusiness extends Component {
         };
         this.ownerService = OwnerServiceClient.instance;
         this.setButtonDisplay = this.setButtonDisplay.bind(this);
-        this.userId = this.props.match.params.ownerId;
-        this.renderProfile(this.userId);
+        this.setState({userId : this.props.match.params.ownerId});
+        this.renderProfile(this.props.match.params.ownerId);
+        this.addBusiness =this.addBusiness.bind(this);
     }
 
     renderProfile(userId){
             this.ownerService
                 .findOwnerById(userId)
-                .then(user => this.setProfile(user));
+                .then(user => this.setProfile(user[0]));
     }
 
     setProfile(user){
+        this.setState({userId: user._id});
         this.setState({username: user.username});
         this.setState({password: user.password});
         this.setState({firstName: user.firstName});
@@ -74,42 +76,35 @@ export default class AddYourBusiness extends Component {
     setButtonDisplay(){
         this.setState({buttonDisplay : !this.state.buttonDisplay})
     }
-    addBusiness(param){
+    addBusiness(param, userId){
         if(this.state.buttonDisplay) {
             switch (param) {
                 case 'HOTEL':
                     return <div>
-                        <Link to={`/profile/${this.state.userId}/hotel`}>
-                            <LoaderButton
-                                block
-                                bsSize="large"
-                                type="submit"
-                                text="View Hotel Details"
-                                onClick={this.setButtonDisplay}/>
+                        <Link to={`/profile/${userId}/hotel`}>
+                            <button onClick={this.setButtonDisplay}
+                                type="submit" >
+                                View Hotel Details
+                            </button>
                         </Link>
                     </div>;
                 case 'RESTAURANT':
                     return <div>
-                        <Link to={`/profile/${this.state.userId}/restaurant`}>
-                            <LoaderButton
-                                block
-                                bsSize="large"
+                        <Link to={`/profile/${userId}/restaurant`}>
+                            <button
                                 type="submit"
-                                text="View Restaurant Details"
-                                onClick={this.setButtonDisplay}
-                            />
+                                onClick={this.setButtonDisplay}>
+                                View Restaurant Details
+                        </button>
                         </Link>
                     </div>;
                 case 'CAR':
                     return <div>
-                        <Link to={`/profile/${this.state.userId}/car`}>
-                            <LoaderButton
-                                block
-                                bsSize="large"
-                                type="submit"
-                                text="View Car Details"
-                                onClick={this.setButtonDisplay}
-                            />
+                        <Link to={`/profile/${userId}/car`}>
+                            <button type="submit"
+                                onClick={this.setButtonDisplay}>
+                                View Car Details
+                        </button>
                         </Link>
                     </div>;
             }
@@ -120,7 +115,6 @@ export default class AddYourBusiness extends Component {
         return (
             <Router>
             <div className="row">
-                {this.renderProfile()}
                 <div className="col-4 Form">
                 <Form horizontal onSubmit={this.handleSubmit}>
                     <FormGroup className="form-inline" controlId="firstName" bsSize="large">
@@ -225,7 +219,7 @@ export default class AddYourBusiness extends Component {
                 </Form>
                 </div>
                 <div className="col-8 SubForm">
-                        {this.addBusiness(this.state.typeOfBusiness)}
+                        {this.addBusiness(this.state.typeOfBusiness, this.state.userId)}
                     <Route path="/profile/:userId/hotel" exact component={HotelManager} />
                     <Route path="/profile/:userId/restaurant" exact component={AddRestaurant} />
                     <Route path="/profile/:userId/car" exact component={CarManager} />

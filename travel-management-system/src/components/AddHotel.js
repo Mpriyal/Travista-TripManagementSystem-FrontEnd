@@ -17,7 +17,7 @@ export default class AddHotel extends Component {
                 longitude:""
         };
         this.hotelService = HotelServiceClient.instance;
-        this.addHotel = this.addHotel.bind(this);
+        this.registerHotel = this.registerHotel.bind(this);
         }
 
     componentDidMount(){
@@ -45,7 +45,7 @@ export default class AddHotel extends Component {
     handleSubmit = event => {
         event.preventDefault();
     };
-    addHotel(){
+    registerHotel(){
         // this.hotelService
         //     .findLatLongOfHotel(this.state.address)
         //     .then((results) => {
@@ -59,7 +59,8 @@ export default class AddHotel extends Component {
         //              longitude: this.state.longitude
         //             };
         this.hotelService
-            .createHotel(this.state.name, this.state.address, this.state.phone, this.state.rate);
+            .createHotel(this.state.name, this.state.address, this.state.phone, this.state.rate)
+            .then(window.location.assign(`/businessProfile/${this.state.owners}`));
     }
 
 
