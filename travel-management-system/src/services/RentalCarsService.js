@@ -46,6 +46,14 @@ class RentalCarsService {
                 return response.json();
             });
     }
+
+    findDbCarsByLocation(location) {
+        return fetch(LOCAL_CAR_URL+'/location/'+location)
+            .then(function(response){
+                return response.json();
+            });
+    }
+
     findCarByOwnerId(ownerId) {
         return fetch(LOCAL_CAR_URL+'/owner/'+ownerId)
             .then(function(response){
