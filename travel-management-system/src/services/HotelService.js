@@ -47,6 +47,13 @@ class HotelService {
             });
     }
 
+    findDbHotelByCity(city) {
+        return fetch(LOCAL_HOTEL_URL+'/city/'+city)
+            .then(function(response){
+                return response.json();
+            });
+    }
+
     findRoomsForHotel(hotelId) {
         return fetch(LOCAL_HOTEL_URL+'/'+hotelId+ '/room')
             .then(function(response){
