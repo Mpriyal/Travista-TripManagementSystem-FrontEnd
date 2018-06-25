@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import {Form, FormGroup, FormControl, ControlLabel} from "react-bootstrap";
-import LoaderButton from "../components/LoaderButton";
+import RestaurantService from "../services/RestaurantService";
 
 
 export default class AddRestaurant extends Component {
@@ -15,7 +15,9 @@ export default class AddRestaurant extends Component {
             city: "",
             phone: "",
             price: ""
-        }
+        };
+        this.restaurantService = RestaurantService.instance;
+        this.registerRestaurant = this.registerRestaurant.bind(this);
     }
     componentDidMount(){
         this.setOwners(this.props.match.params.userId);
@@ -40,6 +42,13 @@ export default class AddRestaurant extends Component {
             [event.target.id]: event.target.value
         });
     };
+
+    registerRestaurant() {
+        this.restaurantService
+            .createRestaurant( this.state.owner, this.state.name,
+                this.state.address, this.state.city, this.state.phone, this.state.price)
+            .then(() => { window.location.assign(`/businessProfile/${this.state.owners}`); });
+    }
 
     handleSubmit = event => {
         event.preventDefault();

@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import {Form, FormGroup, FormControl, ControlLabel} from "react-bootstrap";
-import LoaderButton from "../components/LoaderButton";
+import RentalCarsService from "../services/RentalCarsService";
 
 export default class AddCar extends Component {
     constructor(props) {
@@ -17,7 +17,9 @@ export default class AddCar extends Component {
                 rate: "",
                 startDate: "",
                 endDate: ""
-            }
+            };
+        this.carService = RentalCarsService.instance;
+        this.registerCar = this.registerCar.bind(this);
     }
     componentDidMount(){
         this.setOwners(this.props.match.params.userId);
@@ -51,6 +53,11 @@ export default class AddCar extends Component {
     };
 
     registerCar(){
+            this.carService
+                .createCar( this.state.category, this.state.type, this.state.fuel, this.state.air_conditioning,
+                    this.state.transmission, this.state.address, this.state.startDate.format("YYYY-MM-DD"),
+                    this.state.endDate.format("YYYY-MM-DD"),this.state.rate)
+                .then(() => { window.location.assign(`/businessProfile/${this.state.owners}`); });
 
     }
 

@@ -60,9 +60,16 @@ class HotelService {
                 return response.json();
             });
     }
+    findHotelByOwnerId(ownerId) {
+        return fetch(LOCAL_HOTEL_URL+'/owner/'+ownerId)
+            .then(function(response){
+                return response.json();
+            });
+    }
 
-    createHotel(hotelName, hotelAddress, hotelPhone, hotelRate) {
+    createHotel(ownerId ,hotelName, hotelAddress, hotelPhone, hotelRate) {
         const hotel = {
+            owners: ownerId,
             name: hotelName,
             address: hotelAddress,
             phone: hotelPhone,

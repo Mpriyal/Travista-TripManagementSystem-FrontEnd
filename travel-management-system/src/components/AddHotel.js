@@ -56,8 +56,9 @@ export default class AddHotel extends Component {
         //              longitude: this.state.longitude
         //             };
         this.hotelService
-            .createHotel(this.state.name, this.state.address, this.state.phone, this.state.rate);
-        window.location.assign(`/businessProfile/${this.state.owners}`);
+            .createHotel(this.state.owners ,this.state.name, this.state.address, this.state.phone, this.state.rate)
+            .then(() => { window.location.assign(`/businessProfile/${this.state.owners}`); });
+
     }
 
 

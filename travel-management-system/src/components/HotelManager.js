@@ -22,21 +22,8 @@ export default class HotelManager extends Component {
         };
         this.hotelService = HotelServiceClient.instance;
         this.updateHotel = this.updateHotel.bind(this);
-    }
-    setHotelId(hotelId){
-        this.setState({hotelId : hotelId})
-    }
-    setUserId(userId){
-        this.setState({userId : userId})
-    }
-    componentDidMount() {
-        this.setHotelId(this.props.hotelId);
-        this.setUserId(this.props.userId);
-    }
-    componentWillReceiveProps(newProps){
-        this.setHotelId(newProps.hotelId);
-        this.setUserId(newProps.userId);
-        this.findAllRoomsByHotelId(newProps.hotelId);
+        this.setState({userId : this.props.match.params.userId});
+        this.renderHotel(this.props.match.params.userId);
     }
     validateForm() {
         return  this.state.name.length > 0 &&
@@ -51,29 +38,24 @@ export default class HotelManager extends Component {
         });
     };
 
-    handleSubmit = event => {
-        event.preventDefault();
-    };
-    updateHotel(){
+    renderHotel(ownerId){
         this.hotelService
-            .findLatLongOfHotel(this.state.address)
-            .then((results) => {
-                this.setLatLong(results);
-            });
-        let hotel = {name: this.state.name,
-            address: this.state.address,
-            phone: this.state.phone,
-            rate: this.state.rate,
-            latitude: this.state.latitude,
-            longitude: this.state.longitude
-        };
-        this.hotelService
-            .updateHotel(hotel);
+            .findHotelByOwnerId(ownerId)
+            .then(hotel => this.setHotel(hotel[0]));
     }
-    setLatLong(results){
-        this.setState({
-            latitude:  results.results[0].geometry.location.lat,
-            longitude: results.results[0].geometry.location.lng })
+    setHotel(hotel){
+        this.setState({name: hotel.name});
+        this.setState({userId: hotel.owners});
+        this.setState({hotelId: hotel._id});
+        this.setState({address: hotel.address});
+        this.setState({phone: hotel.phone});
+        this.setState({rate: hotel.rate});
+    }
+
+    updateHotel() {
+        this.hotelService
+            .updateHotel(this.state.userId,this.state.hotelId, this.state.name, this.state.address, this.state.phone, this.state.rate)
+
     }
     findAllRoomsByHotelId(){
         this
@@ -102,7 +84,7 @@ export default class HotelManager extends Component {
             <Router>
             <div>
             <div className="SubForm">
-                <Form horizontal onSubmit={this.handleSubmit}>
+                <Form horizontal>
                     <FormGroup className="form-inline" controlId="name" bsSize="large">
                         <ControlLabel className="col-4">Hotel Name</ControlLabel>
                         <FormControl
@@ -143,14 +125,9 @@ export default class HotelManager extends Component {
                             onChange={this.handleChange}
                         />
                     </FormGroup>
-                    <LoaderButton
-                        block
-                        bsSize="large"
-                        disabled={!this.validateForm()}
-                        type="submit"
-                        text="Update Your Hotel"
-                        onClick={this.updateHotel}
-                    />
+                    <button
+                        onClick={this.updateHotel}> Update your hotel
+                    </button>
                 </Form>
             </div>
                 <ListGroup>

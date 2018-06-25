@@ -1,10 +1,6 @@
 import React, { Component } from "react";
 import {BrowserRouter as Router ,Route, Link } from 'react-router-dom';
 import {Form, FormGroup, FormControl, ControlLabel} from "react-bootstrap";
-import LoaderButton from "../components/LoaderButton";
-import AddCar from "./AddCar";
-import AddRestaurant from "./AddRestaurant";
-import AddHotel from "./AddHotel";
 import OwnerServiceClient from "../services/OwnerService";
 
 
