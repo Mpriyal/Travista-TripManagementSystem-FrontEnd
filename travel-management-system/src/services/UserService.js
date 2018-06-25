@@ -99,8 +99,7 @@ class UserService {
     findCurrentUser(){
         return fetch(PROFILE_URL,{
             credentials: "include"
-        }).then((response) => {return response})
-           .then((response) => {return response});
+        }).then((response) => {return response});
     }
 }
 export default UserService;

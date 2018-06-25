@@ -82,7 +82,6 @@ class OwnerService {
             credentials: 'include'
         })
             .then((response) => {return response})
-            .then((response) => {return response});
     }
 
 

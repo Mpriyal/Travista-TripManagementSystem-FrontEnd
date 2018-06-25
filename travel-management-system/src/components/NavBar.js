@@ -12,12 +12,10 @@ export default class NavBar extends Component {
         };
         this.userService = UserServiceClient.instance;
         this.ownerService = OwnerServiceClient.instance;
-        this.currentOwner = "";
-        this.currentUser =  "";
-        this.ownerService.findCurrentOwner().then((response) => {this.currentOwner = response});
-        this.userService.findCurrentUser().then((response) => {this.currentUser = response});
-        console.log(this.ownerService.findCurrentOwner);
-        this.hidden = this.currentOwner.status !== 403 || this.currentUser.status !== 403
+        this.ownerloggedIn = false
+        this.ownerloggedIn = false
+        this.hidden =
+        console.log(this.hidden);
     }
 
     toggleNavbar() {
@@ -25,7 +23,20 @@ export default class NavBar extends Component {
             collapsed: !this.state.collapsed,
         });
     }
-
+    findCurrentOwner(){
+        return this.ownerService.findCurrentOwner().then(response=> this.checkOwnerStatus(response.status));
+    }
+    findCurrentUser(){
+       return  this.userService.findCurrentUser().then(response => this.checkUserStatus(response.status));
+    }
+    checkOwnerStatus(status){
+        console.log(status)
+        return status !== 403
+    }
+    checkUserStatus(status){
+        console.log(status)
+        return status !== 403
+    }
     render() {
         const collapsed = this.state.collapsed;
         const classOne = collapsed ? 'collapse navbar-collapse' : 'collapse navbar-collapse show';
@@ -79,9 +90,9 @@ export default class NavBar extends Component {
                             </li>
                             </ul>
                         <ul className="navbar-nav">
-                            <li className= {this.hidden ? "nav-item" : "hidden" }><Link to ="/signup"><i className="fa fa-user btn"/> Sign Up</Link></li>
-                            <li className= {this.hidden ? "nav-item" : "hidden" }><Link to ="/login"><i className="fa fa-sign-in btn"/> Login</Link></li>
-                            <li className= {this.hidden ? "nav-item" : "hidden" }><Link to ="/businessSignIn"><i className="fa fa-briefcase btn"/> Business</Link></li>
+                            <li className= {this.hidden ? "hidden" : "nav-item" }><Link to ="/signup"><i className="fa fa-user btn"/> Sign Up</Link></li>
+                            <li className= {this.hidden ? "hidden" : "nav-item" }><Link to ="/login"><i className="fa fa-sign-in btn"/> Login</Link></li>
+                            <li className= {this.hidden ? "hidden" : "nav-item" }><Link to ="/businessSignIn"><i className="fa fa-briefcase btn"/> Business</Link></li>
                         </ul>
                 </div>
             </nav>
