@@ -45,28 +45,12 @@ export default class Signup extends Component {
     //     });
     // }
 
-    handleSubmit = async event => {
-        event.preventDefault();
-
-        this.setState({isLoading: true});
-
-        this.setState({newUser: "test"});
-
-        this.setState({isLoading: false});
-    }
-
-    handleConfirmationSubmit = async event => {
-        event.preventDefault();
-
-        this.setState({isLoading: true});
-    }
 
     registerCustomer() {
-        console.log(this.state.username)
         var customer = {
             username: this.state.username,
             password: this.state.password
-        }
+        };
         this.UserService
             .createCustomer(customer)
             .then((customer) => {customer.Status === "Username Taken" ?
@@ -78,7 +62,7 @@ export default class Signup extends Component {
 renderForm()
 {
     return (
-        <form onSubmit={this.handleSubmit}>
+        <form>
             <FormGroup controlId="username" bsSize="large">
                 <ControlLabel>Username</ControlLabel>
                 <FormControl

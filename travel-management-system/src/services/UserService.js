@@ -1,5 +1,6 @@
 let _singleton = Symbol();
-const LOG_IN_URL = 'http://localhost:4000/api/login';
+const LOG_IN_URL = 'http://localhost:4000/api/login'
+const LOG_OUT_URL = 'http://localhost:4000/api/logut';
 const PROFILE_URL = 'http://localhost:4000/api/profile';
 const CUSTOMER_URL = 'http://localhost:4000/api/customer';
 // const USER_URL = 'http://localhost:4000/api/user';
@@ -31,6 +32,7 @@ class UserService {
     }
 
     findCustomerById(customerId) {
+        console.log(customerId)
         return fetch(CUSTOMER_URL + '/' + customerId,{
             credentials: "same-origin"
         }).then(response => response.json());
@@ -76,10 +78,12 @@ class UserService {
                 headers: { 'Content-Type': 'application/json' },
                 method: 'PUT'
             })
-            .then(function (response)
-            {
-                return response.json();
-            })
+    }
+
+    logOut(){
+        return fetch (LOG_OUT_URL,{
+            method: 'post',
+            credentials: 'include'});
     }
 
     deleteCustomer(customerId) {

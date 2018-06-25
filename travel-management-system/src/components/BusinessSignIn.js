@@ -14,6 +14,7 @@ export default class BusinessSignIn extends Component {
             password: ""
         };
         this.ownerService = OwnerServiceClient.instance;
+        this.loginOwner = this.loginOwner.bind(this);
     }
 
     validateForm() {
@@ -33,9 +34,7 @@ export default class BusinessSignIn extends Component {
         this
             .ownerService
             .loginOwner(this.state.username,this.state.password)
-            .then(() => {
-               return <Link to="/owner/:userId"/>;
-            })
+            .then((owner) => {owner == null ? alert ("Wrong Credentials") : window.location.assign(`/businessProfile/${owner._id}`);});
     }
 
     render() {

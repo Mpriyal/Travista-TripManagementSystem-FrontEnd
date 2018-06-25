@@ -24,7 +24,7 @@ class OwnerService {
                 'content-type': 'application/json'
             }
         }).then(function(response){
-            return response;
+            return response == null ? null :  response.json() ;
         })
     }
 
@@ -62,7 +62,8 @@ class OwnerService {
             headers: {
                 'content-type': 'application/json'
             }
-        });
+        })
+    .then(response => response.json());
     }
 
     logout() {

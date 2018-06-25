@@ -13,6 +13,9 @@ import HotelListAdmin from "../components/HotelListAdmin";
 import UserProfile from "../components/UserProfile";
 import BusinessSignIn from "../components/BusinessSignIn"
 import RestaurantListAdmin from "../components/RestaurantListAdmin";
+import AddHotel from "../components/AddHotel";
+import AddRestaurant from "../components/AddRestaurant";
+import AddCar from "../components/AddCar";
 
 export default class Main extends Component {
     render() {
@@ -28,7 +31,10 @@ export default class Main extends Component {
                     <Route path="/login" exact component={SignIn} />
                     <Route path="/businessSignIn" exact component={BusinessSignIn} />
                     <Route path="/addYourBusiness" exact component={AddYourBusiness} />
-                    <Route path="/owner/:userId" exact component={Profile} />
+                    <Route path="/register/:userId/hotel" exact component={AddHotel} />
+                    <Route path="/register/:userId/restaurant" exact component={AddRestaurant} />
+                    <Route path="/register/:userId/car" exact component={AddCar} />
+                    <Route path="/businessProfile/:ownerId" exact component={Profile} />
                     <Route path="/profile/:userId" exact component={UserProfile} />
                     <Route path="/admin" exact component={AdminPage} />
                     <Route path="/hotelEditor" exact component={HotelListAdmin} />
