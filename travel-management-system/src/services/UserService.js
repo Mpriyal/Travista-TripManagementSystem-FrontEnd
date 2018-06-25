@@ -32,10 +32,11 @@ class UserService {
     }
 
     findCustomerById(customerId) {
-        console.log(customerId)
-        return fetch(CUSTOMER_URL + '/' + customerId,{
+        console.log("I am in customerById"+customerId);
+        return fetch(CUSTOMER_URL + '/' + customerId, {
             credentials: "same-origin"
-        }).then(response => response.json());
+        })
+            .then(response => response.json());
     }
 
     findUserIdByUsername(username) {

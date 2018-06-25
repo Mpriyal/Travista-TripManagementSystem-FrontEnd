@@ -3,7 +3,7 @@ import {BrowserRouter as Router ,Route, Link } from 'react-router-dom';
 import {Form, FormGroup, FormControl, ControlLabel, ListGroupItem} from "react-bootstrap";
 import UserServiceClient from '../services/UserService';
 
-export default class AddYourBusiness extends Component {
+export default class UserProfile extends Component {
     constructor(props) {
         super(props);
 
@@ -46,7 +46,9 @@ export default class AddYourBusiness extends Component {
 
     renderProfile(userId){
             this.userService
+            //    console.log("XXXX"+userId);
                 .findCustomerById(userId)
+                // .then((user) => console.log("I am user" +user[0]._id+"username:"+user[0].username));
                 .then(user => this.setProfile(user[0]));
     }
     renderAllBookingsOfUser(){
