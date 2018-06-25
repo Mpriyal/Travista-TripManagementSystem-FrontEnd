@@ -65,9 +65,9 @@ export default class AddYourBusiness extends Component {
         this.ownerService
             .createOwner(owner)
             .then((owner) =>
-            {owner.Status === "Username Taken" ?
-                alert(owner.Status) : window.location.assign(`/register/${owner._id}/${this.state.typeOfBusiness.toLowerCase()}`);
-                        alert("You are now Registered Business Owner. Please register your business now")});
+            {owner.Status === "Username Taken" ? alert(owner.Status) :
+                window.location.assign(`/register/${owner._id}/${this.state.typeOfBusiness.toLowerCase()}`);
+                       });
     }
     handleSubmit = event => {
 

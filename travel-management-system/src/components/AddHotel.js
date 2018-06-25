@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import {Form, FormGroup, FormControl, ControlLabel} from "react-bootstrap";
-import LoaderButton from "../components/LoaderButton";
 import HotelServiceClient from "../services/HotelService";
 
 export default class AddHotel extends Component {
@@ -42,10 +41,8 @@ export default class AddHotel extends Component {
         });
     };
 
-    handleSubmit = event => {
-        event.preventDefault();
-    };
     registerHotel(){
+        console.log("hello");
         // this.hotelService
         //     .findLatLongOfHotel(this.state.address)
         //     .then((results) => {
@@ -59,8 +56,8 @@ export default class AddHotel extends Component {
         //              longitude: this.state.longitude
         //             };
         this.hotelService
-            .createHotel(this.state.name, this.state.address, this.state.phone, this.state.rate)
-            .then(window.location.assign(`/businessProfile/${this.state.owners}`));
+            .createHotel(this.state.name, this.state.address, this.state.phone, this.state.rate);
+        window.location.assign(`/businessProfile/${this.state.owners}`);
     }
 
 
@@ -108,10 +105,10 @@ export default class AddHotel extends Component {
                                 onChange={this.handleChange}
                           />
                     </FormGroup>
-                    <button onClick={this.registerHotel}>
-                        Add Hotel
-                    </button>
                 </Form>
+                <button onClick={this.registerHotel}>
+                    Add Hotel
+                </button>
             </div>
         );
     }

@@ -61,9 +61,7 @@ export default class BusinessSignIn extends Component {
                         />
                     </FormGroup>
                     <button
-
                         type="submit"
-
                         onClick={this.loginOwner}>
                         LogIn</button>
 
