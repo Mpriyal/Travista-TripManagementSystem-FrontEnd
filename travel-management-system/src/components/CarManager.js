@@ -168,9 +168,6 @@ export default class CarManager extends Component {
                         onClick={this.updateCar}> Update your Car
                     </button>
                 </Form>
-                <ListGroup>
-                    {this.renderCarBooking()}
-                </ListGroup>
             </div>
         );
     }
