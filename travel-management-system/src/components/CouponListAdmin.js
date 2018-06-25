@@ -6,6 +6,7 @@ import HotelList from "./HotelList";
 import {BrowserRouter as Router, Switch} from "react-router-dom";
 import CouponService from "../services/CouponService";
 import CouponListItem from "./CouponListItem";
+import OwnerService from "../services/OwnerService";
 
 
 export default class CouponListAdmin extends Component {
@@ -22,6 +23,7 @@ export default class CouponListAdmin extends Component {
 
 
         this.couponService = CouponService.instance
+        this.ownerService = OwnerService.instance
         this.createCoupon = this.createCoupon.bind(this)
         this.deleteCoupon = this.deleteCoupon.bind(this)
         this.populateCoupon = this.populateCoupon.bind(this)
@@ -31,6 +33,7 @@ export default class CouponListAdmin extends Component {
         this.setCoupons = this.setCoupons.bind(this)
         this.setCode = this.setCode.bind(this)
         this.setValue = this.setValue.bind(this)
+        this.userNameChanged = this.userNameChanged.bind(this)
     }
 
 

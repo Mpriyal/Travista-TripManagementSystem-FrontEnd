@@ -32,7 +32,6 @@ class UserService {
     }
 
     findCustomerById(customerId) {
-        console.log("I am in customerById"+customerId);
         return fetch(CUSTOMER_URL + '/' + customerId, {
             credentials: "include"
         })
@@ -70,7 +69,6 @@ class UserService {
         })
             .then(response => response.json());
     }
-
 
     updateCustomer(customerId,customer){
         return fetch(CUSTOMER_URL+'/'+customerId,
