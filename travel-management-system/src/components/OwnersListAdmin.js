@@ -306,7 +306,7 @@ export default class OwnersListAdmin extends Component {
                                    className="form-control text-center font-weight-bold"/>
                             <br/>
                             <select className="form-control text-center font-weight-bold"
-                                    onSelect={this.setTypeOfBusiness}>
+                                    onChange={this.setTypeOfBusiness}>
                                 <option value="HOTEL">Hotel</option>
                                 <option value="RESTAURANT">Restaurant</option>
                                 <option value="CAR">Rental Car</option>
