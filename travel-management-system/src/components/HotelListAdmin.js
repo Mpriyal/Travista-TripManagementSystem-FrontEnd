@@ -5,6 +5,7 @@ import HotelService from '../services/HotelService.js'
 import HotelList from "./HotelList";
 import {BrowserRouter as Router, Switch} from "react-router-dom";
 import HotelListItem from "./HotelListItem";
+import OwnerService from "../services/OwnerService";
 
 
 export default class HotelListAdmin extends Component {
@@ -12,6 +13,8 @@ export default class HotelListAdmin extends Component {
         super(props);
         this.state = {
             id: '',
+            ownerName: '',
+            owner: '',
             hotels: [],
             name: '',
             address: '',
@@ -19,6 +22,9 @@ export default class HotelListAdmin extends Component {
             rate: ''
         };
 
+
+        this.ownerService = OwnerService.instance
+        this.userNameChanged = this.userNameChanged.bind(this)
         this.deleteHotels = this.deleteHotels.bind(this)
         this.populateHotel = this.populateHotel.bind(this)
         this.updateHotel = this.updateHotel.bind(this)
@@ -30,6 +36,7 @@ export default class HotelListAdmin extends Component {
         this.setPhone = this.setPhone.bind(this)
         this.setRate = this.setRate.bind(this)
         this.createHotel = this.createHotel.bind(this)
+        this.setOwner = this.setOwner.bind(this)
     }
 
 
@@ -55,6 +62,18 @@ export default class HotelListAdmin extends Component {
         return (
             hotels
         )
+    }
+
+    userNameChanged(event){
+        this.setState({
+            ownerName: event.target.value
+        })
+    }
+
+    setOwner(){
+        this.ownerService
+            .findOwnerByUsername(this.state.ownerName)
+            .then((owner1) => {this.setState({owner: owner1[0]})});
     }
 
     setName(event){
@@ -144,6 +163,15 @@ export default class HotelListAdmin extends Component {
                                     {this.renderListOfHotels()}
                                 </ul>
                             <br/>
+                            <label>Please fill the username of Hotel owner first</label>
+                            <input onChange={this.userNameChanged}
+                                   value={this.state.ownerName}
+                                   placeholder="Enter Owner's username"
+                                   className="form-control text-center font-weight-bold"/>
+                            <button onClick={this.setOwner}
+                                    className="btn btn-block btn-primary">
+                                Click to verify username
+                            </button>
                             <input onChange={this.setName}
                                    value={this.state.name}
                                    placeholder="Add Hotel Name"

@@ -13,6 +13,7 @@ import HotelListAdmin from "../components/HotelListAdmin";
 import UserProfile from "../components/UserProfile";
 import BusinessSignIn from "../components/BusinessSignIn"
 import RestaurantListAdmin from "../components/RestaurantListAdmin";
+import RentalCarsListAdmin from "../components/RentalCarsListAdmin";
 
 export default class Main extends Component {
     render() {
@@ -33,7 +34,7 @@ export default class Main extends Component {
                     <Route path="/admin" exact component={AdminPage} />
                     <Route path="/hotelEditor" exact component={HotelListAdmin} />
                     <Route path="/restaurantEditor" exact component={RestaurantListAdmin} />
-                    <Route path="/carEditor" exact component={HotelListAdmin} />
+                    <Route path="/carEditor" exact component={RentalCarsListAdmin} />
                     <Route path="/userEditor" exact component={HotelListAdmin} />
                 </Switch>
             </main>

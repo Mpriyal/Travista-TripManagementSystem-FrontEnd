@@ -35,7 +35,6 @@ class OwnerService {
     }
 
     findOwnerByUsername(username) {
-        console.log(username)
         return fetch(PROFILE_URL + '/' + username,{
             credentials: "same-origin"
         }).then(response => response.json());

@@ -89,7 +89,7 @@ class HotelService {
     //     )
     // }
 
-    updateHotel(hotelId,hotelName, hotelAddress, hotelPhone, hotelRate){
+    updateHotel(hotelId, hotelName, hotelAddress, hotelPhone, hotelRate){
         const hotel = {
             _id: hotelId,
             name: hotelName,
@@ -101,10 +101,6 @@ class HotelService {
                 body: JSON.stringify(hotel),
                 headers: { 'Content-Type': 'application/json' },
                 method: 'PUT'
-            })
-            .then(function (response)
-            {
-                return response.json();
             })
     }
 
