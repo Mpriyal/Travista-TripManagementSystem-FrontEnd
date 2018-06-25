@@ -16,7 +16,8 @@ export default class HotelPage extends Component {
             checkOut: moment('2018-06-11'),
             radius: '10',
             inputText: '',
-            hotels: []
+            hotels: [],
+            dbHotels: []
         };
         this.inputTextChanged = this.inputTextChanged.bind(this);
         this.findAllHotels = this.findAllHotels.bind(this);
@@ -46,11 +47,17 @@ export default class HotelPage extends Component {
 
     findAllHotels(){
         this.hotelService
+            .findDbHotelByCity(this.state.inputText)
+            .then((result) => {
+                console.log("db result: "+result);
+                this.setState({
+                    dbHotels: result})
+            });
+        this.hotelService
             .findLatLongOfHotel(this.state.inputText)
             .then((results) => {
                 this.setLatLong(results); })
-            .then(() => this.findAllHotelsByLatLong());
-
+            .then(() => this.findAllHotelsByLatLong())
     }
 
     setLatLong(results){
@@ -123,7 +130,7 @@ export default class HotelPage extends Component {
                     </form>
                     </div>
                     <div>
-                        <HotelList data={this.state.hotels}/>
+                        <HotelList data={this.state.hotels} data2={this.state.dbHotels}/>
                     </div>
                 </div>
             </Router>
