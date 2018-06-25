@@ -50,6 +50,10 @@ export default class AddCar extends Component {
         event.preventDefault();
     };
 
+    registerCar(){
+
+    }
+
     render() {
         return (
             <div className="SubForm">
@@ -144,13 +148,9 @@ export default class AddCar extends Component {
                                 onChange={this.handleChange}
                             />
                         </FormGroup>
-                    <LoaderButton
-                        block
-                        bsSize="large"
-                        disabled={!this.validateForm()}
-                        type="submit"
-                        text="Add Your Car"
-                    />
+                    <button onClick={this.registerCar}>
+                        Add Car
+                    </button>
                 </Form>
             </div>
         );

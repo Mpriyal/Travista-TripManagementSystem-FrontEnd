@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import {BrowserRouter as Router ,Route, Link } from 'react-router-dom';
 import {Form, FormGroup, FormControl, ControlLabel} from "react-bootstrap";
-import UserServiceClient from '../services/UserService';
+import OwnerServiceClient from '../services/OwnerService';
 import LoaderButton from "../components/LoaderButton";
 import "./Profile.css";
 import HotelManager from "./HotelManager";
@@ -13,7 +13,7 @@ export default class AddYourBusiness extends Component {
         super(props);
 
         this.state = {
-            userId:"123",
+            userId: "",
             username: "",
             password: "",
             firstName: "",
@@ -26,20 +26,29 @@ export default class AddYourBusiness extends Component {
             address:"",
             buttonDisplay: true
         };
-        this.userService = UserServiceClient.instance;
+        this.ownerService = OwnerServiceClient.instance;
         this.setButtonDisplay = this.setButtonDisplay.bind(this);
+        this.userId = this.props.match.params.ownerId;
+        this.renderProfile(this.userId);
     }
 
     renderProfile(userId){
-            this.userService
-                .findUserById(userId)
+            this.ownerService
+                .findOwnerById(userId)
                 .then(user => this.setProfile(user));
     }
 
     setProfile(user){
-        for (var key in user) {
-            this.setState({key: user[key]});
-        }
+        this.setState({username: user.username});
+        this.setState({password: user.password});
+        this.setState({firstName: user.firstName});
+        this.setState({lastName: user.lastName});
+        this.setState({businessName: user.businessName});
+        this.setState({typeOfBusiness: user.typeOfBusiness});
+        this.setState({dateOfBirth: user.dateOfBirth});
+        this.setState({phone: user.phoneNumber});
+        this.setState({address: user.address});
+        this.setState({email: user.email});
     }
     validateForm() {
         return this.state.email.length > 0 &&
@@ -213,20 +222,6 @@ export default class AddYourBusiness extends Component {
                             type="password"
                         />
                     </FormGroup>
-                    <LoaderButton
-                        block
-                        bsSize="large"
-                        disabled={!this.validateForm()}
-                        type="submit"
-                        text="Update"
-                    />
-                    <LoaderButton
-                        className="btn-danger"
-                        block
-                        bsSize="large"
-                        type="submit"
-                        text="DELETE ACCOUNT"
-                    />
                 </Form>
                 </div>
                 <div className="col-8 SubForm">

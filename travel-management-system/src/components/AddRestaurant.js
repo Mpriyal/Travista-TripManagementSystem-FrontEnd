@@ -89,13 +89,9 @@ export default class AddRestaurant extends Component {
                                 onChange={this.handleChange}
                             />
                         </FormGroup>
-                    <LoaderButton
-                        block
-                        bsSize="large"
-                        disabled={!this.validateForm()}
-                        type="submit"
-                        text="Add Your Restaurant"
-                    />
+                    <button onClick={this.registerRestaurant}>
+                        Add Restaurant
+                    </button>
                 </Form>
             </div>
         );

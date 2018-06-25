@@ -46,26 +46,22 @@ export default class AddHotel extends Component {
         event.preventDefault();
     };
     addHotel(){
+        // this.hotelService
+        //     .findLatLongOfHotel(this.state.address)
+        //     .then((results) => {
+        //     this.setLatLong(results);
+        //     });
+        // let hotel = {name: this.state.name,
+        //              address: this.state.address,
+        //              phone: this.state.phone,
+        //              rate: this.state.rate,
+        //              latitude: this.state.latitude,
+        //              longitude: this.state.longitude
+        //             };
         this.hotelService
-            .findLatLongOfHotel(this.state.address)
-            .then((results) => {
-            this.setLatLong(results);
-            });
-        let hotel = {name: this.state.name,
-                     address: this.state.address,
-                     phone: this.state.phone,
-                     rate: this.state.rate,
-                     latitude: this.state.latitude,
-                     longitude: this.state.longitude
-                    };
-        this.hotelService
-            .createHotel(hotel);
+            .createHotel(this.state.name, this.state.address, this.state.phone, this.state.rate);
     }
-    setLatLong(results){
-        this.setState({
-            latitude:  results.results[0].geometry.location.lat,
-            longitude: results.results[0].geometry.location.lng })
-    }
+
 
     render() {
         return (
@@ -82,7 +78,7 @@ export default class AddHotel extends Component {
                         />
                     </FormGroup>
                     <FormGroup className="form-inline" controlId="address" bsSize="large">
-                        <ControlLabel className="col-4">Hotel Address</ControlLabel>
+                        <ControlLabel className="col-4">Hotel City</ControlLabel>
                         <FormControl
                             autoFocus
                             type="text"
@@ -111,14 +107,9 @@ export default class AddHotel extends Component {
                                 onChange={this.handleChange}
                           />
                     </FormGroup>
-                    <LoaderButton
-                        block
-                        bsSize="large"
-                        disabled={!this.validateForm()}
-                        type="submit"
-                        text="Add Your Hotel"
-                        onClick={this.addHotel}
-                    />
+                    <button onClick={this.registerHotel}>
+                        Add Hotel
+                    </button>
                 </Form>
             </div>
         );
