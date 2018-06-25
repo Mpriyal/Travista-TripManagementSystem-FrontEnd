@@ -4,8 +4,6 @@ import 'react-datepicker/dist/react-datepicker.css';
 import HotelService from '../services/HotelService.js'
 import HotelList from "./HotelList";
 import {BrowserRouter as Router, Switch} from "react-router-dom";
-import HotelListItem from "./HotelListItem";
-import OwnerService from "../services/OwnerService";
 import CouponService from "../services/CouponService";
 import CouponListItem from "./CouponListItem";
 
@@ -47,7 +45,7 @@ export default class CouponListAdmin extends Component {
     renderListOfCoupons(){
         let coupons = null;
         if(this.state) {
-            coupons = this.state.hotels.map((coupon) => {
+            coupons = this.state.coupons.map((coupon) => {
                     return <CouponListItem key={coupon.id}
                                           coupon={coupon}
                                           deleteCoupon={this.deleteCoupon}
@@ -110,13 +108,13 @@ export default class CouponListAdmin extends Component {
         }
     }
 
-    populateCoupon(hotel) {
+    populateCoupon(coupon) {
         this.setState({
-            name: hotel.name,
-            address: hotel.address,
-            phone: hotel.phone,
-            rate: hotel.rate,
-            id: hotel._id
+            code: coupon.code,
+            value: coupon.value,
+            id: coupon._id,
+            hotel: coupon.hotel,
+
         })
     }
 
@@ -126,7 +124,7 @@ export default class CouponListAdmin extends Component {
             hotel: this.state.hotelId,
             code: this.state.code,
             value: this.state.value
-        }
+        };
         this.couponService
             .updateCoupon(coupon)
             .then(() => {
@@ -175,31 +173,21 @@ export default class CouponListAdmin extends Component {
                                 Click to verify username
                             </button>
                             <br/>
-                            <input onChange={this.setName}
-                                   value={this.state.name}
-                                   placeholder="Add Hotel Name"
+                            <input onChange={this.setCode}
+                                   value={this.state.code}
+                                   placeholder="Add Code"
                                    className="form-control text-center font-weight-bold"/>
                             <br/>
-                            <input onChange={this.setAddress}
-                                   value={this.state.address}
-                                   placeholder="Add Hotel Address"
+                            <input onChange={this.setValue}
+                                   value={this.state.value}
+                                   placeholder="Add Value"
                                    className="form-control text-center font-weight-bold"/>
                             <br/>
-                            <input onChange={this.setPhone}
-                                   value={this.state.phone}
-                                   placeholder="Add Hotel Phone"
-                                   className="form-control text-center font-weight-bold"/>
-                            <br/>
-                            <input onChange={this.setRate}
-                                   value={this.state.rate}
-                                   placeholder="Add Hotel Rate"
-                                   className="form-control text-center font-weight-bold"/>
-                            <br/>
-                            <button onClick={this.createHotel} className="btn btn-dark btn-block">
+                            <button onClick={this.createCoupon} className="btn btn-dark btn-block">
                                 <i className="fa fa-plus"></i>
                             </button>
                             <br/>
-                            <button onClick={this.updateHotel} className="btn btn-dark btn-block">
+                            <button onClick={this.updateCoupon} className="btn btn-dark btn-block">
                                 <i className="fa fa-refresh"></i>
                             </button>
                         </div>
