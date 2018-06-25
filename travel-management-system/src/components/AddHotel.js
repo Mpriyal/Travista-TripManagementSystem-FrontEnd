@@ -1,6 +1,10 @@
 import React, { Component } from "react";
 import {Form, FormGroup, FormControl, ControlLabel} from "react-bootstrap";
 import HotelServiceClient from "../services/HotelService";
+import AddRoom from "./AddRoom";
+import {Link, Route, Switch} from "react-router-dom";
+import LoaderButton from "./LoaderButton";
+import CouponComponent from "./CouponComponent";
 
 export default class AddHotel extends Component {
     constructor(props) {
@@ -64,6 +68,8 @@ export default class AddHotel extends Component {
 
     render() {
         return (
+            <Switch>
+            <div>
             <div className="SubForm">
                 <Form horizontal>
                     <FormGroup className="form-inline" controlId="name" bsSize="large">
@@ -111,6 +117,20 @@ export default class AddHotel extends Component {
                     Add Hotel
                 </button>
             </div>
+            <div>
+                <div>
+                    <Link to={`/profile/${this.state.userId}/hotel/${this.state.hotelId}`}>
+                        <LoaderButton
+                            block
+                            bsSize="large"
+                            type="submit"
+                            text="ADD COUPON"/>
+                    </Link>
+                    <Route path="/profile/:userId/hotel/:hotelId" exact component={CouponComponent} />
+                </div>
+            </div>
+            </div>
+            </Switch>
         );
     }
 }
