@@ -104,7 +104,7 @@ export default class CarManager extends Component {
                                 onChange={this.handleChange}
                             />
                         </FormGroup>
-                        <FormGroup className="form-inline" controlId="airConditioning" bsSize="large">
+                        <FormGroup className="form-inline" controlId="air_conditioning" bsSize="large">
                             <ControlLabel className="col-4">Air Conditioning</ControlLabel>
                             <FormControl
                                 autoFocus
@@ -134,7 +134,7 @@ export default class CarManager extends Component {
                             onChange={this.handleChange}
                         />
                     </FormGroup>
-                    <FormGroup className="form-inline" controlId="type" bsSize="large">
+                    <FormGroup className="form-inline" controlId="rate" bsSize="large">
                     <ControlLabel className="col-4">Rate</ControlLabel>
                             <FormControl
                                 autoFocus
