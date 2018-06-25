@@ -5,6 +5,7 @@ import LoaderButton from "../components/LoaderButton";
 import AddCar from "./AddCar";
 import AddRestaurant from "./AddRestaurant";
 import AddHotel from "./AddHotel";
+import OwnerServiceClient from "../services/OwnerService";
 
 
 export default class AddYourBusiness extends Component {
@@ -25,6 +26,8 @@ export default class AddYourBusiness extends Component {
             typeOfBusiness:"HOTEL",
             confirmPassword: ""
         };
+        this.registerOwner = this.registerOwner.bind(this);
+        this.ownerService = OwnerServiceClient.instance;
     }
 
     validateForm() {
@@ -46,7 +49,26 @@ export default class AddYourBusiness extends Component {
             [event.target.id]: event.target.value
         });
     };
-
+    registerOwner() {
+        var owner = {
+            username: this.state.username,
+            password: this.state.password,
+            email : this.state.email,
+            firstName: this.state.firstName,
+            lastName: this.state.lastName,
+            businessName: this.state.businessName,
+            dateOfBirth: this.state.dateOfBirth,
+            phoneNumber: this.state.phone,
+            address: this.state.address,
+            typeOfBusiness: this.state.typeOfBusiness
+        };
+        this.ownerService
+            .createOwner(owner)
+            .then((owner) =>
+            {owner.Status === "Username Taken" ?
+                alert(owner.Status) : window.location.assign(`/register/${owner._id}/${this.state.typeOfBusiness.toLowerCase()}`);
+                        alert("You are now Registered Business Owner. Please register your business now")});
+    }
     handleSubmit = event => {
 
     };
@@ -203,22 +225,16 @@ export default class AddYourBusiness extends Component {
                             type="password"
                         />
                     </FormGroup>
-                    <Link to={`/register/${this.state.userId}/${this.state.typeOfBusiness.toLowerCase()}`}>
-                        <LoaderButton
-                            block
-                            bsSize="large"
-                            disabled={!this.validateForm()}
-                            type="submit"
-                            text="Register"
-                        />
-                    </Link>
+
+                        <button onClick={this.registerOwner}>
+                            Sign Up
+                        </button>
+
                 </Form>
             </div>
             <div className="col-8 SubForm">
                     {/*{this.addBusiness(this.state.typeOfBusiness)}*/}
-                <Route path="/register/:userId/hotel" exact component={AddHotel} />
-                <Route path="/register/:userId/restaurant" exact component={AddRestaurant} />
-                <Route path="/register/:userId/car" exact component={AddCar} />
+
             </div>
          </div>
         </Router>

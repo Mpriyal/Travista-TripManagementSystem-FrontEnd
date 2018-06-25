@@ -23,6 +23,8 @@ export default class AddYourBusiness extends Component {
         // this.bookingService = BookingServiceClient.instance;
         this.updateUser = this.updateUser.bind(this);
         this.deleteUser = this.deleteUser.bind(this);
+        this.userId = this.props.match.params.userId;
+        this.renderProfile(this.userId);
     }
 
     // findAllBookingsByUserId(){
@@ -33,18 +35,19 @@ export default class AddYourBusiness extends Component {
     // }
 
     componentDidMount() {
-        this.setState({userId: this.props.match.params.userId});
-        this.renderProfile(this.state.userId);
+        this.setState({userId: this.userId});
+        this.renderProfile(this.userId);
     }
 
     componentWillReceiveProps(newProps){
-        this.setState({userId : newProps.userId});
+        this.setState({userId : this.state.userId});
+        this.renderProfile(this.state.userId);
     }
 
     renderProfile(userId){
             this.userService
                 .findCustomerById(userId)
-                .then(user => this.setProfile(user));
+                .then(user => this.setProfile(user[0]));
     }
     renderAllBookingsOfUser(){
         let bookings = null;
@@ -62,10 +65,16 @@ export default class AddYourBusiness extends Component {
     }
 
     setProfile(user){
-        for (var key in user) {
-            console.log(key);
-            this.setState({key: user[key]});
-        }
+            this.setState({userId: user._id});
+            this.setState({username: user.username});
+            this.setState({password: user.password});
+            this.setState({firstName: user.firstName});
+            this.setState({lastName: user.lastName});
+            this.setState({dateOfBirth: user.dateOfBirth});
+            this.setState({phone: user.phoneNumber});
+            this.setState({address: user.address});
+            this.setState({email: user.email});
+
     }
     validateForm() {
         return this.state.email.length > 0 &&
@@ -86,6 +95,7 @@ export default class AddYourBusiness extends Component {
 
     updateUser() {
         let customer = {
+                    _id : this.state.userId,
                     password : this.state.password,
                     lastName : this.state.lastName,
                     firstName : this.state.firstName,
@@ -101,6 +111,10 @@ export default class AddYourBusiness extends Component {
     deleteUser() {
         this.userService
             .deleteCustomer(this.state.userId);
+        this.userService
+            .logOut()
+            .then(() => window.location.assign(`/`));
+
     }
 
     handleSubmit = event => {
@@ -111,7 +125,6 @@ export default class AddYourBusiness extends Component {
         return (
             <Router>
             <div className="row">
-                {this.renderProfile()}
                 <div className="col-4 Form">
                 <Form horizontal onSubmit={this.handleSubmit}>
                     <FormGroup className="form-inline" controlId="firstName" bsSize="large">
