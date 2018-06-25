@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import axios from 'axios';
 import RestaurantList from "./RestaurantList";
+import RestaurantService from "../services/RestaurantService";
 var restaurantUrl = 'http://opentable.herokuapp.com/api/restaurants';
 
 export default class RestaurantPage extends Component {
@@ -14,10 +15,12 @@ export default class RestaurantPage extends Component {
                 country: ''
             },
             restaurants: [],
+            dbRestaurants: [],
             selectedOption: 'name'
         };
         this.setOption = this.setOption.bind(this);
         this.searchRestaurant = this.searchRestaurant.bind(this);
+        this.RestaurantService = RestaurantService.instance;
     }
 
     setOption(changedOption) {
@@ -35,7 +38,13 @@ export default class RestaurantPage extends Component {
             }).then(res=>{
                 const restaurants = res.data.restaurants;
                 this.setState({restaurants});
-            })
+            });
+            this.RestaurantService
+                .findDbRestaurantByName(textValue)
+                .then((result) => {
+                    this.setState({
+                        dbRestaurants: result})
+                });
         }
         else if (currentState === 'city') {
             axios.get(restaurantUrl,{
@@ -46,7 +55,13 @@ export default class RestaurantPage extends Component {
                 console.log(res)
                 const restaurants = res.data.restaurants;
                 this.setState({restaurants});
-            })
+            });
+            this.RestaurantService
+                .findDbRestaurantByCity(textValue)
+                .then((result) => {
+                    this.setState({
+                        dbRestaurants: result})
+                });
         }
         else if (currentState === 'zipcode') {
             axios.get(restaurantUrl,{
@@ -108,7 +123,7 @@ export default class RestaurantPage extends Component {
                     </form>
                 </div>
             <div>
-                <RestaurantList data={this.state.restaurants}/>
+                <RestaurantList data={this.state.restaurants} data2={this.state.dbRestaurants}/>
             </div>
         </div>
         )
