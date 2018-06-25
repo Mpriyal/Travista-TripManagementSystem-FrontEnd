@@ -45,7 +45,7 @@ export default class AddRestaurant extends Component {
 
     registerRestaurant() {
         this.restaurantService
-            .createRestaurant( this.state.owner, this.state.name,
+            .createRestaurant( this.state.owners, this.state.name,
                 this.state.address, this.state.city, this.state.phone, this.state.price)
             .then(() => { window.location.assign(`/businessProfile/${this.state.owners}`); });
     }

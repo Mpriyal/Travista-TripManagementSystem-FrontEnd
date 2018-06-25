@@ -100,8 +100,8 @@ export default class RestaurantManager extends Component {
                                 onChange={this.handleChange}
                             />
                         </FormGroup>
-                    <button onClick={this.registerRestaurant}>
-                        Add Restaurant
+                    <button onClick={this.updateRestaurant}>
+                        Update Restaurant
                     </button>
                 </Form>
             </div>
