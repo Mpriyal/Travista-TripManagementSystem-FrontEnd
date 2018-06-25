@@ -108,16 +108,13 @@ export default class UserProfile extends Component {
 
     }
 
-    handleSubmit = event => {
-        event.preventDefault();
-    };
 
     render() {
         return (
             <Router>
                 <div className="row">
                     <div className="col-4 Form">
-                        <Form horizontal onSubmit={this.handleSubmit}>
+                        <Form horizontal>
                             <FormGroup className="form-inline" controlId="firstName" bsSize="large">
                                 <ControlLabel className="col-4">First Name </ControlLabel>
                                 <FormControl

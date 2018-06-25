@@ -4,6 +4,7 @@ import {Form, FormGroup, FormControl, ControlLabel, ListGroup, ListGroupItem} fr
 import LoaderButton from "../components/LoaderButton";
 import HotelServiceClient from "../services/HotelService";
 import AddRoom from "./AddRoom";
+import CouponComponent from "./CouponComponent";
 
 export default class HotelManager extends Component {
     constructor(props) {
@@ -134,14 +135,15 @@ export default class HotelManager extends Component {
                     {this.renderHotelRooms()}
                 </ListGroup>
                 <div>
-                    <Link to={`/profile/${this.state.userId}/hotel/${this.state.hotelId}`}>
-                        <LoaderButton
-                            block
-                            bsSize="large"
-                            type="submit"
-                            text="ADD ROOM"/>
-                    </Link>
-                        <Route path="/profile/:userId/hotel/:hotelId" exact component={AddRoom} />
+                    <div>
+                        <Link to={`/profile/${this.state.userId}/hotel/${this.state.hotelId}`}>
+                            <button
+                                type="submit">
+                                COUPONS
+                            </button>
+                        </Link>
+                        <Route path="/profile/:userId/hotel/:hotelId" exact component={CouponComponent} />
+                    </div>
                 </div>
             </div>
             </Router>

@@ -30,6 +30,8 @@ export default class Profile extends Component {
         this.setState({userId : this.props.match.params.ownerId});
         this.renderProfile(this.props.match.params.ownerId);
         this.addBusiness =this.addBusiness.bind(this);
+        this.updateOwner = this.updateOwner.bind(this);
+        this.deleteOwner = this.deleteOwner.bind(this);
     }
 
     renderProfile(userId){
@@ -69,9 +71,31 @@ export default class Profile extends Component {
         });
     };
 
-    handleSubmit = event => {
-        event.preventDefault();
-    };
+    updateOwner() {
+        let owner = {
+            _id : this.state.userId,
+            username: this.state.username,
+            password : this.state.password,
+            lastName : this.state.lastName,
+            firstName : this.state.firstName,
+            dateOfBirth : this.state.dateOfBirth,
+            email : this.state.email,
+            address : this.state.address,
+            phoneNumber : this.state.phone,
+            businessName : this.state.businessName,
+        };
+        this.ownerService
+            .updateOwner(owner);
+    }
+
+    deleteOwner() {
+        this.ownerService
+            .deleteOwner(this.state.userId);
+        this.ownerService
+            .logout()
+            .then(() => window.location.assign(`/`));
+
+    }
     setButtonDisplay(){
         this.setState({buttonDisplay : !this.state.buttonDisplay})
     }
@@ -115,7 +139,7 @@ export default class Profile extends Component {
             <Router>
             <div className="row">
                 <div className="col-4 Form">
-                <Form horizontal onSubmit={this.handleSubmit}>
+                <Form horizontal>
                     <FormGroup className="form-inline" controlId="firstName" bsSize="large">
                         <ControlLabel className="col-4">First Name </ControlLabel>
                         <FormControl
@@ -216,6 +240,8 @@ export default class Profile extends Component {
                         />
                     </FormGroup>
                 </Form>
+                    <button onClick={this.updateOwner}>Update</button>
+                    <button onClick={this.deleteOwner}>Delete</button>
                 </div>
                 <div className="col-8 SubForm">
                         {this.addBusiness(this.state.typeOfBusiness, this.state.userId)}

@@ -14,13 +14,18 @@ export default class CouponComponent extends Component {
             hotelId:"",
             code:"",
             value: "",
+            id: "",
             coupons: []
         };
+        this.buttonText = "Add Coupon";
         this.hotelService = HotelServiceClient.instance;
         this.findCouponByHotelId = this.findCouponByHotelId.bind(this);
         this.couponService = CouponService.instance;
         this.createCoupon = this.createCoupon.bind(this);
+        this.updateCoupon = this.updateCoupon.bind(this);
         this.deleteCoupon = this.deleteCoupon.bind(this);
+        this.populateCoupon = this.populateCoupon.bind(this);
+        this.findCouponByHotelId(this.props.match.params.hotelId);
     }
 
     validateForm() {
@@ -28,19 +33,16 @@ export default class CouponComponent extends Component {
             this.state.numberOfBeds.length > 0
     }
 
-    handleChange = event => {
-        this.setState({
-            [event.target.id] : event.target.value
-        });
-    };
 
     componentDidMount(){
-        this.findCouponByHotelId(this.props.hotelId)
+        this.setState({hotelId : this.props.match.params.hotelId});
+        this.findCouponByHotelId(this.props.match.params.hotelId);
+        this.renderListOfCoupons();
     }
-
-    componentWillReceiveProps(newProps){
-        this.findCouponByHotelId(newProps.hotelId)
-    }
+    //
+    // componentWillReceiveProps(newProps){
+    //     this.findCouponByHotelId(newProps.hotelId)
+    // }
 
     findCouponByHotelId(hotelId){
         this.couponService
@@ -64,10 +66,8 @@ export default class CouponComponent extends Component {
         )
     }
 
-    handleSubmit = event => {
-        event.preventDefault();
-    };
     createCoupon(){
+        console.log(this.state.hotelId);
         var coupon = {
             hotel: this.state.hotelId,
             code: this.state.code,
@@ -92,28 +92,35 @@ export default class CouponComponent extends Component {
             id: coupon._id,
             code: coupon.code,
             value: coupon.value
-        })
+        });
+        this.buttonText = "Update Coupon";
     }
     updateCoupon() {
         var coupon = {
             hotel: this.state.hotelId,
             code: this.state.code,
             value: this.state.value,
-            id: this.state.id
+            _id: this.state.id
         };
         this.couponService
-            .updateCoupon()
+            .updateCoupon(coupon)
             .then(() => {
                     this.findCouponByHotelId(this.state.hotelId)
                 }
             );
+
     }
+    handleChange = event => {
+        this.setState({
+            [event.target.id]: event.target.value
+        });
+    };
     render() {
         return (
             <div>
                 {this.renderListOfCoupons()}
             <div className="Form">
-                <Form horizontal onSubmit={this.handleSubmit}>
+                <Form horizontal>
                     <h2 className = "align-content-center">Enter Coupon Details</h2>
                     <FormGroup controlId="code" bsSize="large">
                         <ControlLabel>Coupon Code</ControlLabel>
@@ -133,14 +140,12 @@ export default class CouponComponent extends Component {
                             onChange={this.handleChange}
                         />
                     </FormGroup>
-                    <LoaderButton
-                        block
-                        bsSize="large"
-                        type="submit"
-                        text="Add Rooms in Hotel"
-                        onClick={this.createCoupon}
-                    />
+
                 </Form>
+                <button
+                    type="submit"
+                    onClick={this.buttonText === "Add Coupon"? this.createCoupon : this.updateCoupon}
+                >{this.buttonText}</button>
             </div>
             </div>
         );

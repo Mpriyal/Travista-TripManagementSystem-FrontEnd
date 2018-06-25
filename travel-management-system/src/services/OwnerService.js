@@ -19,7 +19,7 @@ class OwnerService {
         return fetch(LOG_IN_URL, {
             method: 'post',
             body: JSON.stringify({username:username, password: password}),
-            credentials: "same-origin",
+            credentials: "include",
             headers: {
                 'content-type': 'application/json'
             }
@@ -30,24 +30,24 @@ class OwnerService {
 
     findOwnerById(userId) {
         return fetch(OWNER_URL + '/' + userId,{
-            credentials: "same-origin"
+            credentials: "include"
         }).then(response => response.json());
     }
 
     findOwnerByUsername(username) {
         return fetch(PROFILE_URL + '/' + username,{
-            credentials: "same-origin"
+            credentials: "include"
         }).then(response => response.json());
     }
     deleteOwner(ownerId) {
         return fetch(OWNER_URL + '/' + ownerId, {
             method: 'delete',
-            credentials: "same-origin"
+            credentials: "include"
         })
     }
     findAllOwners() {
         return fetch(OWNER_URL,{
-            credentials: "same-origin"
+            credentials: "include"
         })
             .then(response => response.json());
     }
@@ -55,7 +55,7 @@ class OwnerService {
         return fetch(OWNER_URL, {
             method: 'post',
             body: JSON.stringify(user),
-            credentials: "same-origin",
+            credentials: "include",
             headers: {
                 'content-type': 'application/json'
             }
@@ -67,7 +67,8 @@ class OwnerService {
             {
                 body: JSON.stringify(user),
                 headers: { 'Content-Type': 'application/json' },
-                method: 'PUT'
+                method: 'PUT',
+                credentials: 'include'
             })
     }
     logout() {
@@ -76,6 +77,14 @@ class OwnerService {
             credentials: 'include'
         });
     }
+    findCurrentOwner(){
+        return fetch(PROFILE_URL,{
+            credentials: 'include'
+        })
+            .then((response) => {return response})
+            .then((response) => {return response});
+    }
+
 
 }
 export default OwnerService;

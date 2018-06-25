@@ -117,18 +117,6 @@ export default class AddHotel extends Component {
                     Add Hotel
                 </button>
             </div>
-            <div>
-                <div>
-                    <Link to={`/profile/${this.state.userId}/hotel/${this.state.hotelId}`}>
-                        <LoaderButton
-                            block
-                            bsSize="large"
-                            type="submit"
-                            text="ADD COUPON"/>
-                    </Link>
-                    <Route path="/profile/:userId/hotel/:hotelId" exact component={CouponComponent} />
-                </div>
-            </div>
             </div>
             </Switch>
         );

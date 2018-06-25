@@ -21,6 +21,10 @@
   width: 100%;
 
 }
+.hidden
+{
+  display: none;
+}
 
 .SubForm {
     padding: 60px 60px;

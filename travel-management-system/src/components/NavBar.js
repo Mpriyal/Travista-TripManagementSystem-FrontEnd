@@ -1,14 +1,23 @@
 import React, {Component} from 'react'
-import logo from '../logo.svg';
 import {Link} from 'react-router-dom'
+import OwnerServiceClient from "../services/OwnerService";
+import UserServiceClient from "../services/UserService";
 
 export default class NavBar extends Component {
     constructor(props) {
-        super(props)
+        super(props);
         this.toggleNavbar = this.toggleNavbar.bind(this);
         this.state = {
             collapsed: true,
         };
+        this.userService = UserServiceClient.instance;
+        this.ownerService = OwnerServiceClient.instance;
+        this.currentOwner = "";
+        this.currentUser =  "";
+        this.ownerService.findCurrentOwner().then((response) => {this.currentOwner = response});
+        this.userService.findCurrentUser().then((response) => {this.currentUser = response});
+        console.log(this.ownerService.findCurrentOwner);
+        this.hidden = this.currentOwner.status !== 403 || this.currentUser.status !== 403
     }
 
     toggleNavbar() {
@@ -70,9 +79,9 @@ export default class NavBar extends Component {
                             </li>
                             </ul>
                         <ul className="navbar-nav">
-                            <li className="nav-item"><Link to ="/signup"><i className="fa fa-user btn"/> Sign Up</Link></li>
-                            <li className="nav-item"><Link to ="/login"><i className="fa fa-sign-in btn"/> Login</Link></li>
-                            <li className="nav-item"><Link to ="/businessSignIn"><i className="fa fa-briefcase btn"/> Business</Link></li>
+                            <li className= {this.hidden ? "nav-item" : "hidden" }><Link to ="/signup"><i className="fa fa-user btn"/> Sign Up</Link></li>
+                            <li className= {this.hidden ? "nav-item" : "hidden" }><Link to ="/login"><i className="fa fa-sign-in btn"/> Login</Link></li>
+                            <li className= {this.hidden ? "nav-item" : "hidden" }><Link to ="/businessSignIn"><i className="fa fa-briefcase btn"/> Business</Link></li>
                         </ul>
                 </div>
             </nav>

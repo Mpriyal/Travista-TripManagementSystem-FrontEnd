@@ -24,7 +24,8 @@ class CouponService {
     }
 
     createCoupon(coupon) {
-        return fetch('http://localhost:4000/api/hotel', {
+        console.log("ban gaye");
+        return fetch(COUPON_URL, {
             method: 'post',
             body: JSON.stringify(coupon),
             credentials: 'include',

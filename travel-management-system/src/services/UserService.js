@@ -22,7 +22,7 @@ class UserService {
         return fetch(LOG_IN_URL, {
             method: 'post',
             body: JSON.stringify({username:username, password: password}),
-            credentials: "same-origin",
+            credentials: "include",
             headers: {
                 'content-type': 'application/json'
             }
@@ -34,7 +34,7 @@ class UserService {
     findCustomerById(customerId) {
         console.log("I am in customerById"+customerId);
         return fetch(CUSTOMER_URL + '/' + customerId, {
-            credentials: "same-origin"
+            credentials: "include"
         })
             .then(response => response.json());
     }
@@ -48,13 +48,13 @@ class UserService {
     deleteCustomer(customerId) {
         return fetch(CUSTOMER_URL + '/' + customerId, {
             method: 'delete',
-            credentials: "same-origin"
+            credentials: "include"
         })
     }
 
     findAllCustomers() {
         return fetch(CUSTOMER_URL,{
-            credentials: "same-origin"
+            credentials: "include"
         })
             .then(response => response.json());
     }
@@ -63,7 +63,7 @@ class UserService {
         return fetch(CUSTOMER_URL, {
             method: 'post',
             body: JSON.stringify(customer),
-            credentials: "same-origin",
+            credentials: "include",
             headers: {
                 'content-type': 'application/json'
             }
@@ -84,7 +84,8 @@ class UserService {
     logOut(){
         return fetch (LOG_OUT_URL,{
             method: 'post',
-            credentials: 'include'});
+            credentials: 'include'
+        });
     }
 
     deleteCustomer(customerId) {
@@ -94,6 +95,12 @@ class UserService {
             }).then(function (response) {
             return response;
         })
+    }
+    findCurrentUser(){
+        return fetch(PROFILE_URL,{
+            credentials: "include"
+        }).then((response) => {return response})
+           .then((response) => {return response});
     }
 }
 export default UserService;
