@@ -23,12 +23,13 @@ export default class RestaurantService{
 
     createRestaurant( owner, restaurantName, restaurantAddress, restaurantCity, restaurantPhone, restaurantPrice) {
         const restaurant = {
-            owner: owner,
+            owners: owner,
             name: restaurantName,
             address: restaurantAddress,
             city: restaurantCity,
             phone: restaurantPhone,
-            price: restaurantPrice};
+            price: restaurantPrice
+        };
         return fetch(LOCAL_RESTAURANT_URL, {
             method: 'post',
             body: JSON.stringify(restaurant),

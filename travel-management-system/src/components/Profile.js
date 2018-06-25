@@ -19,7 +19,7 @@ export default class Profile extends Component {
             lastName: "",
             dateOfBirth: "",
             businessName: "",
-            typeOfBusiness:"HOTEL",
+            typeOfBusiness:"",
             phone: "",
             email:"",
             address:"",
