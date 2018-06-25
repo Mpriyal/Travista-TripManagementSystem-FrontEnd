@@ -18,7 +18,7 @@ export default class CarManager extends Component {
                 rate: "",
                 startDate: "",
                 endDate: ""
-            }
+            };
         this.carService = CarServiceClient.instance;
         this.updateCar = this.updateCar.bind(this);
         this.setState({userId : this.props.match.params.userId});
@@ -43,9 +43,6 @@ export default class CarManager extends Component {
         });
     };
 
-    renderCarBooking(){
-
-    }
     setCar(car) {
         this.setState({
             id: car._id,
@@ -73,14 +70,10 @@ export default class CarManager extends Component {
                 this.state.endDate,this.state.rate)
     }
 
-    handleSubmit = event => {
-        event.preventDefault();
-    };
-
     render() {
         return (
             <div className="SubForm">
-                <Form horizontal onSubmit={this.handleSubmit}>
+                <Form horizontal>
                     <FormGroup className="form-inline" controlId="address" bsSize="large">
                     <ControlLabel className="col-4">Car Address</ControlLabel>
                     <FormControl

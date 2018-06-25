@@ -110,7 +110,7 @@ export default class RestaurantListAdmin extends Component {
 
     createRestaurant() {
         this.restaurantService
-            .createRestaurant( this.state.owner, this.state.name,
+            .createRestaurant( this.state.owner._id, this.state.name,
                 this.state.address, this.state.city, this.state.phone, this.state.price)
             .then(() => { this.findAllRestaurants(); });
     }

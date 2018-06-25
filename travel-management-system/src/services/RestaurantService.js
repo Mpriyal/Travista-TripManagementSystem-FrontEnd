@@ -1,5 +1,3 @@
-import HotelService from "./HotelService";
-import axios from "axios/index";
 var restaurantUrl = 'http://opentable.herokuapp.com/api/restaurants';
 const LOCAL_RESTAURANT_URL = 'http://localhost:4000/api/restaurant';
 
@@ -40,7 +38,12 @@ export default class RestaurantService{
             }
         });
     }
-
+    findRestaurantByOwnerId(ownerId) {
+        return fetch(LOCAL_RESTAURANT_URL+'/owner/'+ownerId)
+            .then(function(response){
+                return response.json();
+            });
+    }
     updateRestaurant(restaurantId, restaurantName, restaurantAddress, restaurantCity, restaurantPhone, restaurantPrice){
         const restaurant = {
             _id: restaurantId,

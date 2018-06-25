@@ -2,11 +2,10 @@ import React, { Component } from "react";
 import {BrowserRouter as Router ,Route, Link } from 'react-router-dom';
 import {Form, FormGroup, FormControl, ControlLabel} from "react-bootstrap";
 import OwnerServiceClient from '../services/OwnerService';
-import LoaderButton from "../components/LoaderButton";
 import "./Profile.css";
 import HotelManager from "./HotelManager";
 import CarManager from "./CarManager";
-import AddRestaurant from "./AddRestaurant";
+import RestaurantManager from "./RestaurantManager";
 
 export default class Profile extends Component {
     constructor(props) {
@@ -221,7 +220,7 @@ export default class Profile extends Component {
                 <div className="col-8 SubForm">
                         {this.addBusiness(this.state.typeOfBusiness, this.state.userId)}
                     <Route path="/profile/:userId/hotel" exact component={HotelManager} />
-                    <Route path="/profile/:userId/restaurant" exact component={AddRestaurant} />
+                    <Route path="/profile/:userId/restaurant" exact component={RestaurantManager} />
                     <Route path="/profile/:userId/car" exact component={CarManager} />
                 </div>
             </div>
