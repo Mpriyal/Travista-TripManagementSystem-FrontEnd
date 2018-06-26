@@ -116,7 +116,8 @@ export default class NavBar extends Component {
         this.state = {
             collapsed: true,
             hidden: false,
-            user: ''
+            user: null,
+            userId: ''
         };
         this.userService = UserServiceClient.instance;
         this.logout = this.logout.bind(this);
@@ -132,28 +133,24 @@ export default class NavBar extends Component {
         return  this.userService.isUserLoggedIn()
             .then(response =>
             {if (response != null) {
-                this.setState({hidden: true});
-                let user = response[0]
-                this.setState({user: user})
+                var user = response[0];
+                this.setState({hidden: true, user: user})
             }});
     }
 
     checkUserStatus(status){
         return status;
     }
-    checkUser(user){
+    setUser(user){
         console.log(user);
         this.setState({user: user})
 
     }
-    // componentDidMount() {
-    //     this.findCurrentUserStatus()
-    // }
-    //
-    // componentWillReceiveProps(newProps){
-    //     this.findCurrentUserStatus()
-    // }
-    //
+    componentWillReceiveProps(newProps) {
+        this.findCurrentUserStatus();
+    }
+
+
     logout(){
         this.userService
             .logout().then(() =>{window.location.assign(`/`);}).then(() => {this.setState({hidden: false});});
@@ -161,6 +158,7 @@ export default class NavBar extends Component {
 
     }
     render() {
+        {console.log(this.state.hidden)}
         const collapsed = this.state.collapsed;
         const classOne = collapsed ? 'collapse navbar-collapse' : 'collapse navbar-collapse show';
         const classTwo = collapsed ? 'navbar-toggler navbar-toggler-right collapsed' : 'navbar-toggler navbar-toggler-right';
@@ -206,9 +204,14 @@ export default class NavBar extends Component {
                                     <div className="nav-link">Attractions</div>
                                 </Link>
                             </li>
-                            <li className={this.state.user.username === 'admin' ? "nav-item" : "hidden"}>
+                            <li className={this.state.hidden === true ? this.state.user.username === 'admin' ? "nav-item" : "hidden" :" hidden"}>
                                 <Link to='/admin'>
                                     <div className="nav-link">Admin</div>
+                                </Link>
+                            </li>
+                            <li className={this.state.hidden === true ? this.state.user.username !== 'admin' ? "nav-item" : "hidden" :" hidden"}>
+                                <Link to={`/profile/${this.state.hidden === true ? this.state.user._id : this.state.user}`}>
+                                    <div className="nav-link">Profile</div>
                                 </Link>
                             </li>
                         </ul>

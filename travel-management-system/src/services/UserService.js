@@ -98,7 +98,7 @@ class UserService {
     findCurrentUser(){
         return fetch(PROFILE_URL,{
             credentials: "include"
-        }).then((response) => {console.log(response); return response.json()});
+        }).then((response) => {return response.json()});
     }
     isUserLoggedIn(){
         return fetch(PROFILE2_URL,{

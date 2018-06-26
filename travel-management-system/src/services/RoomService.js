@@ -1,8 +1,6 @@
 let _singleton = Symbol();
 const ROOM_URL = 'http://localhost:4000/api/room';
 
-
-
 class RoomService {
     constructor(singletonToken) {
         if (_singleton !== singletonToken)
