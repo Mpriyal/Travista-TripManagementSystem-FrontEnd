@@ -94,7 +94,7 @@ export default class CouponListAdmin extends Component {
 
     createCoupon() {
         var coupon = {
-            hotel: this.state.hotelId,
+            hotel: this.state.hotel._id,
             code: this.state.code,
             value: this.state.value
         }

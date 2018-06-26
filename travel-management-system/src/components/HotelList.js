@@ -1,5 +1,7 @@
 import React, {Component} from 'react'
 import CouponService from "../services/CouponService";
+import {Link} from "react-router-dom";
+import UserService from "../services/UserService";
 
 const HOTEL_LOGO = 'https://logoobject.com/wp-content/uploads/edd/2017/09/Real-Estate-Logos-Inspiration.png';
 
@@ -15,12 +17,30 @@ export default class HotelList extends Component {
             RestOwner: null,
             hotels: [],
             dbHotels: [],
-            coupons: []
+            coupons: [],
+            hidden: false
         }
 
+        this.checkUserStatus = this.checkUserStatus.bind(this);
         this.couponService = CouponService.instance
+        this.userService = UserService.instance
+        this.findCurrentUserStatus()
         this.findCouponByHotelId = this.findCouponByHotelId.bind(this)
 
+    }
+
+    findCurrentUserStatus(){
+        return  this.userService.isUserLoggedIn()
+            .then(response =>
+            {if (response != null) {
+                this.setState({hidden: true});
+                let user = response[0]
+                this.setState({user: user})
+            }});
+    }
+
+    checkUserStatus(status){
+        return status;
     }
 
     findCouponByHotelId(hotelId){
@@ -52,14 +72,19 @@ export default class HotelList extends Component {
                                                 </p>
                                                 <p className="card-text"><b>Call:</b> {hotel.phone}</p>
                                                 {this.findCouponByHotelId(hotel._id)}
-                                                {this.state.coupons.length !== 0 &&  <span>
+                                                {this.state.coupons.length !== 0 && this.state.hidden === true && <span>
+                                                    <h6>Avail Coupons</h6>
                                                         <ul>
                                                             {this.state.coupons.map((coupon, index) =>
                                                                 <div>
-                                                                    <li>Code: {coupon.code} Value: {coupon.value}</li>
+                                                                    <li>Code: <b>{coupon.code}</b></li>
+                                                                    <li>Value: <b>{coupon.value}</b></li>
                                                                 </div>
                                                             )}
                                                         </ul>
+                                                    </span>}
+                                                {this.state.coupons.length !== 0 && this.state.hidden === false && <span>
+                                                            <Link to ="/login"><i className="fa fa-sign-in btn"/>Login to view Special coupons for booking</Link>
                                                     </span>}
                                                 {/*{renderIf(this.state.coupons.length !== 0)(*/}
                                                     {/*<span>*/}

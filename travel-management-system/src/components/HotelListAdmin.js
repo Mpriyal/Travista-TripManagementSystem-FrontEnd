@@ -73,7 +73,7 @@ export default class HotelListAdmin extends Component {
     setOwner(){
         this.ownerService
             .findOwnerByUsername(this.state.ownerName)
-            .then((owner1) => {this.setState({owner: owner1[0]})});
+            .then((owner1) => {(owner1.length === 0) ? window.alert("Username incorrect") : this.setState({owner: owner1[0]})});
     }
 
     setName(event){

@@ -103,7 +103,7 @@ export default class UserProfile extends Component {
         this.userService
             .deleteCustomer(this.state.userId);
         this.userService
-            .logOut()
+            .logout()
             .then(() => window.location.assign(`/`));
 
     }
