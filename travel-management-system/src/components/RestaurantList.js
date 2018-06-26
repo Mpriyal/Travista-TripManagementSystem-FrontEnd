@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import axios from 'axios/index'
 import {Link} from 'react-router-dom'
+import OwnerService from "../services/OwnerService";
 
 export default class RestaurantList extends Component {
     constructor(props) {
@@ -12,8 +13,19 @@ export default class RestaurantList extends Component {
             restId: null,
             RestOwner: null,
             dbRestaurant: []
-        }
+        };
+        this.OwnerService = OwnerService.instance;
+        this.contactRestaurant = this.contactRestaurant.bind(this);
     }
+
+    contactRestaurant (owners) {
+        this.OwnerService.findOwnerById(owners)
+            .then((owner) => {
+                var ownerEmail = owner[0].email;
+                window.location.assign("mailto:"+ownerEmail)
+            });
+    }
+
 
     render() {
         if (this.props.data2) {
@@ -35,6 +47,8 @@ export default class RestaurantList extends Component {
                                             </p>
                                             <p className="card-text"><b>Call:</b> {restaurant.phone}</p>
                                             <p className="card-text"><b>Price for 2:</b> {restaurant.price}</p>
+                                            <button onClick={() => this.contactRestaurant(restaurant.owners)}>Contact Owner For Booking</button>
+                                            <p className="card-text"><a href="">View Coupons </a> </p>
                                         </div>
                                     </div>
                                 </div>
@@ -83,6 +97,8 @@ export default class RestaurantList extends Component {
                                             </p>
                                             <p className="card-text"><b>Call:</b> {restaurant.phone}</p>
                                             <p className="card-text"><b>Price for 2:</b> {restaurant.price}</p>
+                                            <button onClick={() => this.contact(restaurant.owners)}>Contact Owner For Booking</button>
+                                            <p className="card-text"><a href="">View Coupons </a> </p>
                                         </div>
                                     </div>
                                 </div>

@@ -16,13 +16,22 @@ export default class CarsList extends Component {
             dbCars: []
         }
         this.setCarsForProviders = this.setCarsForProviders.bind(this)
-        // this.OwnerService = OwnerService.instance;
+        this.OwnerService = OwnerService.instance;
+        this.contactCar = this.contactCar.bind(this);
     }
 
     setCarsForProviders(results) {
         this.setState({
             cars: results
         })
+    }
+
+    contactCar (owners) {
+        this.OwnerService.findOwnerById(owners)
+            .then((owner) => {
+                var ownerEmail = owner[0].email;
+                window.location.assign("mailto:"+ownerEmail)
+            });
     }
 
     render() {
@@ -52,6 +61,7 @@ export default class CarsList extends Component {
                                                 <p className="card-text">
                                                     <b>Availability:</b> {car.start_date.toString().split('T')[0]} <b>-</b> {car.end_date.toString().split('T')[0]}
                                                 </p>
+                                                <button onClick={() => this.contactCar(car.owners)}>Contact Owner for the Deal</button>
                                             </div>
                                         </div>
                                     </div>
@@ -132,6 +142,7 @@ export default class CarsList extends Component {
                                                 <p className="card-text">
                                                     <b>Availability:</b> {car.start_date} <b>-</b> {car.end_date}
                                                 </p>
+                                                <button onClick={() => this.contactCar(car.owners)}>Contact Owner for the Deal</button>
                                             </div>
                                         </div>
                                     </div>

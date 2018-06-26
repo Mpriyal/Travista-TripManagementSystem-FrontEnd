@@ -57,7 +57,7 @@ export default class HotelPage extends Component {
             .findLatLongOfHotel(this.state.inputText)
             .then((results) => {
                 this.setLatLong(results); })
-            .then(() => this.findAllHotelsByLatLong())
+            .then(() => this.findAllHotelsByLatLong());
     }
 
     setLatLong(results){
