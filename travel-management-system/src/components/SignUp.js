@@ -62,6 +62,7 @@ export default class Signup extends Component {
 renderForm()
 {
     return (
+        <div>
         <form>
             <FormGroup controlId="username" bsSize="large">
                 <ControlLabel>Username</ControlLabel>
@@ -97,8 +98,10 @@ renderForm()
             {/*text="Signup"*/}
             {/*loadingText="Signing up…"*/}
             {/*/>*/}
-            <button onClick={this.registerCustomer}>Sign Up</button>
+
         </form>
+        <button onClick={this.registerCustomer}>Sign Up</button>
+        </div>
     );
 }
 

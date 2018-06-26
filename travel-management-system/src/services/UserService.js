@@ -1,7 +1,8 @@
 let _singleton = Symbol();
 const LOG_IN_URL = 'http://localhost:4000/api/login'
-const LOG_OUT_URL = 'http://localhost:4000/api/logut';
+const LOG_OUT_URL = 'http://localhost:4000/api/logout';
 const PROFILE_URL = 'http://localhost:4000/api/profile';
+const PROFILE2_URL = 'http://localhost:4000/api/profile2';
 const CUSTOMER_URL = 'http://localhost:4000/api/customer';
 // const USER_URL = 'http://localhost:4000/api/user';
 
@@ -79,7 +80,7 @@ class UserService {
             })
     }
 
-    logOut(){
+    logout(){
         return fetch (LOG_OUT_URL,{
             method: 'post',
             credentials: 'include'
@@ -97,7 +98,12 @@ class UserService {
     findCurrentUser(){
         return fetch(PROFILE_URL,{
             credentials: "include"
-        }).then((response) => {return response});
+        }).then((response) => {console.log(response); return response.json()});
+    }
+    isUserLoggedIn(){
+        return fetch(PROFILE2_URL,{
+            credentials: "include"
+        }).then((response) => {return response.status !== 403 ? response.json() : null });
     }
 }
 export default UserService;

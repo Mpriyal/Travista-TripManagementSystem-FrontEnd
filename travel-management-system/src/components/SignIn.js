@@ -75,8 +75,8 @@ export default class Login extends Component {
                         {/*text="Login"*/}
                         {/*onClick = {this.handleSubmit}*/}
                     {/*/>*/}
-                    <button onClick={this.loginCustomer}>Login</button>
                 </form>
+                <button onClick={this.loginCustomer}>Login</button>
             </div>
         );
     }

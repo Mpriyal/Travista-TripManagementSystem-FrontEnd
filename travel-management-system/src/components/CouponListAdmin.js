@@ -34,6 +34,7 @@ export default class CouponListAdmin extends Component {
         this.setCode = this.setCode.bind(this)
         this.setValue = this.setValue.bind(this)
         this.userNameChanged = this.userNameChanged.bind(this)
+        this.setOwner = this.setOwner.bind(this)
     }
 
 
@@ -70,10 +71,13 @@ export default class CouponListAdmin extends Component {
     setOwner(){
         this.ownerService
             .findOwnerByUsername(this.state.ownerName)
-            .then((owner1) => {this.setState({owner: owner1[0]})});
-        this.hotelService
-            .findHotelByOwnerId(this.state.owner._id)
-            .then((res) => {this.setState({hotel: res[0]})})
+            .then((owner1) => {this.setState({owner: owner1[0]});
+                this.hotelService
+                    .findHotelByOwnerId(owner1[0]._id)
+                    .then((res) => {this.setState({hotel: res[0]})})
+
+            });
+
     }
 
     setCode(event){
