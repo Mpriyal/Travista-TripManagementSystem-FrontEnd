@@ -32,7 +32,7 @@ export default class Main extends Component {
                     <Route exact path='/restaurants' component={RestaurantPage}/>
                     <Route exact path='/attractions' component={AttractionPage}/>
                     <Route exact path='/signup' component={SignUp}/>
-                    <Route path="/login" exact component={SignIn} />
+                    <Route path="/login" component={SignIn} />
                     <Route path="/businessSignIn" exact component={BusinessSignIn} />
                     <Route path="/addYourBusiness" exact component={AddYourBusiness} />
                     <Route path="/register/:userId/hotel" exact component={AddHotel} />

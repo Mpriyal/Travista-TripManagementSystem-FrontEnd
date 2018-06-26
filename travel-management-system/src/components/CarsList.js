@@ -1,5 +1,6 @@
 import React, {Component} from 'react'
 import OwnerService from "../services/OwnerService";
+import UserService from "../services/UserService";
 const CARS_LOGO = 'https://logoobject.com/wp-content/uploads/edd/2017/09/Real-Estate-Logos-Inspiration.png';
 
 export default class CarsList extends Component {
@@ -13,11 +14,29 @@ export default class CarsList extends Component {
             restId: null,
             RestOwner: null,
             cars: [],
+            hidden: false,
             dbCars: []
-        }
-        this.setCarsForProviders = this.setCarsForProviders.bind(this)
+        };
         this.OwnerService = OwnerService.instance;
+        this.userService = UserService.instance;
+        this.checkUserStatus = this.checkUserStatus.bind(this);
+        this.findCurrentUserStatus();
+        this.setCarsForProviders = this.setCarsForProviders.bind(this)
         this.contactCar = this.contactCar.bind(this);
+    }
+
+    checkUserStatus(status){
+        return status;
+    }
+
+    findCurrentUserStatus(){
+        return  this.userService.isUserLoggedIn()
+            .then(response =>
+            {if (response != null) {
+                this.setState({hidden: true});
+                let user = response[0]
+                this.setState({user: user})
+            }});
     }
 
     setCarsForProviders(results) {
@@ -45,7 +64,6 @@ export default class CarsList extends Component {
                                     <div className="col-sm-12" key={car._id} style={{marginBottom: 5}}>
                                         <div className="card">
                                             <div className="card-body">
-                                                {/*<h5 className="card-title text-center">{provider.provider.company_name}</h5>*/}
                                                 <p className="card-text text-center">
                                                     <b>Category:</b> {car.category}
                                                 </p>
@@ -61,7 +79,16 @@ export default class CarsList extends Component {
                                                 <p className="card-text">
                                                     <b>Availability:</b> {car.start_date.toString().split('T')[0]} <b>-</b> {car.end_date.toString().split('T')[0]}
                                                 </p>
-                                                <button onClick={() => this.contactCar(car.owners)}>Contact Owner for the Deal</button>
+                                                {this.state.hidden === false &&
+                                                <span>
+                                            <button onClick={() => {window.location.assign(`/login`)}}>
+                                                 Login to contact owner for Deal
+                                            </button>
+                                        </span>}
+                                                {this.state.hidden === true &&
+                                                <span>
+                                            <button onClick={() => this.contactCar(car.owners)}>Contact Owner For Deal</button>
+                                        </span>}
                                             </div>
                                         </div>
                                     </div>
@@ -142,7 +169,16 @@ export default class CarsList extends Component {
                                                 <p className="card-text">
                                                     <b>Availability:</b> {car.start_date} <b>-</b> {car.end_date}
                                                 </p>
-                                                <button onClick={() => this.contactCar(car.owners)}>Contact Owner for the Deal</button>
+                                                {this.state.hidden === false &&
+                                                <span>
+                                            <button onClick={() => {window.location.assign(`/login`)}}>
+                                                 Login to contact owner for Deal
+                                            </button>
+                                        </span>}
+                                                {this.state.hidden === true &&
+                                                <span>
+                                            <button onClick={() => this.contactCar(car.owners)}>Contact Owner For Deal</button>
+                                        </span>}
                                             </div>
                                         </div>
                                     </div>

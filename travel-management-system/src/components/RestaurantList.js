@@ -2,6 +2,7 @@ import React, {Component} from 'react'
 import axios from 'axios/index'
 import {Link} from 'react-router-dom'
 import OwnerService from "../services/OwnerService";
+import UserService from "../services/UserService";
 
 export default class RestaurantList extends Component {
     constructor(props) {
@@ -12,10 +13,28 @@ export default class RestaurantList extends Component {
             info: false,
             restId: null,
             RestOwner: null,
+            hidden: false,
             dbRestaurant: []
         };
+        this.userService = UserService.instance;
         this.OwnerService = OwnerService.instance;
+        this.checkUserStatus = this.checkUserStatus.bind(this);
+        this.findCurrentUserStatus();
         this.contactRestaurant = this.contactRestaurant.bind(this);
+    }
+
+    checkUserStatus(status){
+        return status;
+    }
+
+    findCurrentUserStatus(){
+        return  this.userService.isUserLoggedIn()
+            .then(response =>
+            {if (response != null) {
+                this.setState({hidden: true});
+                let user = response[0]
+                this.setState({user: user})
+            }});
     }
 
     contactRestaurant (owners) {
@@ -47,8 +66,16 @@ export default class RestaurantList extends Component {
                                             </p>
                                             <p className="card-text"><b>Call:</b> {restaurant.phone}</p>
                                             <p className="card-text"><b>Price for 2:</b> {restaurant.price}</p>
+                                            {this.state.hidden === false &&
+                                            <span>
+                                            <button onClick={() => {window.location.assign(`/login`)}}>
+                                                 Login to contact owner for Booking
+                                            </button>
+                                        </span>}
+                                            {this.state.hidden === true &&
+                                            <span>
                                             <button onClick={() => this.contactRestaurant(restaurant.owners)}>Contact Owner For Booking</button>
-                                            <p className="card-text"><a href="">View Coupons </a> </p>
+                                        </span>}
                                         </div>
                                     </div>
                                 </div>
@@ -97,8 +124,16 @@ export default class RestaurantList extends Component {
                                             </p>
                                             <p className="card-text"><b>Call:</b> {restaurant.phone}</p>
                                             <p className="card-text"><b>Price for 2:</b> {restaurant.price}</p>
-                                            <button onClick={() => this.contact(restaurant.owners)}>Contact Owner For Booking</button>
-                                            <p className="card-text"><a href="">View Coupons </a> </p>
+                                            {this.state.hidden === false &&
+                                            <span>
+                                            <button onClick={() => {window.location.assign(`/login`)}}>
+                                                 Login to contact owner for Booking
+                                            </button>
+                                        </span>}
+                                            {this.state.hidden === true &&
+                                            <span>
+                                            <button onClick={() => this.contactRestaurant(restaurant.owners)}>Contact Owner For Booking</button>
+                                        </span>}
                                         </div>
                                     </div>
                                 </div>

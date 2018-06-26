@@ -2,6 +2,7 @@ import React, {Component} from 'react'
 import CouponService from "../services/CouponService";
 import {Link} from "react-router-dom";
 import UserService from "../services/UserService";
+import OwnerService from "../services/OwnerService";
 
 const HOTEL_LOGO = 'https://logoobject.com/wp-content/uploads/edd/2017/09/Real-Estate-Logos-Inspiration.png';
 
@@ -23,13 +24,23 @@ export default class HotelList extends Component {
         }
 
         this.checkUserStatus = this.checkUserStatus.bind(this);
-        this.couponService = CouponService.instance
-        this.userService = UserService.instance
-        this.findCurrentUserStatus()
-        this.findCouponByHotelId = this.findCouponByHotelId.bind(this)
-        this.findAllCoupons = this.findAllCoupons.bind(this)
-        this.setCoupons = this.setCoupons.bind(this)
-        this.deleteCoupon = this.deleteCoupon.bind(this)
+        this.couponService = CouponService.instance;
+        this.userService = UserService.instance;
+        this.findCurrentUserStatus();
+        this.findCouponByHotelId = this.findCouponByHotelId.bind(this);
+        this.findAllCoupons = this.findAllCoupons.bind(this);
+        this.setCoupons = this.setCoupons.bind(this);
+        this.deleteCoupon = this.deleteCoupon.bind(this);
+        this.OwnerService = OwnerService.instance;
+        this.contactHotel = this.contactHotel.bind(this);
+    }
+
+    contactHotel (owners) {
+        this.OwnerService.findOwnerById(owners)
+            .then((owner) => {
+                var ownerEmail = owner[0].email;
+                window.location.assign("mailto:"+ownerEmail)
+            });
     }
 
     setCoupons(cpns){
@@ -103,9 +114,13 @@ export default class HotelList extends Component {
                                         <p className="card-text"><b>Call:</b> {hotel.phone}</p>
                                         {this.state.hidden === false &&
                                         <span>
-                                            <Link to='/login'>
-                                                 <div className="nav-link">Login to view special discount coupons</div>
-                                            </Link>
+                                            <button onClick={() => {window.location.assign(`/login`)}}>
+                                                 Login to view special discount coupons
+                                            </button>
+                                        </span>}
+                                        {this.state.hidden === true &&
+                                        <span>
+                                            <button onClick={() => this.contactHotel(hotel.owners)}>Contact Owner For Booking</button>
                                         </span>}
                                         {this.state.coupons.map((coupon, index) =>
                                             <div>
