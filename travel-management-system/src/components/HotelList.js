@@ -24,15 +24,21 @@ export default class HotelList extends Component {
         }
 
         this.checkUserStatus = this.checkUserStatus.bind(this);
-        this.couponService = CouponService.instance;
-        this.userService = UserService.instance;
-        this.findCurrentUserStatus();
-        this.findCouponByHotelId = this.findCouponByHotelId.bind(this);
-        this.findAllCoupons = this.findAllCoupons.bind(this);
-        this.setCoupons = this.setCoupons.bind(this);
-        this.deleteCoupon = this.deleteCoupon.bind(this);
+        this.couponService = CouponService.instance
+        this.userService = UserService.instance
+        this.findCurrentUserStatus()
+        this.findCouponByHotelId = this.findCouponByHotelId.bind(this)
+        this.findAllCoupons = this.findAllCoupons.bind(this)
+        this.setCoupons = this.setCoupons.bind(this)
+        this.deleteCoupon = this.deleteCoupon.bind(this)
         this.OwnerService = OwnerService.instance;
         this.contactHotel = this.contactHotel.bind(this);
+    }
+
+    setCoupons(cpns){
+        this.setState({
+            coupons: cpns
+        })
     }
 
     contactHotel (owners) {
@@ -43,12 +49,6 @@ export default class HotelList extends Component {
             });
     }
 
-    setCoupons(cpns){
-        this.setState({
-            coupons: cpns
-        })
-    }
-
     findAllCoupons(){
         this.couponService
             .findAllCoupons()
@@ -56,12 +56,12 @@ export default class HotelList extends Component {
     }
 
     deleteCoupon(couponId) {
-            this.couponService
-                .deleteCoupon(couponId)
-                .then(() => {
-                        this.findAllCoupons()
-                    }
-                );
+        this.couponService
+            .deleteCoupon(couponId)
+            .then(() => {
+                    this.findAllCoupons()
+                }
+            );
     }
 
     componentDidMount(){
@@ -114,9 +114,9 @@ export default class HotelList extends Component {
                                         <p className="card-text"><b>Call:</b> {hotel.phone}</p>
                                         {this.state.hidden === false &&
                                         <span>
-                                            <button onClick={() => {window.location.assign(`/login`)}}>
-                                                 Login to view special discount coupons
-                                            </button>
+                                            <Link to='/login'>
+                                                 <div className="nav-link">Login to view special discount coupons</div>
+                                            </Link>
                                         </span>}
                                         {this.state.hidden === true &&
                                         <span>
@@ -131,7 +131,7 @@ export default class HotelList extends Component {
                                                             <li>Code: <b>{coupon.code}</b></li>
                                                             <li>Value: <b>{coupon.value}</b></li>
                                                         </ul>
-                                                    <button className="btn btn-primary form-control" onClick={this.deleteCoupon(coupon._id)}>
+                                                    <button className="btn btn-primary form-control" onClick={()=> this.deleteCoupon(coupon._id)}>
                                                         Avail Coupon
                                                     </button>
                                                     </span>}
