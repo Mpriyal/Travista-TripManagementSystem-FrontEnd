@@ -65,9 +65,7 @@ export default class AddYourBusiness extends Component {
                 window.location.assign(`/register/${owner._id}/${this.state.typeOfBusiness.toLowerCase()}`);
                        });
     }
-    handleSubmit = event => {
 
-    };
     // addBusiness(param){
     //     switch (param) {
     //         case 'HOTEL':
@@ -112,7 +110,7 @@ export default class AddYourBusiness extends Component {
         return (<Router>
             <div className="row">
             <div className="col-4 Form">
-                <Form horizontal onSubmit={this.handleSubmit}>
+                <Form horizontal>
                     <FormGroup className="form-inline" controlId="firstName" bsSize="large">
                         <ControlLabel className="col-4">First Name</ControlLabel>
                         <FormControl
@@ -221,12 +219,12 @@ export default class AddYourBusiness extends Component {
                             type="password"
                         />
                     </FormGroup>
-
+                </Form>
                         <button onClick={this.registerOwner}>
                             Sign Up
                         </button>
 
-                </Form>
+
             </div>
             <div className="col-8 SubForm">
                     {/*{this.addBusiness(this.state.typeOfBusiness)}*/}

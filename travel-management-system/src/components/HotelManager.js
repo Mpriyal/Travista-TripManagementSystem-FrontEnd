@@ -126,10 +126,10 @@ export default class HotelManager extends Component {
                             onChange={this.handleChange}
                         />
                     </FormGroup>
-                    <button
-                        onClick={this.updateHotel}> Update your hotel
-                    </button>
                 </Form>
+                <button
+                    onClick={this.updateHotel}> Update your hotel
+                </button>
             </div>
                 <ListGroup>
                     {this.renderHotelRooms()}

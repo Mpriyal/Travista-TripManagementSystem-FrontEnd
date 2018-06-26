@@ -210,7 +210,12 @@ export default class NavBar extends Component {
                                 </Link>
                             </li>
                             <li className={this.state.hidden === true ? this.state.user.username !== 'admin' ? "nav-item" : "hidden" :" hidden"}>
-                                <Link to={`/profile/${this.state.hidden === true ? this.state.user._id : this.state.user}`}>
+                                <Link to =
+                                          {this.state.hidden === true ?
+                                              this.state.user.hasOwnProperty("typeOfBusiness") ?
+                                                  `/businessProfile/${this.state.user._id}` :
+                                                  `/profile/${this.state.user._id}` :
+                                              `/profile/${this.state.user}`}>
                                     <div className="nav-link">Profile</div>
                                 </Link>
                             </li>

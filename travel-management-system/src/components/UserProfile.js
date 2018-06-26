@@ -20,39 +20,16 @@ export default class UserProfile extends Component {
             bookings:[]
         };
         this.userService = UserServiceClient.instance;
-        // this.bookingService = BookingServiceClient.instance;
         this.updateUser = this.updateUser.bind(this);
         this.deleteUser = this.deleteUser.bind(this);
         this.userId = this.props.match.params.userId;
         this.renderProfile(this.userId);
     }
 
-    // findAllBookingsByUserId(){
-    //     this
-    //         .bookingService
-    //         .findAllBookingsByUserId(this.state.userId)
-    //         .then(bookings => {this.setState({bookings: bookings})});
-    // }
-
-
     renderProfile(userId){
         this.userService
             .findCustomerById(userId)
             .then(user => this.setProfile(user[0]));
-    }
-    renderAllBookingsOfUser(){
-        let bookings = null;
-        if(this.state) {
-            bookings = this.state.bookings.map((booking) =>{
-                    return <ListGroupItem>
-                        <b>Booking Id:</b> booking._id
-                    </ListGroupItem>
-                }
-            );
-        }
-        return (
-            bookings
-        )
     }
 
     setProfile(user){
@@ -206,12 +183,9 @@ export default class UserProfile extends Component {
                             {/*type="submit"*/}
                             {/*text="DELETE ACCOUNT"*/}
                             {/*/>*/}
-                            <button onClick={this.updateUser}>Update</button>
-                            <button onClick={this.deleteUser}>Delete</button>
                         </Form>
-                    </div>
-                    <div className="col-8 SubForm">
-                        {this.renderAllBookingsOfUser()}
+                        <button onClick={this.updateUser}>Update</button>
+                        <button onClick={this.deleteUser}>Delete</button>
                     </div>
                 </div>
             </Router>
