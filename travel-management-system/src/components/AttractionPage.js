@@ -3,7 +3,7 @@ import axios from 'axios';
 import AttractionList from "./AttractionList";
 
 var attractionUrl = 'http://api.sandbox.amadeus.com/v1.2/points-of-interest/yapq-search-text';
-var apiKey = 'Qx2BLHZV4pB0wTFL3qFx9JGNAXsMa4my'
+var apiKey = ''
 
 export default class AttractionPage extends Component {
     constructor(props) {

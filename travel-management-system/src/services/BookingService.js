@@ -47,7 +47,7 @@ class HotelService {
     }
 
     deleteBooking(hotelId){
-        return fetch('http://localhost:4000/api/hotel/'
+        return fetch('http://sheltered-brook-33412.herokuapp.com/api/hotel/'
             + hotelId, {method: 'delete'})
     }
     findAllBookingsByUserId(userId) {

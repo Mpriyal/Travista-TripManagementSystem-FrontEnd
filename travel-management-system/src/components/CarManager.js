@@ -164,10 +164,10 @@ export default class CarManager extends Component {
                                 onChange={this.handleChange}
                             />
                         </FormGroup>
-                    <button
-                        onClick={this.updateCar}> Update your Car
-                    </button>
                 </Form>
+                <button
+                    onClick={this.updateCar}> Update your Car
+                </button>
             </div>
         );
     }

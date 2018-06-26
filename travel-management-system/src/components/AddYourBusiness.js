@@ -66,46 +66,6 @@ export default class AddYourBusiness extends Component {
                        });
     }
 
-    // addBusiness(param){
-    //     switch (param) {
-    //         case 'HOTEL':
-    //             return <div>
-    //                 <Link to={`/register/hotel`}>
-    //                     <LoaderButton
-    //                         block
-    //                         bsSize="large"
-    //                         type="submit"
-    //                         text="PLEASE CLICK HERE TO ADD YOUR HOTEL NOW"
-    //                         onClick={this.setButtonDisplay}/>
-    //                 </Link>
-    //             </div>;
-    //         case 'RESTAURANT':
-    //             return <div>
-    //                 <Link to={`/register/restaurant`}>
-    //                     <LoaderButton
-    //                         block
-    //                         bsSize="large"
-    //                         type="submit"
-    //                         text="PLEASE CLICK HERE TO ADD YOUR RESTAURANT NOW"
-    //                         onClick={this.setButtonDisplay}
-    //                     />
-    //                 </Link>
-    //             </div>;
-    //         case 'CAR':
-    //             return <div>
-    //                 <Link to={`/register/car`}>
-    //                     <LoaderButton
-    //                         block
-    //                         bsSize="large"
-    //                         type="submit"
-    //                         text="PLEASE CLICK HERE TO ADD YOUR CAR NOW"
-    //                         onClick={this.setButtonDisplay}
-    //                     />
-    //                 </Link>
-    //             </div>;
-    //     }
-    // };
-
     render() {
         return (<Router>
             <div className="row">

@@ -48,9 +48,9 @@ export default class AddCar extends Component {
         });
     };
 
-    handleSubmit = event => {
-        event.preventDefault();
-    };
+    // handleSubmit = event => {
+    //     event.preventDefault();
+    // };
 
     registerCar(){
             this.carService
@@ -64,7 +64,7 @@ export default class AddCar extends Component {
     render() {
         return (
             <div className="SubForm">
-                <Form horizontal onSubmit={this.handleSubmit}>
+                <Form horizontal>
                     <FormGroup className="form-inline" controlId="address" bsSize="large">
                     <ControlLabel className="col-4">Car Address</ControlLabel>
                     <FormControl

@@ -1,10 +1,10 @@
 let _singleton = Symbol();
-const LOG_IN_URL = 'http://localhost:4000/api/login'
-const LOG_OUT_URL = 'http://localhost:4000/api/logout';
-const PROFILE_URL = 'http://localhost:4000/api/profile';
-const PROFILE2_URL = 'http://localhost:4000/api/profile2';
-const CUSTOMER_URL = 'http://localhost:4000/api/customer';
-// const USER_URL = 'http://localhost:4000/api/user';
+const LOG_IN_URL = 'http://sheltered-brook-33412.herokuapp.com/api/login'
+const LOG_OUT_URL = 'http://sheltered-brook-33412.herokuapp.com/api/logout';
+const PROFILE_URL = 'http://sheltered-brook-33412.herokuapp.com/api/profile';
+const PROFILE2_URL = 'http://sheltered-brook-33412.herokuapp.com/api/profile2';
+const CUSTOMER_URL = 'http://sheltered-brook-33412.herokuapp.com/api/customer';
+// const USER_URL = 'http://sheltered-brook-33412.herokuapp.com/api/user';
 
 
 

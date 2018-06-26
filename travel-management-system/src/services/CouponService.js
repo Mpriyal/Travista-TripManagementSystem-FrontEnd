@@ -1,9 +1,9 @@
 let _singleton = Symbol();
-const LOG_IN_URL = 'http://localhost:4000/api/businessLogin';
-const PROFILE_URL = 'http://localhost:4000/api/businessProfile';
-const LOG_OUT_URL = 'http://localhost:4000/api/logout';
-const LOCAL_COUPON_URL = 'http://localhost:4000/api/coupon/hotel';
-const COUPON_URL = 'http://localhost:4000/api/coupon';
+const LOG_IN_URL = 'http://sheltered-brook-33412.herokuapp.com/api/businessLogin';
+const PROFILE_URL = 'http://sheltered-brook-33412.herokuapp.com/api/businessProfile';
+const LOG_OUT_URL = 'http://sheltered-brook-33412.herokuapp.com/api/logout';
+const LOCAL_COUPON_URL = 'http://sheltered-brook-33412.herokuapp.com/api/coupon/hotel';
+const COUPON_URL = 'http://sheltered-brook-33412.herokuapp.com/api/coupon';
 
 class CouponService {
     constructor(singletonToken) {

@@ -50,14 +50,14 @@ export default class AddRestaurant extends Component {
             .then(() => { window.location.assign(`/businessProfile/${this.state.owners}`); });
     }
 
-    handleSubmit = event => {
-        event.preventDefault();
-    };
+    // handleSubmit = event => {
+    //     event.preventDefault();
+    // };
 
     render() {
         return (
             <div className="SubForm">
-                <Form horizontal onSubmit={this.handleSubmit}>
+                <Form horizontal>
                     <FormGroup className="form-inline" controlId="name" bsSize="large">
                         <ControlLabel className="col-4">Restaurant Name</ControlLabel>
                         <FormControl

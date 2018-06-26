@@ -1,5 +1,5 @@
 let _singleton = Symbol();
-const ROOM_URL = 'http://localhost:4000/api/room';
+const ROOM_URL = 'http://sheltered-brook-33412.herokuapp.com/api/room';
 
 class RoomService {
     constructor(singletonToken) {

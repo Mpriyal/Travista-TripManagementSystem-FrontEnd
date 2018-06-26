@@ -46,19 +46,6 @@ export default class AddHotel extends Component {
     };
 
     registerHotel(){
-        console.log("hello");
-        // this.hotelService
-        //     .findLatLongOfHotel(this.state.address)
-        //     .then((results) => {
-        //     this.setLatLong(results);
-        //     });
-        // let hotel = {name: this.state.name,
-        //              address: this.state.address,
-        //              phone: this.state.phone,
-        //              rate: this.state.rate,
-        //              latitude: this.state.latitude,
-        //              longitude: this.state.longitude
-        //             };
         this.hotelService
             .createHotel(this.state.owners ,this.state.name, this.state.address, this.state.phone, this.state.rate)
             .then(() => { window.location.assign(`/businessProfile/${this.state.owners}`); });

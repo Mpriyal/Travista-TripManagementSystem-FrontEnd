@@ -91,7 +91,7 @@ export default class AdminPage extends Component {
                                 </div>
                                 <div className="col-sm-2" style={{marginBottom: 40}}>
                                     <div className="card">
-                                        <img className="card-img-top" src="http://locker.com.au/wp-content/uploads/2017/01/user-icon-png-person-user-profile-icon-20.png" alt="Card image cap"/>
+                                        <img className="card-img-top" src="https://png.icons8.com/metro/1600/cutting-coupon.png" alt="Card image cap"/>
                                         <div className="card-body">
                                             <h5 className="card-title">Coupons</h5>
                                             <p>Add delete or update Coupons</p>

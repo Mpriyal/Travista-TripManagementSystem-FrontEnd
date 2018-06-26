@@ -1,5 +1,5 @@
 var restaurantUrl = 'http://opentable.herokuapp.com/api/restaurants';
-const LOCAL_RESTAURANT_URL = 'http://localhost:4000/api/restaurant';
+const LOCAL_RESTAURANT_URL = 'http://sheltered-brook-33412.herokuapp.com/api/restaurant';
 
 let _singleton = Symbol();
 

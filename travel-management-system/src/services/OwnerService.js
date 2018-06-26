@@ -1,8 +1,8 @@
 let _singleton = Symbol();
-const LOG_IN_URL = 'http://localhost:4000/api/businessLogin';
-const PROFILE_URL = 'http://localhost:4000/api/businessProfile';
-const LOG_OUT_URL = 'http://localhost:4000/api/logout';
-const OWNER_URL = 'http://localhost:4000/api/owner';
+const LOG_IN_URL = 'http://sheltered-brook-33412.herokuapp.com/api/businessLogin';
+const PROFILE_URL = 'http://sheltered-brook-33412.herokuapp.com/api/businessProfile';
+const LOG_OUT_URL = 'http://sheltered-brook-33412.herokuapp.com/api/logout';
+const OWNER_URL = 'http://sheltered-brook-33412.herokuapp.com/api/owner';
 
 class OwnerService {
     constructor(singletonToken) {

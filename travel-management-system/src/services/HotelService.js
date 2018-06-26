@@ -1,10 +1,9 @@
 let _singleton = Symbol();
 const HOTEL_API_URL = 'http://api.sandbox.amadeus.com/v1.2/hotels/search-circle?';
-const LOCAL_HOTEL_URL = 'http://localhost:4000/api/hotel';
+const LOCAL_HOTEL_URL = 'http://sheltered-brook-33412.herokuapp.com/api/hotel';
 const LAT_LONG_URL = 'https://maps.googleapis.com/maps/api/geocode/json?';
-const API_KEY = 'Qx2BLHZV4pB0wTFL3qFx9JGNAXsMa4my';
+const API_KEY = '';
 const LAT_LONG_API_KEY = 'AIzaSyCGFcq0Kr1hQAULOY9_O3azu2N4Srn-tmY';
-
 
 
 class HotelService {
@@ -81,7 +80,7 @@ class HotelService {
             address: hotelAddress,
             phone: hotelPhone,
             rate: hotelRate};
-        return fetch('http://localhost:4000/api/hotel', {
+        return fetch('http://sheltered-brook-33412.herokuapp.com/api/hotel', {
             method: 'post',
             body: JSON.stringify(hotel),
             credentials: 'include',

@@ -28,9 +28,6 @@ export default class BusinessSignIn extends Component {
         });
     };
 
-    handleSubmit = event => {
-        event.preventDefault();
-    };
     loginOwner(){
         this
             .ownerService
@@ -42,7 +39,7 @@ export default class BusinessSignIn extends Component {
         return (
             <div>
             <div className="Form">
-                <form onSubmit={this.handleSubmit}>
+                <form>
                     <FormGroup controlId="username" bsSize="large">
                         <ControlLabel>Username</ControlLabel>
                         <FormControl
@@ -60,21 +57,15 @@ export default class BusinessSignIn extends Component {
                             type="password"
                         />
                     </FormGroup>
-                    <button
-                        type="submit"
-                        onClick={this.loginOwner}>
-                        LogIn</button>
-
                 </form>
+                <button
+                    type="submit"
+                    onClick={this.loginOwner}>
+                    LogIn</button>
             </div>
             <div>
                 <Link to="/addYourBusiness">
-                    <LoaderButton
-                        block
-                        bsSize="large"
-                        type="submit"
-                        text="Want to Add your Business ??"
-                    />
+                    Want to Add your Business ??
                 </Link>
             </div>
     </div>
