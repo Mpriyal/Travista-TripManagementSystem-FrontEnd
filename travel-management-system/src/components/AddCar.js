@@ -155,10 +155,10 @@ export default class AddCar extends Component {
                                 onChange={this.handleChange}
                             />
                         </FormGroup>
-                    <button onClick={this.registerCar}>
-                        Add Car
-                    </button>
                 </Form>
+                <button onClick={this.registerCar}>
+                    Add Car
+                </button>
             </div>
         );
     }

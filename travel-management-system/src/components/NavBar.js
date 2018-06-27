@@ -35,7 +35,6 @@ export default class NavBar extends Component {
         return status;
     }
     setUser(user){
-        console.log(user);
         this.setState({user: user})
 
     }
@@ -51,7 +50,6 @@ export default class NavBar extends Component {
 
     }
     render() {
-        {console.log(this.state.hidden)}
         const collapsed = this.state.collapsed;
         const classOne = collapsed ? 'collapse navbar-collapse' : 'collapse navbar-collapse show';
         const classTwo = collapsed ? 'navbar-toggler navbar-toggler-right collapsed' : 'navbar-toggler navbar-toggler-right';

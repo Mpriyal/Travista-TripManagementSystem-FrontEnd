@@ -39,10 +39,6 @@ export default class CouponComponent extends Component {
         this.findCouponByHotelId(this.props.match.params.hotelId);
         this.renderListOfCoupons();
     }
-    //
-    // componentWillReceiveProps(newProps){
-    //     this.findCouponByHotelId(newProps.hotelId)
-    // }
 
     findCouponByHotelId(hotelId){
         this.couponService
@@ -67,7 +63,6 @@ export default class CouponComponent extends Component {
     }
 
     createCoupon(){
-        console.log(this.state.hotelId);
         var coupon = {
             hotel: this.state.hotelId,
             code: this.state.code,
@@ -142,10 +137,14 @@ export default class CouponComponent extends Component {
                     </FormGroup>
 
                 </Form>
+                <div className="buttonCss">
                 <button
+                    className="btn btn-success"
                     type="submit"
-                    onClick={this.buttonText === "Add Coupon"? this.createCoupon : this.updateCoupon}
-                >{this.buttonText}</button>
+                    onClick={this.buttonText === "Add Coupon"? this.createCoupon : this.updateCoupon}>
+                    {this.buttonText}
+                </button>
+                </div>
             </div>
             </div>
         );

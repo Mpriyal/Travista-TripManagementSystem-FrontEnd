@@ -165,9 +165,12 @@ export default class CarManager extends Component {
                             />
                         </FormGroup>
                 </Form>
+                <div className="buttonCss">
                 <button
+                    className="btn btn-primary"
                     onClick={this.updateCar}> Update your Car
                 </button>
+                </div>
             </div>
         );
     }

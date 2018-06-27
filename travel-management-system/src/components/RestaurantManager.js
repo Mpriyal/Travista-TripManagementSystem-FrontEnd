@@ -101,9 +101,11 @@ export default class RestaurantManager extends Component {
                             />
                         </FormGroup>
                 </Form>
-                <button onClick={this.updateRestaurant}>
+                <div className="buttonCss">
+                <button className="btn btn-primary" onClick={this.updateRestaurant}>
                     Update Restaurant
                 </button>
+                </div>
             </div>
         );
     }

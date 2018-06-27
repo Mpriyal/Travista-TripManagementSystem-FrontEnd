@@ -35,24 +35,26 @@ export default class HotelList extends Component {
         this.contactHotel = this.contactHotel.bind(this);
     }
 
-    setCoupons(cpns){
+    setCoupons(cpns) {
         this.setState({
             coupons: cpns
         })
     }
 
-    contactHotel (owners) {
+    contactHotel(owners) {
         this.OwnerService.findOwnerById(owners)
             .then((owner) => {
                 var ownerEmail = owner[0].email;
-                window.location.assign("mailto:"+ownerEmail)
+                window.location.assign("mailto:" + ownerEmail)
             });
     }
 
-    findAllCoupons(){
+    findAllCoupons() {
         this.couponService
             .findAllCoupons()
-            .then(response => {this.setCoupons(response)})
+            .then(response => {
+                this.setCoupons(response)
+            })
     }
 
     deleteCoupon(couponId) {
@@ -64,32 +66,35 @@ export default class HotelList extends Component {
             );
     }
 
-    componentDidMount(){
+    componentDidMount() {
         this.findAllCoupons()
     }
 
-    componentWillReceiveProps(){
+    componentWillReceiveProps() {
         this.findAllCoupons()
     }
 
-    findCurrentUserStatus(){
-        return  this.userService.isUserLoggedIn()
-            .then(response =>
-            {if (response != null) {
-                this.setState({hidden: true});
-                let user = response[0]
-                this.setState({user: user})
-            }});
+    findCurrentUserStatus() {
+        return this.userService.isUserLoggedIn()
+            .then(response => {
+                if (response != null) {
+                    this.setState({hidden: true});
+                    let user = response[0]
+                    this.setState({user: user})
+                }
+            });
     }
 
-    checkUserStatus(status){
+    checkUserStatus(status) {
         return status;
     }
 
-    findCouponByHotelId(hotelId){
+    findCouponByHotelId(hotelId) {
         this.couponService
             .findCouponByHotelId(hotelId)
-            .then((coupons) => {this.setState({coupons: coupons})})
+            .then((coupons) => {
+                this.setState({coupons: coupons})
+            })
     }
 
     render() {
@@ -114,13 +119,27 @@ export default class HotelList extends Component {
                                         <p className="card-text"><b>Call:</b> {hotel.phone}</p>
                                         {this.state.hidden === false &&
                                         <span>
-                                            <Link to='/login'>
-                                                 <div className="nav-link">Login to view special discount coupons</div>
-                                            </Link>
+                                            <div className="buttonCss">
+                                            <button className="btn btn-success" onClick={() => {
+                                                window.location.assign(`/login`)
+                                            }}>
+                                            Login to view special discount coupons
+                                            </button>
+                                            <button className="btn btn-primary" onClick={() => {
+                                                window.location.assign(`/login`)
+                                            }}>
+                                            Contact Owner
+                                            </button>
+                                            </div>
                                         </span>}
                                         {this.state.hidden === true &&
                                         <span>
-                                            <button onClick={() => this.contactHotel(hotel.owners)}>Contact Owner For Booking</button>
+                                            <div className="buttonCss">
+                                            <button className="btn btn-primary"
+                                                    onClick={() => this.contactHotel(hotel.owners)}>
+                                                Contact Owner
+                                            </button>
+                                            </div>
                                         </span>}
                                         {this.state.coupons.map((coupon, index) =>
                                             <div>
@@ -131,7 +150,8 @@ export default class HotelList extends Component {
                                                             <li>Code: <b>{coupon.code}</b></li>
                                                             <li>Value: <b>{coupon.value}</b></li>
                                                         </ul>
-                                                    <button className="btn btn-primary form-control" onClick={()=> this.deleteCoupon(coupon._id)}>
+                                                    <button className="btn btn-success form-control"
+                                                            onClick={() => this.deleteCoupon(coupon._id)}>
                                                         Avail Coupon
                                                     </button>
                                                     </span>}

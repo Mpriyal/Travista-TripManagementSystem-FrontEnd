@@ -24,7 +24,6 @@ class CouponService {
     }
 
     createCoupon(coupon) {
-        console.log("ban gaye");
         return fetch(COUPON_URL, {
             method: 'post',
             body: JSON.stringify(coupon),

@@ -81,13 +81,19 @@ export default class CarsList extends Component {
                                                 </p>
                                                 {this.state.hidden === false &&
                                                 <span>
-                                            <button onClick={() => {window.location.assign(`/login`)}}>
+                                                    <div className="buttonCss">
+                                            <button className="btn btn-primary" onClick={() => {window.location.assign(`/login`)}}>
                                                  Login to contact owner for Deal
                                             </button>
+                                                    </div>
                                         </span>}
                                                 {this.state.hidden === true &&
                                                 <span>
-                                            <button onClick={() => this.contactCar(car.owners)}>Contact Owner For Deal</button>
+                                                    <div className="buttonCss">
+                                            <button className="btn btn-success" onClick={() => this.contactCar(car.owners)}>
+                                                Contact Owner For Deal
+                                            </button>
+                                                    </div>
                                         </span>}
                                             </div>
                                         </div>
@@ -171,13 +177,19 @@ export default class CarsList extends Component {
                                                 </p>
                                                 {this.state.hidden === false &&
                                                 <span>
-                                            <button onClick={() => {window.location.assign(`/login`)}}>
+                                                    <div className="buttonCss">
+                                            <button className="btn btn-primary" onClick={() => {window.location.assign(`/login`)}}>
                                                  Login to contact owner for Deal
                                             </button>
+                                                    </div>
                                         </span>}
                                                 {this.state.hidden === true &&
                                                 <span>
-                                            <button onClick={() => this.contactCar(car.owners)}>Contact Owner For Deal</button>
+                                                    <div className="buttonCss">
+                                            <button className="btn btn-success" onClick={() => this.contactCar(car.owners)}>
+                                                Contact Owner For Deal
+                                            </button>
+                                                    </div>
                                         </span>}
                                             </div>
                                         </div>

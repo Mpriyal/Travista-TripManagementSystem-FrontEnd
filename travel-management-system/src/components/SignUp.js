@@ -39,13 +39,6 @@ export default class Signup extends Component {
         });
     }
 
-    // handleChange(event) {
-    //     this.setState({
-    //         [event.target.id]: event.target.value
-    //     });
-    // }
-
-
     registerCustomer() {
         var customer = {
             username: this.state.username,
@@ -53,64 +46,59 @@ export default class Signup extends Component {
         };
         this.UserService
             .createCustomer(customer)
-            .then((customer) => {customer.Status === "Username Taken" ?
-                                alert(customer.Status) :
-                                window.location.assign(`/profile/${customer._id}`);});
+            .then((customer) => {
+                customer.Status === "Username Taken" ?
+                    alert(customer.Status) :
+                    window.location.assign(`/profile/${customer._id}`);
+            });
     }
 
 
-renderForm()
-{
-    return (
-        <div>
-        <form>
-            <FormGroup controlId="username" bsSize="large">
-                <ControlLabel>Username</ControlLabel>
-                <FormControl
-                    autoFocus
-                    type="text"
-                    value={this.state.username}
-                    onChange={this.handleChange}
-                />
-            </FormGroup>
-            <FormGroup controlId="password" bsSize="large">
-                <ControlLabel>Password</ControlLabel>
-                <FormControl
-                    value={this.state.password}
-                    onChange={this.handleChange}
-                    type="password"
-                />
-            </FormGroup>
-            <FormGroup controlId="confirmPassword" bsSize="large">
-                <ControlLabel>Confirm Password</ControlLabel>
-                <FormControl
-                    value={this.state.confirmPassword}
-                    onChange={this.handleChange}
-                    type="password"
-                />
-            </FormGroup>
-            {/*<LoaderButton*/}
-            {/*block*/}
-            {/*bsSize="large"*/}
-            {/*disabled={!this.validateForm()}*/}
-            {/*type="submit"*/}
-            {/*isLoading={this.state.isLoading}*/}
-            {/*text="Signup"*/}
-            {/*loadingText="Signing up…"*/}
-            {/*/>*/}
+    renderForm() {
+        return (
+            <div>
+                <form>
+                    <FormGroup controlId="username" bsSize="large">
+                        <ControlLabel>Username</ControlLabel>
+                        <FormControl
+                            autoFocus
+                            type="text"
+                            value={this.state.username}
+                            onChange={this.handleChange}
+                        />
+                    </FormGroup>
+                    <FormGroup controlId="password" bsSize="large">
+                        <ControlLabel>Password</ControlLabel>
+                        <FormControl
+                            value={this.state.password}
+                            onChange={this.handleChange}
+                            type="password"
+                        />
+                    </FormGroup>
+                    <FormGroup controlId="confirmPassword" bsSize="large">
+                        <ControlLabel>Confirm Password</ControlLabel>
+                        <FormControl
+                            value={this.state.confirmPassword}
+                            onChange={this.handleChange}
+                            type="password"
+                        />
+                    </FormGroup>
 
-        </form>
-        <button onClick={this.registerCustomer}>Sign Up</button>
-        </div>
-    );
-}
+                </form>
+                <div className="buttonCss">
+                    <button className="btn btn-primary" onClick={this.registerCustomer}>
+                        Sign Up
+                    </button>
+                </div>
+            </div>
+        );
+    }
 
-render()
-{
-    return (
-        <div className="Signup">
-            {this.renderForm()}
-        </div>
-    );
-}
+    render() {
+        return (
+            <div className="Signup">
+                {this.renderForm()}
+            </div>
+        );
+    }
 }

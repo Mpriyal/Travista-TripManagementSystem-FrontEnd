@@ -52,7 +52,6 @@ export default class RestaurantPage extends Component {
                     city:textValue
                 }
             }).then(res=>{
-                console.log(res)
                 const restaurants = res.data.restaurants;
                 this.setState({restaurants});
             });

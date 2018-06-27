@@ -37,21 +37,18 @@ export default class RentalCarsPage extends Component {
         this.setState({
             pickUp : moment(event.target.value)
         });
-        // console.log(this.state.pickUp._i)
     }
 
     dropOffDateChange(event) {
         this.setState({
             dropOff : moment(event.target.value)
         });
-        // console.log(this.state.dropOff._i)
     }
 
     findAllCars(){
         this.carService
             .findDbCarsByLocation(this.state.location)
             .then((result) => {
-                console.log("db result: "+result);
                 this.setState({
                     dbCars: result})
             });
@@ -77,7 +74,6 @@ export default class RentalCarsPage extends Component {
                 this.state.dropOff.format("YYYY-MM-DD"),
                 this.state.radius)
             .then((result) => {
-                console.log(result);
                 this.setState({
                     cars: result.results})
             });

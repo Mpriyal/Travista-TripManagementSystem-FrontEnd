@@ -58,10 +58,14 @@ export default class BusinessSignIn extends Component {
                         />
                     </FormGroup>
                 </form>
+                <div className="buttonCss">
                 <button
+                    className="btn btn-success"
                     type="submit"
                     onClick={this.loginOwner}>
-                    LogIn</button>
+                    LogIn
+                </button>
+                </div>
             </div>
             <div>
                 <Link to="/addYourBusiness">

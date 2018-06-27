@@ -127,9 +127,11 @@ export default class HotelManager extends Component {
                         />
                     </FormGroup>
                 </Form>
-                <button
+                <div className="buttonCss">
+                <button className="btn btn-primary"
                     onClick={this.updateHotel}> Update your hotel
                 </button>
+                </div>
             </div>
                 <ListGroup>
                     {this.renderHotelRooms()}
@@ -137,10 +139,12 @@ export default class HotelManager extends Component {
                 <div>
                     <div>
                         <Link to={`/profile/${this.state.userId}/hotel/${this.state.hotelId}`}>
-                            <button
+                            <div className="buttonCss">
+                            <button className="btn btn-dark"
                                 type="submit">
                                 COUPONS
                             </button>
+                            </div>
                         </Link>
                         <Route path="/profile/:userId/hotel/:hotelId" exact component={CouponComponent} />
                     </div>

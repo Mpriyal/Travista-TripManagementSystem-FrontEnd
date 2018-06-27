@@ -169,23 +169,11 @@ export default class UserProfile extends Component {
                                     type="password"
                                 />
                             </FormGroup>
-                            {/*<LoaderButton*/}
-                            {/*block*/}
-                            {/*bsSize="large"*/}
-                            {/*disabled={!this.validateForm()}*/}
-                            {/*type="submit"*/}
-                            {/*text="Update"*/}
-                            {/*/>*/}
-                            {/*<LoaderButton*/}
-                            {/*className="btn-danger"*/}
-                            {/*block*/}
-                            {/*bsSize="large"*/}
-                            {/*type="submit"*/}
-                            {/*text="DELETE ACCOUNT"*/}
-                            {/*/>*/}
                         </Form>
-                        <button onClick={this.updateUser}>Update</button>
-                        <button onClick={this.deleteUser}>Delete</button>
+                        <div className="buttonCss">
+                        <button className="btn btn-primary" onClick={this.updateUser}>Update</button>
+                        <button className="btn btn-danger" onClick={this.deleteUser}>Delete</button>
+                        </div>
                     </div>
                 </div>
             </Router>

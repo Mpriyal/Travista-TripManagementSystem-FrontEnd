@@ -27,7 +27,6 @@ export default class AttractionPage extends Component {
                 apikey: apiKey
             }
         }).then(res => {
-            console.log(res)
             const attractions = res.data.points_of_interest;
             this.setState({attractions});
         })

@@ -144,11 +144,9 @@ export default class HotelListAdmin extends Component {
     }
 
     findAllHotels(){
-        console.log("Inside find all hotels")
         this.hotelService
             .findAllHotels()
             .then(response => {this.setHotels(response)})
-        console.log(this.state.hotels)
     }
 
     render() {

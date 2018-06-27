@@ -98,10 +98,10 @@ export default class AddRestaurant extends Component {
                                 onChange={this.handleChange}
                             />
                         </FormGroup>
-                    <button onClick={this.registerRestaurant}>
-                        Add Restaurant
-                    </button>
                 </Form>
+                <button onClick={this.registerRestaurant}>
+                    Add Restaurant
+                </button>
             </div>
         );
     }

@@ -49,7 +49,6 @@ export default class HotelPage extends Component {
         this.hotelService
             .findDbHotelByCity(this.state.inputText)
             .then((result) => {
-                console.log("db result: "+result);
                 this.setState({
                     dbHotels: result})
             });
@@ -74,7 +73,6 @@ export default class HotelPage extends Component {
                 this.state.checkOut.format("YYYY-MM-DD"),
                 this.state.radius)
             .then((result) => {
-                console.log(result);
                 this.setState({
                     hotels: result.results})
             });
