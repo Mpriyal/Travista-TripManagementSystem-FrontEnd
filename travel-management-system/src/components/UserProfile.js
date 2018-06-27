@@ -171,7 +171,7 @@ export default class UserProfile extends Component {
                             </FormGroup>
                         </Form>
                         <div className="buttonCss">
-                        <button className="btn btn-primary" onClick={this.updateUser}>Update</button>
+                        <button className="btn btn-primary" disabled={!this.validateForm()} onClick={this.updateUser}>Update</button>
                         <button className="btn btn-danger" onClick={this.deleteUser}>Delete</button>
                         </div>
                     </div>

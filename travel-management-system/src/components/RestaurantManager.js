@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import {Form, FormGroup, FormControl, ControlLabel} from "react-bootstrap";
 import RestaurantService from "../services/RestaurantService";
-import CarServiceClient from "../services/RentalCarsService";
 
 
 export default class RestaurantManager extends Component {
@@ -102,7 +101,10 @@ export default class RestaurantManager extends Component {
                         </FormGroup>
                 </Form>
                 <div className="buttonCss">
-                <button className="btn btn-primary" onClick={this.updateRestaurant}>
+                <button
+                    className="btn btn-primary"
+                    disabled={!this.validateForm()}
+                    onClick={this.updateRestaurant}>
                     Update Restaurant
                 </button>
                 </div>

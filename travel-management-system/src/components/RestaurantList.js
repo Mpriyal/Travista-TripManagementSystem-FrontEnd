@@ -1,6 +1,4 @@
 import React, {Component} from 'react'
-import axios from 'axios/index'
-import {Link} from 'react-router-dom'
 import OwnerService from "../services/OwnerService";
 import UserService from "../services/UserService";
 

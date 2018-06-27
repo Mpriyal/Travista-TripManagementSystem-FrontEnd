@@ -1,8 +1,6 @@
 import React, {Component} from 'react'
-import moment from 'moment';
 import 'react-datepicker/dist/react-datepicker.css';
 import HotelService from '../services/HotelService.js'
-import HotelList from "./HotelList";
 import {BrowserRouter as Router, Switch} from "react-router-dom";
 import HotelListItem from "./HotelListItem";
 import OwnerService from "../services/OwnerService";
@@ -44,13 +42,13 @@ export default class HotelListAdmin extends Component {
         this.findAllHotels();
     }
 
-    componentWillReceiveProps(newProps){
+    componentWillReceiveProps(newProps) {
         this.findAllHotels();
     }
 
-    renderListOfHotels(){
+    renderListOfHotels() {
         let hotels = null;
-        if(this.state) {
+        if (this.state) {
             hotels = this.state.hotels.map((hotel) => {
                     return <HotelListItem key={hotel.id}
                                           hotel={hotel}
@@ -64,37 +62,39 @@ export default class HotelListAdmin extends Component {
         )
     }
 
-    userNameChanged(event){
+    userNameChanged(event) {
         this.setState({
             ownerName: event.target.value
         })
     }
 
-    setOwner(){
+    setOwner() {
         this.ownerService
             .findOwnerByUsername(this.state.ownerName)
-            .then((owner1) => {(owner1.length === 0) ? window.alert("Username incorrect") : this.setState({owner: owner1[0]})});
+            .then((owner1) => {
+                (owner1.length === 0) ? window.alert("Username incorrect") : this.setState({owner: owner1[0]})
+            });
     }
 
-    setName(event){
+    setName(event) {
         this.setState({
             name: event.target.value
         })
     }
 
-    setPhone(event){
+    setPhone(event) {
         this.setState({
             phone: event.target.value
         })
     }
 
-    setAddress(event){
+    setAddress(event) {
         this.setState({
             address: event.target.value
         })
     }
 
-    setRate(event){
+    setRate(event) {
         this.setState({
             rate: event.target.value
         })
@@ -103,12 +103,14 @@ export default class HotelListAdmin extends Component {
     createHotel() {
         this.hotelService
             .createHotel(this.state.owner._id, this.state.name, this.state.address, this.state.phone, this.state.rate)
-            .then(() => { this.findAllHotels(); });
+            .then(() => {
+                this.findAllHotels();
+            });
     }
 
     deleteHotels(hotelId) {
         var answer = window.confirm("Click Ok to delete");
-        if(answer == true) {
+        if (answer == true) {
             this.hotelService
                 .deleteHotels(hotelId)
                 .then(() => {
@@ -137,16 +139,18 @@ export default class HotelListAdmin extends Component {
             );
     }
 
-    setHotels(htls){
+    setHotels(htls) {
         this.setState({
             hotels: htls
         })
     }
 
-    findAllHotels(){
+    findAllHotels() {
         this.hotelService
             .findAllHotels()
-            .then(response => {this.setHotels(response)})
+            .then(response => {
+                this.setHotels(response)
+            })
     }
 
     render() {
@@ -157,9 +161,9 @@ export default class HotelListAdmin extends Component {
                         <div className="col-4" style={{overflow: 'scroll'}}>
                             <h2 style={{textAlign: "center"}}>Hotels</h2>
                             <br/>
-                                <ul className="list-group">
-                                    {this.renderListOfHotels()}
-                                </ul>
+                            <ul className="list-group">
+                                {this.renderListOfHotels()}
+                            </ul>
                             <br/>
                         </div>
                         <div className="col-8" style={{overflow: 'scroll'}}>

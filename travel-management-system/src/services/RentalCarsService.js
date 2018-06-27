@@ -6,7 +6,6 @@ const LAT_LONG_API_KEY = 'AIzaSyCGFcq0Kr1hQAULOY9_O3azu2N4Srn-tmY';
 const LOCAL_CAR_URL = 'http://sheltered-brook-33412.herokuapp.com/api/car';
 
 
-
 class RentalCarsService {
     constructor(singletonToken) {
         if (_singleton !== singletonToken)

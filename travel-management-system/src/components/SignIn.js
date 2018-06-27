@@ -58,7 +58,7 @@ export default class Login extends Component {
                     </FormGroup>
                 </form>
                 <div className="buttonCss">
-                    <button className="btn btn-success" onClick={this.loginCustomer}>Login</button>
+                    <button className="btn btn-success" disabled={!this.validateForm()}  onClick={this.loginCustomer}>Login</button>
                 </div>
             </div>
         );

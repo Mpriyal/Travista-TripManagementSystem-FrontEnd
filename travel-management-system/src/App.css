@@ -80,6 +80,10 @@
   color:black
 }
 
+.space-right {
+  margin-right: 10px;
+}
+
 
 .dropdown{
   width:50%;
@@ -91,8 +95,8 @@
 }
 
 .search{
-  height: 300px;
-  background: url(https://picsum.photos/1920/1080?image=871&?blur) no-repeat center center fixed;
+  height: 400px;
+  background: url(https://picsum.photos/1500/500?image=985);
   -webkit-justify-content: center;
   justify-content: center;
   -webkit-align-items: center;

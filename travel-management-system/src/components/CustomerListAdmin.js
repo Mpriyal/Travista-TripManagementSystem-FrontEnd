@@ -1,14 +1,7 @@
 import React, {Component} from 'react'
-import moment from 'moment';
 import 'react-datepicker/dist/react-datepicker.css';
-import HotelService from '../services/HotelService.js'
-import HotelList from "./HotelList";
 import {BrowserRouter as Router, Link, Route, Switch} from "react-router-dom";
-import HotelListItem from "./HotelListItem";
 import CustomerListItem from "./CustomerListItem";
-import RentalCarsListAdmin from "./RentalCarsListAdmin";
-import HotelListAdmin from "./HotelListAdmin";
-import RestaurantListAdmin from "./RestaurantListAdmin";
 import UserService from "../services/UserService";
 
 
@@ -25,8 +18,8 @@ export default class CustomerListAdmin extends Component {
             lastName: "",
             dateOfBirth: String,
             phone: "",
-            email:"",
-            address:""
+            email: "",
+            address: ""
         };
 
 
@@ -54,18 +47,18 @@ export default class CustomerListAdmin extends Component {
         this.findAllCustomers();
     }
 
-    componentWillReceiveProps(newProps){
+    componentWillReceiveProps(newProps) {
         this.findAllCustomers();
     }
 
-    renderListOfCustomers(){
+    renderListOfCustomers() {
         let customers = null;
-        if(this.state) {
+        if (this.state) {
             customers = this.state.customers.map((customer) => {
                     return <CustomerListItem key={customer.id}
-                                          customer={customer}
-                                          deleteCustomer={this.deleteCustomer}
-                                          populateCustomer={this.populateCustomer}/>
+                                             customer={customer}
+                                             deleteCustomer={this.deleteCustomer}
+                                             populateCustomer={this.populateCustomer}/>
                 }
             );
         }
@@ -74,55 +67,65 @@ export default class CustomerListAdmin extends Component {
         )
     }
 
-    setFirstName(event){
+    setFirstName(event) {
         this.setState({
             firstName: event.target.value
         })
     }
-    setLastName(event){
+
+    setLastName(event) {
         this.setState({
             lastName: event.target.value
         })
     }
-    setUsername(event){
+
+    setUsername(event) {
         this.setState({
             username: event.target.value
         })
     }
-    setPassword(event){
+
+    setPassword(event) {
         this.setState({
             password: event.target.value
         })
     }
-    setConfirmPassword(event){
+
+    setConfirmPassword(event) {
         this.setState({
             confirmPassword: event.target.value
         })
     }
-    setPhone(event){
+
+    setPhone(event) {
         this.setState({
             phone: event.target.value
         })
     }
-    setAddress(event){
+
+    setAddress(event) {
         this.setState({
             address: event.target.value
         })
     }
-    setDateOfBirth(event){
+
+    setDateOfBirth(event) {
         this.setState({
             dateOfBirth: event.target.value
         })
     }
-    setEmail(event){
+
+    setEmail(event) {
         this.setState({
             email: event.target.value
         })
     }
-    validateAndCreate(){
+
+    validateAndCreate() {
         (this.state.password === this.state.confirmPassword) ?
             this.createCustomer() : window.alert("Passwords do not match")
     }
+
     createCustomer() {
         const customer = {
             username: this.state.username,
@@ -135,11 +138,14 @@ export default class CustomerListAdmin extends Component {
         }
         this.customerService
             .createCustomer(customer)
-            .then(() => { this.findAllCustomers(); })
+            .then(() => {
+                this.findAllCustomers();
+            })
     }
+
     deleteCustomer(customerId) {
         var answer = window.confirm("Click Ok to delete");
-        if(answer == true) {
+        if (answer == true) {
             this.customerService
                 .deleteCustomer(customerId)
                 .then(() => {
@@ -148,6 +154,7 @@ export default class CustomerListAdmin extends Component {
                 );
         }
     }
+
     populateCustomer(customer) {
         this.setState({
             username: customer.username,
@@ -161,6 +168,7 @@ export default class CustomerListAdmin extends Component {
             id: customer._id
         })
     }
+
     updateCustomer() {
         const customer = {
             _id: this.state.id,
@@ -179,15 +187,19 @@ export default class CustomerListAdmin extends Component {
                 }
             );
     }
-    setCustomers(ownrs){
+
+    setCustomers(ownrs) {
         this.setState({
             customers: ownrs
         })
     }
-    findAllCustomers(){
+
+    findAllCustomers() {
         this.customerService
             .findAllCustomers()
-            .then(response => {this.setCustomers(response)})
+            .then(response => {
+                this.setCustomers(response)
+            })
     }
 
     render() {

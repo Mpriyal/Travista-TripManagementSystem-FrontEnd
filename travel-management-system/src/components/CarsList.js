@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import OwnerService from "../services/OwnerService";
 import UserService from "../services/UserService";
+
 const CARS_LOGO = 'https://logoobject.com/wp-content/uploads/edd/2017/09/Real-Estate-Logos-Inspiration.png';
 
 export default class CarsList extends Component {
@@ -25,18 +26,19 @@ export default class CarsList extends Component {
         this.contactCar = this.contactCar.bind(this);
     }
 
-    checkUserStatus(status){
+    checkUserStatus(status) {
         return status;
     }
 
-    findCurrentUserStatus(){
-        return  this.userService.isUserLoggedIn()
-            .then(response =>
-            {if (response != null) {
-                this.setState({hidden: true});
-                let user = response[0]
-                this.setState({user: user})
-            }});
+    findCurrentUserStatus() {
+        return this.userService.isUserLoggedIn()
+            .then(response => {
+                if (response != null) {
+                    this.setState({hidden: true});
+                    let user = response[0]
+                    this.setState({user: user})
+                }
+            });
     }
 
     setCarsForProviders(results) {
@@ -45,11 +47,11 @@ export default class CarsList extends Component {
         })
     }
 
-    contactCar (owners) {
+    contactCar(owners) {
         this.OwnerService.findOwnerById(owners)
             .then((owner) => {
                 var ownerEmail = owner[0].email;
-                window.location.assign("mailto:"+ownerEmail)
+                window.location.assign("mailto:" + ownerEmail)
             });
     }
 
@@ -77,12 +79,15 @@ export default class CarsList extends Component {
                                                     <b>Rate:</b> {car.rate}
                                                 </p>
                                                 <p className="card-text">
-                                                    <b>Availability:</b> {car.start_date.toString().split('T')[0]} <b>-</b> {car.end_date.toString().split('T')[0]}
+                                                    <b>Availability:</b> {car.start_date.toString().split('T')[0]}
+                                                    <b>-</b> {car.end_date.toString().split('T')[0]}
                                                 </p>
                                                 {this.state.hidden === false &&
                                                 <span>
                                                     <div className="buttonCss">
-                                            <button className="btn btn-primary" onClick={() => {window.location.assign(`/login`)}}>
+                                            <button className="btn btn-primary" onClick={() => {
+                                                window.location.assign(`/login`)
+                                            }}>
                                                  Login to contact owner for Deal
                                             </button>
                                                     </div>
@@ -90,7 +95,8 @@ export default class CarsList extends Component {
                                                 {this.state.hidden === true &&
                                                 <span>
                                                     <div className="buttonCss">
-                                            <button className="btn btn-success" onClick={() => this.contactCar(car.owners)}>
+                                            <button className="btn btn-success"
+                                                    onClick={() => this.contactCar(car.owners)}>
                                                 Contact Owner For Deal
                                             </button>
                                                     </div>
@@ -159,7 +165,6 @@ export default class CarsList extends Component {
                                     <div className="col-sm-12" key={car._id} style={{marginBottom: 5}}>
                                         <div className="card">
                                             <div className="card-body">
-                                                {/*<h5 className="card-title text-center">{provider.provider.company_name}</h5>*/}
                                                 <p className="card-text text-center">
                                                     <b>Category:</b> {car.category}
                                                 </p>
@@ -178,7 +183,9 @@ export default class CarsList extends Component {
                                                 {this.state.hidden === false &&
                                                 <span>
                                                     <div className="buttonCss">
-                                            <button className="btn btn-primary" onClick={() => {window.location.assign(`/login`)}}>
+                                            <button className="btn btn-primary" onClick={() => {
+                                                window.location.assign(`/login`)
+                                            }}>
                                                  Login to contact owner for Deal
                                             </button>
                                                     </div>
@@ -186,7 +193,8 @@ export default class CarsList extends Component {
                                                 {this.state.hidden === true &&
                                                 <span>
                                                     <div className="buttonCss">
-                                            <button className="btn btn-success" onClick={() => this.contactCar(car.owners)}>
+                                            <button className="btn btn-success"
+                                                    onClick={() => this.contactCar(car.owners)}>
                                                 Contact Owner For Deal
                                             </button>
                                                     </div>

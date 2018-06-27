@@ -10,10 +10,10 @@ export default class RentalCarsPage extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            latitude: '42.3398198',
-            longitude: '-71.0875516',
-            pickUp: moment('2018-07-01'),
-            dropOff: moment('2018-07-11'),
+            latitude: '',
+            longitude: '',
+            pickUp: moment('2018-06-01'),
+            dropOff: moment('2018-06-11'),
             radius: '10',
             location: '',
             cars: [],
@@ -31,6 +31,13 @@ export default class RentalCarsPage extends Component {
         this.setState({
             location: event.target.value
         });
+    }
+
+    validateForm() {
+        var now = moment();
+        return this.state.pickUp >= now &&
+            this.state.dropOff > now &&
+            this.state.location.length > 0;
     }
 
     pickUpDateChange(event) {
@@ -87,40 +94,35 @@ export default class RentalCarsPage extends Component {
                     <div className="search align-content-center">
                         <form>
                             <div className="form-row align-content-center search">
-                                <div className=" form-inline col">
+                                <div className=" form-inline row">
                                     <div className="input-group-prepend">
                                         <span className="input-group-text">Location</span>
                                     </div>
-                                    <input className="form-control amber-border"
+                                    <input className="form-control space-right"
                                            type="text"
                                            placeholder="Location"
                                            onChange={this.locationChanged}
                                            aria-label="Search"
                                            ref="searchValue"/>
-                                </div>
-                                <div className="col form-inline">
                                     <div className="input-group-prepend">
                                         <span className="input-group-text">Pick Up</span>
                                     </div>
                                     <input
                                         type= "date"
-                                        className="form-control amber-border"
+                                        className="form-control space-right"
                                         onChange={this.pickUpDateChange}
                                     />
-                                </div>
-                                <div className="col form-inline">
                                     <div className="input-group-prepend">
                                         <span className="input-group-text">Drop Off</span>
                                     </div>
                                     <input
                                         type="date"
-                                        className="form-control amber-border"
+                                        className="form-control space-right"
                                         onChange={this.dropOffDateChange}
                                     />
-                                </div>
-                                <div className="col form-control-lg">
-                                    <button className ="fa fa-search btn " aria-hidden="true"
+                                    <button className ="fa fa-search btn btn-secondary" aria-hidden="true"
                                             type="button"
+                                            disabled={!this.validateForm()}
                                             onClick={this.findAllCars}>
                                         Search
                                     </button>

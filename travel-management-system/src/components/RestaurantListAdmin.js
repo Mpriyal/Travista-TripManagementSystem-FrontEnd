@@ -1,10 +1,7 @@
 import React, {Component} from 'react'
-import moment from 'moment';
 import 'react-datepicker/dist/react-datepicker.css';
-import HotelService from '../services/HotelService.js'
 import {BrowserRouter as Router, Switch} from "react-router-dom";
 import RestaurantService from "../services/RestaurantService";
-import RestaurantList from "./RestaurantList";
 import RestaurantListItem from "./RestaurantListItem";
 import OwnerService from "../services/OwnerService";
 

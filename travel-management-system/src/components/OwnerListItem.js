@@ -1,9 +1,9 @@
 import React from 'react';
-import { Link } from 'react-router-dom'
+import {Link} from 'react-router-dom'
 
 export default class OwnerListItem
     extends React.Component {
-    constructor(props){
+    constructor(props) {
         super(props);
     }
 
@@ -18,15 +18,17 @@ export default class OwnerListItem
                         <br/>Type of Business: {this.props.owner.typeOfBusiness}
                     </Link>
                     <button className="btn btn-dark float-right"
-                            onClick={() =>
-                            {this.props.deleteOwner
-                            (this.props.owner._id)}}>
+                            onClick={() => {
+                                this.props.deleteOwner
+                                (this.props.owner._id)
+                            }}>
                         <i className="fa fa-trash"/>
                     </button>
                     <button className="btn btn-dark float-right"
-                            onClick={() =>
-                            {this.props.populateOwner
-                            (this.props.owner)}}>
+                            onClick={() => {
+                                this.props.populateOwner
+                                (this.props.owner)
+                            }}>
                         <i className="fa fa-pencil"/>
                     </button>
                 </div>

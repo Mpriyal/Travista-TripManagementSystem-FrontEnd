@@ -89,18 +89,6 @@ class HotelService {
             }
         });
     }
-    // createHotel(hotel) {
-    //     return fetch(LOCAL_HOTEL_URL, {
-    //         body: JSON.stringify(hotel),
-    //         headers: {
-    //             'Content-Type': 'application/json'
-    //         },
-    //         method: 'POST'
-    //     }).then(function (response) {
-    //             return response.json();
-    //         }
-    //     )
-    // }
 
     updateHotel(hotelId, hotelName, hotelAddress, hotelPhone, hotelRate){
         const hotel = {

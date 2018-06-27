@@ -38,17 +38,19 @@ export default class AttractionPage extends Component {
                 <div className="search">
                     <form>
                         <div className="form-row align-content-center search">
-                        <input className="form-control col amber-border" type="text"
-                               placeholder="Search Attractions by city"
-                               aria-label="Search" ref="searchValue"/>
-                            <button className ="fa fa-search btn " aria-hidden="true"
-                                    type="button"
-                                    onClick={this.searchAttraction}>
-                                Search
-                            </button>
-                    </div>
+                            <div className="form-inline row">
+                                <input className="form-control space-right" type="text"
+                                       placeholder="Enter City "
+                                       aria-label="Search" ref="searchValue"/>
+                                <button className="fa fa-search btn btn-secondary " aria-hidden="true"
+                                        type="button"
+                                        onClick={this.searchAttraction}>
+                                    Search
+                                </button>
+                            </div>
+                        </div>
                     </form>
-                 </div>
+                </div>
                 <div>
                     <AttractionList data={this.state.attractions}/>
                 </div>

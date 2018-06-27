@@ -1,9 +1,9 @@
 import React from 'react';
-import { Link } from 'react-router-dom'
+import {Link} from 'react-router-dom'
 
 export default class CustomerListItem
     extends React.Component {
-    constructor(props){
+    constructor(props) {
         super(props);
     }
 
@@ -19,15 +19,17 @@ export default class CustomerListItem
                         <br/>Last Name: {this.props.customer.lastName}
                     </Link>
                     <button className="btn btn-dark float-right"
-                            onClick={() =>
-                            {this.props.deleteCustomer
-                            (this.props.customer._id)}}>
+                            onClick={() => {
+                                this.props.deleteCustomer
+                                (this.props.customer._id)
+                            }}>
                         <i className="fa fa-trash"/>
                     </button>
                     <button className="btn btn-dark float-right"
-                            onClick={() =>
-                            {this.props.populateCustomer
-                            (this.props.customer)}}>
+                            onClick={() => {
+                                this.props.populateCustomer
+                                (this.props.customer)
+                            }}>
                         <i className="fa fa-pencil"/>
                     </button>
                 </div>

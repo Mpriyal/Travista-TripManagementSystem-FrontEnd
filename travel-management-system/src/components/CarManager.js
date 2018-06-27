@@ -168,6 +168,7 @@ export default class CarManager extends Component {
                 <div className="buttonCss">
                 <button
                     className="btn btn-primary"
+                    disabled={!this.validateForm()}
                     onClick={this.updateCar}> Update your Car
                 </button>
                 </div>

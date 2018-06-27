@@ -61,13 +61,14 @@ export default class BusinessSignIn extends Component {
                 <div className="buttonCss">
                 <button
                     className="btn btn-success"
+                    disabled={!this.validateForm()}
                     type="submit"
                     onClick={this.loginOwner}>
                     LogIn
                 </button>
                 </div>
             </div>
-            <div>
+            <div className="buttonCss">
                 <Link to="/addYourBusiness">
                     Want to Add your Business ??
                 </Link>

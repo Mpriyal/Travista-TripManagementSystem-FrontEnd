@@ -10,10 +10,10 @@ export default class HotelPage extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            latitude: '42.3398198',
-            longitude: '-71.0875516',
+            latitude: '',
+            longitude: '',
             checkIn: moment('2018-06-01'),
-            checkOut: moment('2018-06-11'),
+            checkOut: moment('2018-06-01'),
             radius: '10',
             inputText: '',
             hotels: [],
@@ -29,8 +29,15 @@ export default class HotelPage extends Component {
 
     checkInDateChange(event) {
         this.setState({
-            checkIn : moment(event.target.value)
+            checkIn: moment(event.target.value)
         });
+    }
+
+    validateForm() {
+        var now = moment();
+        return this.state.checkIn >= now &&
+            this.state.checkOut > now &&
+            this.state.inputText.length > 0;
     }
 
     inputTextChanged(event) {
@@ -41,28 +48,31 @@ export default class HotelPage extends Component {
 
     checkOutDateChange(event) {
         this.setState({
-            checkOut : moment(event.target.value)
+            checkOut: moment(event.target.value)
         });
     }
 
-    findAllHotels(){
+    findAllHotels() {
         this.hotelService
             .findDbHotelByCity(this.state.inputText)
             .then((result) => {
                 this.setState({
-                    dbHotels: result})
+                    dbHotels: result
+                })
             });
         this.hotelService
             .findLatLongOfHotel(this.state.inputText)
             .then((results) => {
-                this.setLatLong(results); })
+                this.setLatLong(results);
+            })
             .then(() => this.findAllHotelsByLatLong());
     }
 
-    setLatLong(results){
+    setLatLong(results) {
         this.setState({
-            latitude:  results.results[0].geometry.location.lat,
-            longitude: results.results[0].geometry.location.lng })
+            latitude: results.results[0].geometry.location.lat,
+            longitude: results.results[0].geometry.location.lng
+        })
     }
 
     findAllHotelsByLatLong() {
@@ -74,7 +84,8 @@ export default class HotelPage extends Component {
                 this.state.radius)
             .then((result) => {
                 this.setState({
-                    hotels: result.results})
+                    hotels: result.results
+                })
             });
     }
 
@@ -83,49 +94,44 @@ export default class HotelPage extends Component {
         return (
             <Router>
                 <div>
-                <div className="search align-content-center">
-                    <form>
-                        <div className="form-row align-content-center search">
-                            <div className=" form-inline col">
-                                <div className="input-group-prepend">
-                                    <span className="input-group-text">Location</span>
-                                </div>
-                                <input className="form-control amber-border"
-                                       type="text"
-                                       placeholder="Location"
-                                       onChange={this.inputTextChanged}
-                                       aria-label="Search"
-                                       ref="searchValue"/>
-                            </div>
-                            <div className="col form-inline">
-                                <div className="input-group-prepend">
-                                    <span className="input-group-text">CheckIn</span>
-                                </div>
-                                <input
-                                    type= "date"
-                                    className="form-control amber-border"
-                                    onChange={this.checkInDateChange}
+                    <div className="search align-content-center">
+                        <form>
+                            <div className="form-row align-content-center search">
+                                <div className="form-inline row">
+                                    <div className="input-group-prepend">
+                                        <span className="input-group-text">Location</span>
+                                    </div>
+                                    <input className="form-control space-right"
+                                           type="text"
+                                           placeholder="Location"
+                                           onChange={this.inputTextChanged}
+                                           aria-label="Search"
+                                           ref="searchValue"/>
+                                    <div className="input-group-prepend">
+                                        <span className="input-group-text">CheckIn</span>
+                                    </div>
+                                    <input
+                                        type="date"
+                                        className="form-control space-right"
+                                        onChange={this.checkInDateChange}
                                     />
-                            </div>
-                            <div className="col form-inline">
-                                <div className="input-group-prepend">
-                                    <span className="input-group-text">CheckOut</span>
+                                    <div className="input-group-prepend">
+                                        <span className="input-group-text">CheckOut</span>
+                                    </div>
+                                    <input
+                                        type="date"
+                                        className="form-control space-right"
+                                        onChange={this.checkOutDateChange}
+                                    />
+                                    <button className="fa fa-search btn " aria-hidden="true"
+                                            type="button"
+                                            disabled={!this.validateForm()}
+                                            onClick={this.findAllHotels}>
+                                        Search
+                                    </button>
                                 </div>
-                                <input
-                                    type="date"
-                                    className="form-control amber-border"
-                                    onChange={this.checkOutDateChange}
-                                />
                             </div>
-                            <div className="col form-control-lg">
-                                <button className ="fa fa-search btn " aria-hidden="true"
-                                        type="button"
-                                        onClick={this.findAllHotels}>
-                                    Search
-                                </button>
-                            </div>
-                        </div>
-                    </form>
+                        </form>
                     </div>
                     <div>
                         <HotelList data={this.state.hotels} data2={this.state.dbHotels}/>

@@ -1,15 +1,8 @@
 import React, {Component} from 'react'
-import moment from 'moment';
 import 'react-datepicker/dist/react-datepicker.css';
-import HotelService from '../services/HotelService.js'
-import HotelList from "./HotelList";
 import {BrowserRouter as Router, Link, Route, Switch} from "react-router-dom";
-import HotelListItem from "./HotelListItem";
 import OwnerService from "../services/OwnerService";
 import OwnerListItem from "./OwnerListItem";
-import RentalCarsListAdmin from "./RentalCarsListAdmin";
-import HotelListAdmin from "./HotelListAdmin";
-import RestaurantListAdmin from "./RestaurantListAdmin";
 
 
 export default class OwnersListAdmin extends Component {
@@ -25,10 +18,10 @@ export default class OwnersListAdmin extends Component {
             lastName: "",
             dateOfBirth: String,
             businessName: "",
-            typeOfBusiness:"HOTEL",
+            typeOfBusiness: "HOTEL",
             phone: "",
-            email:"",
-            address:""
+            email: "",
+            address: ""
         };
 
 
@@ -58,13 +51,13 @@ export default class OwnersListAdmin extends Component {
         this.findAllOwners();
     }
 
-    componentWillReceiveProps(newProps){
+    componentWillReceiveProps(newProps) {
         this.findAllOwners();
     }
 
-    renderListOfOwners(){
+    renderListOfOwners() {
         let owners = null;
-        if(this.state) {
+        if (this.state) {
             owners = this.state.owners.map((owner) => {
                     return <OwnerListItem key={owner.id}
                                           owner={owner}
@@ -78,52 +71,61 @@ export default class OwnersListAdmin extends Component {
         )
     }
 
-    setFirstName(event){
+    setFirstName(event) {
         this.setState({
             firstName: event.target.value
         })
     }
-    setLastName(event){
+
+    setLastName(event) {
         this.setState({
             lastName: event.target.value
         })
     }
-    setUsername(event){
+
+    setUsername(event) {
         this.setState({
             username: event.target.value
         })
     }
-    setPassword(event){
+
+    setPassword(event) {
         this.setState({
             password: event.target.value
         })
     }
-    setConfirmPassword(event){
+
+    setConfirmPassword(event) {
         this.setState({
             confirmPassword: event.target.value
         })
     }
-    setPhone(event){
+
+    setPhone(event) {
         this.setState({
             phone: event.target.value
         })
     }
-    setAddress(event){
+
+    setAddress(event) {
         this.setState({
             address: event.target.value
         })
     }
-    setDateOfBirth(event){
+
+    setDateOfBirth(event) {
         this.setState({
             dateOfBirth: event.target.value
         })
     }
-    setEmail(event){
+
+    setEmail(event) {
         this.setState({
             email: event.target.value
         })
     }
-    setBusinessName(event){
+
+    setBusinessName(event) {
         this.setState({
             businessName: event.target.value
         })
@@ -131,19 +133,22 @@ export default class OwnersListAdmin extends Component {
             Register the Hotel
         </Link> : this.state.typeOfBusiness === 'RESTAURANT' ? <Link to={`/restaurantEditor`}>
             Register the restaurant
-        </Link> :  <Link to={`/carEditor`}>
+        </Link> : <Link to={`/carEditor`}>
             Register the Car
         </Link>
     }
-    setTypeOfBusiness(event){
+
+    setTypeOfBusiness(event) {
         this.setState({
             typeOfBusiness: event.target.value
         })
     }
-    validateAndCreate(){
+
+    validateAndCreate() {
         (this.state.password === this.state.confirmPassword) ?
             this.createOwner() : window.alert("Passwords do not match")
     }
+
     createOwner() {
         const owner = {
             username: this.state.username,
@@ -158,11 +163,14 @@ export default class OwnersListAdmin extends Component {
         }
         this.ownerService
             .createOwner(owner)
-            .then(() => { this.findAllOwners(); })
+            .then(() => {
+                this.findAllOwners();
+            })
     }
+
     deleteOwner(ownerId) {
         var answer = window.confirm("Click Ok to delete");
-        if(answer == true) {
+        if (answer == true) {
             this.ownerService
                 .deleteOwner(ownerId)
                 .then(() => {
@@ -171,6 +179,7 @@ export default class OwnersListAdmin extends Component {
                 );
         }
     }
+
     populateOwner(owner) {
         this.setState({
             username: owner.username,
@@ -186,6 +195,7 @@ export default class OwnersListAdmin extends Component {
             id: owner._id
         })
     }
+
     updateOwner() {
         const owner = {
             _id: this.state.id,
@@ -206,18 +216,22 @@ export default class OwnersListAdmin extends Component {
                 }
             );
     }
-    setOwners(ownrs){
+
+    setOwners(ownrs) {
         this.setState({
             owners: ownrs
         })
     }
-    findAllOwners(){
+
+    findAllOwners() {
         this.ownerService
             .findAllOwners()
-            .then(response => {this.setOwners(response)})
+            .then(response => {
+                this.setOwners(response)
+            })
     }
 
-    addBusiness(param){
+    addBusiness(param) {
         switch (param) {
             case 'HOTEL':
                 return <div>
@@ -252,7 +266,7 @@ export default class OwnersListAdmin extends Component {
                                 {this.renderListOfOwners()}
                             </ul>
                             <br/>
-                         </div>
+                        </div>
                         <div className="col-8 form-control">
                             <br/>
                             <h3 align="center">Add Owners</h3>

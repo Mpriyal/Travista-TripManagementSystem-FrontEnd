@@ -17,38 +17,48 @@ export default class NavBar extends Component {
         this.checkUserStatus = this.checkUserStatus.bind(this);
         this.findCurrentUserStatus()
     }
+
     toggleNavbar() {
         this.setState({
             collapsed: !this.state.collapsed,
         });
     }
-    findCurrentUserStatus(){
-        return  this.userService.isUserLoggedIn()
-            .then(response =>
-            {if (response != null) {
-                var user = response[0];
-                this.setState({hidden: true, user: user})
-            }});
+
+    findCurrentUserStatus() {
+        return this.userService.isUserLoggedIn()
+            .then(response => {
+                if (response != null) {
+                    var user = response[0];
+                    this.setState({hidden: true, user: user})
+                }
+            });
     }
 
-    checkUserStatus(status){
+    checkUserStatus(status) {
         return status;
     }
-    setUser(user){
+
+    setUser(user) {
         this.setState({user: user})
 
     }
+
     componentWillReceiveProps(newProps) {
         this.findCurrentUserStatus();
     }
 
 
-    logout(){
+    logout() {
         this.userService
-            .logout().then(() =>{window.location.assign(`/`);}).then(() => {this.setState({hidden: false});});
+            .logout().then(() => {
+            window.location.assign(`/`);
+        }).then(() => {
+            this.setState({hidden: false});
+        });
 
 
     }
+
     render() {
         const collapsed = this.state.collapsed;
         const classOne = collapsed ? 'collapse navbar-collapse' : 'collapse navbar-collapse show';
@@ -95,13 +105,13 @@ export default class NavBar extends Component {
                                     <div className="nav-link">Attractions</div>
                                 </Link>
                             </li>
-                            <li className={this.state.hidden === true ? this.state.user.username === 'admin' ? "nav-item" : "hidden" :" hidden"}>
+                            <li className={this.state.hidden === true ? this.state.user.username === 'admin' ? "nav-item" : "hidden" : " hidden"}>
                                 <Link to='/admin'>
                                     <div className="nav-link">Admin</div>
                                 </Link>
                             </li>
                             <li className={this.state.hidden === true ? "nav-item" : "hidden"}>
-                                <Link to =
+                                <Link to=
                                           {this.state.hidden === true ?
                                               this.state.user.hasOwnProperty("typeOfBusiness") ?
                                                   `/businessProfile/${this.state.user._id}` :
@@ -112,10 +122,15 @@ export default class NavBar extends Component {
                             </li>
                         </ul>
                         <ul className="navbar-nav">
-                            <li className= {this.state.hidden ? "hidden" : "nav-item btn" }><Link to ="/signup"><i className="fa fa-user btn"/>Sign Up</Link></li>
-                            <li className= {this.state.hidden ? "hidden" : "nav-item btn" }><Link to ="/login"><i className="fa fa-sign-in btn"/>Login</Link></li>
-                            <li className= {this.state.hidden ? "hidden" : "nav-item btn" }><Link to ="/businessSignIn"><i className="fa fa-briefcase btn"/>Business</Link></li>
-                            <li className= {this.state.hidden ? "nav-item btn": "hidden" }><i onClick= {this.logout} className="fa fa-sign-out btn">Log Out</i></li>
+                            <li className={this.state.hidden ? "hidden" : "nav-item btn"}><Link to="/signup"><i
+                                className="fa fa-user btn"/>Sign Up</Link></li>
+                            <li className={this.state.hidden ? "hidden" : "nav-item btn"}><Link to="/login"><i
+                                className="fa fa-sign-in btn"/>Login</Link></li>
+                            <li className={this.state.hidden ? "hidden" : "nav-item btn"}><Link to="/businessSignIn"><i
+                                className="fa fa-briefcase btn"/>Business</Link></li>
+                            <li className={this.state.hidden ? "nav-item btn" : "hidden"}><i onClick={this.logout}
+                                                                                             className="fa fa-sign-out btn">
+                                Log Out</i></li>
                         </ul>
                     </div>
                 </nav>

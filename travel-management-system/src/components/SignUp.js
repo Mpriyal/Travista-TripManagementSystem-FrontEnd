@@ -14,7 +14,6 @@ export default class Signup extends Component {
         super(props);
 
         this.state = {
-            isLoading: false,
             username: "",
             password: "",
             confirmPassword: "",
@@ -25,11 +24,10 @@ export default class Signup extends Component {
     }
 
     validateForm() {
-        return (
-            this.state.username.length > 0 &&
+        return this.state.username.length > 0 &&
             this.state.password.length > 0 &&
             this.state.password === this.state.confirmPassword
-        );
+
     }
 
 
@@ -86,7 +84,7 @@ export default class Signup extends Component {
 
                 </form>
                 <div className="buttonCss">
-                    <button className="btn btn-primary" onClick={this.registerCustomer}>
+                    <button className="btn btn-primary" disabled={!this.validateForm()}  onClick={this.registerCustomer}>
                         Sign Up
                     </button>
                 </div>

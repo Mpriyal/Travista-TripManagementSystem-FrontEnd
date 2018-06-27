@@ -4,7 +4,6 @@ const LOG_OUT_URL = 'http://sheltered-brook-33412.herokuapp.com/api/logout';
 const PROFILE_URL = 'http://sheltered-brook-33412.herokuapp.com/api/profile';
 const PROFILE2_URL = 'http://sheltered-brook-33412.herokuapp.com/api/profile2';
 const CUSTOMER_URL = 'http://sheltered-brook-33412.herokuapp.com/api/customer';
-// const USER_URL = 'http://sheltered-brook-33412.herokuapp.com/api/user';
 
 
 

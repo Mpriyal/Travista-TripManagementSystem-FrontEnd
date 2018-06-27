@@ -1,11 +1,7 @@
 import React, {Component} from 'react'
 import moment from 'moment';
 import 'react-datepicker/dist/react-datepicker.css';
-import HotelService from '../services/HotelService.js'
 import {BrowserRouter as Router, Switch} from "react-router-dom";
-import RestaurantService from "../services/RestaurantService";
-import RestaurantList from "./RestaurantList";
-import RestaurantListItem from "./RestaurantListItem";
 import OwnerService from "../services/OwnerService";
 import RentalCarsService from "../services/RentalCarsService";
 import RentalCarsListItem from "./RentalCarsListItem";
@@ -54,13 +50,13 @@ export default class RentalCarsListAdmin extends Component {
         this.findAllCars();
     }
 
-    componentWillReceiveProps(newProps){
+    componentWillReceiveProps(newProps) {
         this.findAllCars();
     }
 
-    renderListOfCars(){
+    renderListOfCars() {
         let cars = null;
-        if(this.state) {
+        if (this.state) {
             cars = this.state.cars.map((car) => {
                     return <RentalCarsListItem key={car.id}
                                                car={car}
@@ -74,72 +70,75 @@ export default class RentalCarsListAdmin extends Component {
         )
     }
 
-    setAC(event){
+    setAC(event) {
         this.setState({
-            air_conditioning : event.target.value
+            air_conditioning: event.target.value
         })
     }
 
-    setTransmission(event){
+    setTransmission(event) {
         this.setState({
-            transmission : event.target.value
+            transmission: event.target.value
         })
     }
 
-    setCategory(event){
+    setCategory(event) {
         this.setState({
             category: event.target.value
         })
     }
 
-    setAddress(event){
+    setAddress(event) {
         this.setState({
             address: event.target.value
         })
     }
 
-    setRate(event){
+    setRate(event) {
         this.setState({
             rate: event.target.value
         })
     }
 
-    setType(event){
+    setType(event) {
         this.setState({
             type: event.target.value
         })
     }
 
-    setStartDate(event){
+    setStartDate(event) {
         this.setState({
             startDate: moment(event.target.value)
         })
     }
 
-    setEndDate(event){
+    setEndDate(event) {
         this.setState({
             endDate: moment(event.target.value)
         })
     }
-    setFuel(event){
+
+    setFuel(event) {
         this.setState({
             fuel: event.target.value
         })
     }
 
-    userNameChanged(event){
+    userNameChanged(event) {
         this.setState({
             ownerName: event.target.value
         })
     }
 
-    setOwner(){
+    setOwner() {
         this.ownerService
             .findOwnerByUsername(this.state.ownerName)
-            .then((owner1) => {(owner1.length === 0) ? window.alert("Username incorrect") : this.setState({owner: owner1[0]})});
+            .then((owner1) => {
+                (owner1.length === 0) ? window.alert("Username incorrect") : this.setState({owner: owner1[0]})
+            });
     }
 
-    setCity(event){
+    setCity(event) {
         this.setState({
             city: event.target.value
         })
@@ -147,7 +146,7 @@ export default class RentalCarsListAdmin extends Component {
 
     deleteCar(carId) {
         var answer = window.confirm("Click Ok to delete");
-        if(answer == true) {
+        if (answer == true) {
             this.carService
                 .deleteCar(carId)
                 .then(() => {
@@ -165,42 +164,47 @@ export default class RentalCarsListAdmin extends Component {
             address: car.address,
             category: car.category,
             fuel: car.fuel,
-            air_conditioning:  car.air_conditioning,
+            air_conditioning: car.air_conditioning,
             rate: car.rate,
             transmission: car.transmission,
             startDate: car.startDate,
             endDate: car.endDate,
         })
     }
+
     createCar() {
         this.carService
-            .createCar( this.state.owner._id, this.state.category, this.state.type, this.state.fuel, this.state.air_conditioning,
+            .createCar(this.state.owner._id, this.state.category, this.state.type, this.state.fuel, this.state.air_conditioning,
                 this.state.transmission, this.state.address, this.state.startDate.format("YYYY-MM-DD"),
-                this.state.endDate.format("YYYY-MM-DD"),this.state.rate)
-            .then(() => { this.findAllCars(); });
+                this.state.endDate.format("YYYY-MM-DD"), this.state.rate)
+            .then(() => {
+                this.findAllCars();
+            });
     }
 
     updateCar() {
         this.carService
             .updateCar(this.state.id, this.state.category, this.state.type, this.state.fuel, this.state.air_conditioning,
                 this.state.transmission, this.state.address, this.state.startDate,
-                this.state.endDate,this.state.rate)
+                this.state.endDate, this.state.rate)
             .then(() => {
                     this.findAllCars()
                 }
             );
     }
 
-    setCars(crs){
+    setCars(crs) {
         this.setState({
             cars: crs
         })
     }
 
-    findAllCars(){
+    findAllCars() {
         this.carService
             .findAllCars()
-            .then(response => {this.setCars(response)})
+            .then(response => {
+                this.setCars(response)
+            })
     }
 
     render() {

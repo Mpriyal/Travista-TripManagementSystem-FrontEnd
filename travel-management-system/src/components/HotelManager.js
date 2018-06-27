@@ -1,9 +1,7 @@
-import React, { Component } from "react";
-import {BrowserRouter as Router ,Route, Link } from 'react-router-dom';
+import React, {Component} from "react";
+import {BrowserRouter as Router, Route, Link} from 'react-router-dom';
 import {Form, FormGroup, FormControl, ControlLabel, ListGroup, ListGroupItem} from "react-bootstrap";
-import LoaderButton from "../components/LoaderButton";
 import HotelServiceClient from "../services/HotelService";
-import AddRoom from "./AddRoom";
 import CouponComponent from "./CouponComponent";
 
 export default class HotelManager extends Component {
@@ -11,23 +9,24 @@ export default class HotelManager extends Component {
         super(props);
 
         this.state = {
-            userId:"",
-            hotelId:"",
-            name:"",
+            userId: "",
+            hotelId: "",
+            name: "",
             address: "",
             phone: "",
             rate: "",
-            latitude:"",
-            longitude:"",
-            rooms:[]
+            latitude: "",
+            longitude: "",
+            rooms: []
         };
         this.hotelService = HotelServiceClient.instance;
         this.updateHotel = this.updateHotel.bind(this);
-        this.setState({userId : this.props.match.params.userId});
+        this.setState({userId: this.props.match.params.userId});
         this.renderHotel(this.props.match.params.userId);
     }
+
     validateForm() {
-        return  this.state.name.length > 0 &&
+        return this.state.name.length > 0 &&
             this.state.address.length > 0 &&
             this.state.phone.length > 0 &&
             this.state.rate.length > 0
@@ -35,16 +34,17 @@ export default class HotelManager extends Component {
 
     handleChange = event => {
         this.setState({
-            [event.target.id] : event.target.value
+            [event.target.id]: event.target.value
         });
     };
 
-    renderHotel(ownerId){
+    renderHotel(ownerId) {
         this.hotelService
             .findHotelByOwnerId(ownerId)
             .then(hotel => this.setHotel(hotel[0]));
     }
-    setHotel(hotel){
+
+    setHotel(hotel) {
         this.setState({name: hotel.name});
         this.setState({userId: hotel.owners});
         this.setState({hotelId: hotel._id});
@@ -58,16 +58,20 @@ export default class HotelManager extends Component {
             .updateHotel(this.state.hotelId, this.state.name, this.state.address, this.state.phone, this.state.rate)
 
     }
-    findAllRoomsByHotelId(){
+
+    findAllRoomsByHotelId() {
         this
             .hotelService
             .findAllRoomsByHotelId(this.state.hotelId)
-            .then(rooms => {this.setState({rooms: rooms})});
+            .then(rooms => {
+                this.setState({rooms: rooms})
+            });
     }
-    renderHotelRooms(){
+
+    renderHotelRooms() {
         let rooms = null;
-        if(this.state) {
-            rooms = this.state.rooms.map((room) =>{
+        if (this.state) {
+            rooms = this.state.rooms.map((room) => {
                     return <ListGroupItem>
                         <b>Room Type:</b> room.type
                         <b>Number of Beds:</b> room.numberOfBeds
@@ -83,73 +87,75 @@ export default class HotelManager extends Component {
     render() {
         return (
             <Router>
-            <div>
-            <div className="SubForm">
-                <Form horizontal>
-                    <FormGroup className="form-inline" controlId="name" bsSize="large">
-                        <ControlLabel className="col-4">Hotel Name</ControlLabel>
-                        <FormControl
-                            autoFocus
-                            className="col-8"
-                            type="text"
-                            value={this.state.name}
-                            onChange={this.handleChange}
-                        />
-                    </FormGroup>
-                    <FormGroup className="form-inline" controlId="address" bsSize="large">
-                        <ControlLabel className="col-4">Hotel Address</ControlLabel>
-                        <FormControl
-                            autoFocus
-                            className="col-8"
-                            type="text"
-                            value={this.state.address}
-                            onChange={this.handleChange}
-                        />
-                    </FormGroup>
-                    <FormGroup className="form-inline" controlId="phone" bsSize="large">
-                        <ControlLabel className="col-4">Phone</ControlLabel>
-                        <FormControl
-                            autoFocus
-                            className="col-8"
-                            type="text"
-                            value={this.state.phone}
-                            onChange={this.handleChange}
-                        />
-                    </FormGroup>
-                    <FormGroup className="form-inline" controlId="rate" bsSize="large">
-                        <ControlLabel className="col-4">Rate</ControlLabel>
-                        <FormControl
-                            autoFocus
-                            className="col-8"
-                            type="text"
-                            value={this.state.rate}
-                            onChange={this.handleChange}
-                        />
-                    </FormGroup>
-                </Form>
-                <div className="buttonCss">
-                <button className="btn btn-primary"
-                    onClick={this.updateHotel}> Update your hotel
-                </button>
-                </div>
-            </div>
-                <ListGroup>
-                    {this.renderHotelRooms()}
-                </ListGroup>
                 <div>
-                    <div>
-                        <Link to={`/profile/${this.state.userId}/hotel/${this.state.hotelId}`}>
-                            <div className="buttonCss">
-                            <button className="btn btn-dark"
-                                type="submit">
-                                COUPONS
+                    <div className="SubForm">
+                        <Form horizontal>
+                            <FormGroup className="form-inline" controlId="name" bsSize="large">
+                                <ControlLabel className="col-4">Hotel Name</ControlLabel>
+                                <FormControl
+                                    autoFocus
+                                    className="col-8"
+                                    type="text"
+                                    value={this.state.name}
+                                    onChange={this.handleChange}
+                                />
+                            </FormGroup>
+                            <FormGroup className="form-inline" controlId="address" bsSize="large">
+                                <ControlLabel className="col-4">Hotel Address</ControlLabel>
+                                <FormControl
+                                    autoFocus
+                                    className="col-8"
+                                    type="text"
+                                    value={this.state.address}
+                                    onChange={this.handleChange}
+                                />
+                            </FormGroup>
+                            <FormGroup className="form-inline" controlId="phone" bsSize="large">
+                                <ControlLabel className="col-4">Phone</ControlLabel>
+                                <FormControl
+                                    autoFocus
+                                    className="col-8"
+                                    type="text"
+                                    value={this.state.phone}
+                                    onChange={this.handleChange}
+                                />
+                            </FormGroup>
+                            <FormGroup className="form-inline" controlId="rate" bsSize="large">
+                                <ControlLabel className="col-4">Rate</ControlLabel>
+                                <FormControl
+                                    autoFocus
+                                    className="col-8"
+                                    type="text"
+                                    value={this.state.rate}
+                                    onChange={this.handleChange}
+                                />
+                            </FormGroup>
+                        </Form>
+                        <div className="buttonCss">
+                            <button
+                                className="btn btn-primary"
+                                disabled={!this.validateForm()}
+                                onClick={this.updateHotel}> Update your hotel
                             </button>
-                            </div>
-                        </Link>
-                        <Route path="/profile/:userId/hotel/:hotelId" exact component={CouponComponent} />
+                        </div>
+                    </div>
+                    <ListGroup>
+                        {this.renderHotelRooms()}
+                    </ListGroup>
+                    <div>
+                        <div>
+                            <Link to={`/profile/${this.state.userId}/hotel/${this.state.hotelId}`}>
+                                <div className="buttonCss">
+                                    <button className="btn btn-dark"
+                                            type="submit">
+                                        COUPONS
+                                    </button>
+                                </div>
+                            </Link>
+                            <Route path="/profile/:userId/hotel/:hotelId" exact component={CouponComponent}/>
+                        </div>
                     </div>
                 </div>
-            </div>
             </Router>
         );
     }

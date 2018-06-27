@@ -29,8 +29,8 @@ export default class CouponComponent extends Component {
     }
 
     validateForm() {
-        return  this.state.type.length > 0 &&
-            this.state.numberOfBeds.length > 0
+        return  this.state.code.length > 0 &&
+            this.state.value.length > 0
     }
 
 
@@ -69,7 +69,11 @@ export default class CouponComponent extends Component {
             value: this.state.value,
         };
         this.couponService
-            .createCoupon(coupon);
+            .createCoupon(coupon)
+            .then(() => {
+                this.findCouponByHotelId(this.state.hotelId)
+            }
+            );
     }
     deleteCoupon(couponId) {
         var answer = window.confirm("Click Ok to delete");
@@ -140,6 +144,7 @@ export default class CouponComponent extends Component {
                 <div className="buttonCss">
                 <button
                     className="btn btn-success"
+                    disabled={!this.validateForm()}
                     type="submit"
                     onClick={this.buttonText === "Add Coupon"? this.createCoupon : this.updateCoupon}>
                     {this.buttonText}

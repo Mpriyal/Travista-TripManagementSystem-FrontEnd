@@ -2,6 +2,7 @@ import React, {Component} from 'react'
 import axios from 'axios';
 import RestaurantList from "./RestaurantList";
 import RestaurantService from "../services/RestaurantService";
+
 var restaurantUrl = 'http://opentable.herokuapp.com/api/restaurants';
 
 export default class RestaurantPage extends Component {
@@ -31,11 +32,11 @@ export default class RestaurantPage extends Component {
         let textValue = this.refs.searchValue.value;
         let currentState = this.state.selectedOption;
         if (currentState === 'name') {
-            axios.get(restaurantUrl,{
-                params:{
-                    name:textValue
+            axios.get(restaurantUrl, {
+                params: {
+                    name: textValue
                 }
-            }).then(res=>{
+            }).then(res => {
                 const restaurants = res.data.restaurants;
                 this.setState({restaurants});
             });
@@ -43,15 +44,16 @@ export default class RestaurantPage extends Component {
                 .findDbRestaurantByName(textValue)
                 .then((result) => {
                     this.setState({
-                        dbRestaurants: result})
+                        dbRestaurants: result
+                    })
                 });
         }
         else if (currentState === 'city') {
-            axios.get(restaurantUrl,{
-                params:{
-                    city:textValue
+            axios.get(restaurantUrl, {
+                params: {
+                    city: textValue
                 }
-            }).then(res=>{
+            }).then(res => {
                 const restaurants = res.data.restaurants;
                 this.setState({restaurants});
             });
@@ -59,25 +61,26 @@ export default class RestaurantPage extends Component {
                 .findDbRestaurantByCity(textValue)
                 .then((result) => {
                     this.setState({
-                        dbRestaurants: result})
+                        dbRestaurants: result
+                    })
                 });
         }
         else if (currentState === 'zipcode') {
-            axios.get(restaurantUrl,{
-                params:{
-                    zip:textValue
+            axios.get(restaurantUrl, {
+                params: {
+                    zip: textValue
                 }
-            }).then(res=>{
+            }).then(res => {
                 const restaurants = res.data.restaurants;
                 this.setState({restaurants});
             })
         }
         else if (currentState === 'country') {
-            axios.get(restaurantUrl,{
-                params:{
-                    country:textValue
+            axios.get(restaurantUrl, {
+                params: {
+                    country: textValue
                 }
-            }).then(res=>{
+            }).then(res => {
                 const restaurants = res.data.restaurants;
                 this.setState({restaurants});
             })
@@ -87,44 +90,46 @@ export default class RestaurantPage extends Component {
     render() {
         return (
             <div>
-                <div className="search">
+                <div className="search align-content-center">
                     <form>
                         <div className="form-row align-content-center search">
-                        <input className="form-control col amber-border"
-                               type="text"
-                               placeholder="Search Restaurants"
-                               aria-label="Search"
-                               ref="searchValue"/>
-                        <button className ="fa fa-search btn " aria-hidden="true"
-                                type="button"
-                                onClick={this.searchRestaurant}>
-                            Search
-                        </button>
-                        <div className="form-check form-check-inline">
-                            <input className="form-check-input"
-                                   type="radio" name="inlineRadioOptions"
-                                   id="inlineRadio1" value="name"
-                                   checked={this.state.selectedOption === 'name'}
-                                   onChange={this.setOption}/>
-                            <label className="input-group-text"
-                                   htmlFor="inlineRadio1">Name</label>
-                        </div>
-                        <div className="form-check form-check-inline">
-                            <input className="form-check-input"
-                                   type="radio" name="inlineRadioOptions"
-                                   id="inlineRadio1" value="city"
-                                   checked={this.state.selectedOption === 'city'}
-                                   onChange={this.setOption}/>
-                            <label className="input-group-text"
-                                   htmlFor="inlineRadio1">City</label>
-                        </div>
+                            <div className="form-inline row">
+                                <input className="form-control space-right"
+                                       type="text"
+                                       placeholder="Search Restaurants"
+                                       aria-label="Search"
+                                       ref="searchValue"/>
+                                <button className="fa fa-search btn space-right" aria-hidden="true"
+                                        type="button"
+                                        onClick={this.searchRestaurant}>
+                                    Search
+                                </button>
+                                <div className="form-check form-check-inline">
+                                    <input className="form-check-input space-right"
+                                           type="radio" name="inlineRadioOptions"
+                                           id="inlineRadio1" value="name"
+                                           checked={this.state.selectedOption === 'name'}
+                                           onChange={this.setOption}/>
+                                    <label className="input-group-text"
+                                           htmlFor="inlineRadio1">Name</label>
+                                </div>
+                                <div className="form-check form-check-inline">
+                                    <input className="form-check-input space-right"
+                                           type="radio" name="inlineRadioOptions"
+                                           id="inlineRadio1" value="city"
+                                           checked={this.state.selectedOption === 'city'}
+                                           onChange={this.setOption}/>
+                                    <label className="input-group-text"
+                                           htmlFor="inlineRadio1">City</label>
+                                </div>
+                            </div>
                         </div>
                     </form>
                 </div>
-            <div>
-                <RestaurantList data={this.state.restaurants} data2={this.state.dbRestaurants}/>
+                <div>
+                    <RestaurantList data={this.state.restaurants} data2={this.state.dbRestaurants}/>
+                </div>
             </div>
-        </div>
         )
     }
 }

@@ -33,10 +33,8 @@ export default class AddYourBusiness extends Component {
             this.state.firstName.length > 0 &&
             this.state.lastName.length > 0 &&
             this.state.businessName.length > 0 &&
-            this.state.dateOfBirth.length > 0 &&
             this.state.phone.length > 0 &&
             this.state.address.length > 0 &&
-            this.state.typeOfBusiness.length > 0 &&
             this.state.password === this.state.confirmPassword;
     }
 
@@ -182,7 +180,8 @@ export default class AddYourBusiness extends Component {
                             </FormGroup>
                         </Form>
                         <div className="buttonCss">
-                            <button className="btn btn-primary" onClick={this.registerOwner}>
+                            <button className="btn btn-primary" disabled={!this.validateForm()}
+                                    onClick={this.registerOwner}>
                                 Sign Up
                             </button>
                         </div>

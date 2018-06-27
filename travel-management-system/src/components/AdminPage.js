@@ -1,9 +1,6 @@
 import React, {Component} from 'react';
 import 'react-datepicker/dist/react-datepicker.css';
-import HotelService from '../services/HotelService.js'
-import HotelList from "./HotelList";
 import {BrowserRouter as Router, Link, Route} from "react-router-dom";
-import HotelListAdmin from "./HotelListAdmin";
 
 
 export default class AdminPage extends Component {
