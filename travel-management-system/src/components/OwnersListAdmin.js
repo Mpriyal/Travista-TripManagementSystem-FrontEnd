@@ -18,7 +18,7 @@ export default class OwnersListAdmin extends Component {
             lastName: "",
             dateOfBirth: String,
             businessName: "",
-            typeOfBusiness: "HOTEL",
+            typeOfBusiness: "",
             phone: "",
             email: "",
             address: ""

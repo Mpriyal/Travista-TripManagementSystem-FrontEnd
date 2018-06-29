@@ -36,7 +36,6 @@ export default class AddRestaurant extends Component {
         return this.state.address.length > 0 &&
             this.state.name.length > 0 &&
             this.state.city.length > 0 &&
-            this.state.phone.length > 0 &&
             this.state.price.length > 0
 
     }
